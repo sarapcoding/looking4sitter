@@ -5,6 +5,7 @@ Looking4Sitter es una aplicación web en la cual los padres podrán buscar el ni
 
 ## Entidades
 Nombre | Descripción
+------- | -------
 Padre | El usuario padre podrá contratar los servicios tanto de Sitters como de Star Sitters, además de poder publicar anuncios de búsqueda de Sitters según sus condiciones
 Sitter | Se trata de un niñero autónomo (a domicilio) que no trabaja en ninguna guardería ni centro especializado pero con experiencia medida por el número de recomendaciones que recibe por parte del sistema de puntuación del site
 Star Sitter | Se trata de un niñero con experiencia y que trabaja en un centro especializado o guardería, que podrá trabajar o no de forma autónoma (a domicilio)
@@ -17,5 +18,6 @@ Administrador | Persona a cargo del site que podrá modificar la información de
 ## Integrantes
 
 Nombre | Apellidos | Correo | Cuenta de GitHub
+------- | ------- | ------- | -------
 Sara Patricia | Núñez Aguirre | sp.nuneza | sarapcoding
 Alejandro | Checha Sánchez-Isasi | a.checas | xialda
