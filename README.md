@@ -12,6 +12,8 @@ Star Sitter | Se trata de un niñero con experiencia y que trabaja en un centro 
 Guarderia | La guarderia podra tanto contactar con niñeros para su contratación al mismo tiempo que puede ofertarse a los padres para que hagan uso de sus servicios.
 Usuario Invitado | El usuario invitado podrá ver las páginas de los centros, los Sitters y los Star Sitters pero no podrá comentar, recomendar ni contactar por mensajería con ellos
 Administrador | Persona a cargo del site que podrá modificar la información de la BBDD de Sitters y Centros
+Anuncio | Escrito por los padres y agregado al tablón de anuncios. Los niñeros pueden pinchar en el y acceder a los datos de contacto del padre
+Comentario | Comentario de los padres al niñero en el que se indica tambien la puntuación.
 
 ## Funcionalidades del servicio interno
 - Servicio de notificación ante la recepcion de mensajes, tanto dentro de la propia pagina como notificacion via e-mail.
