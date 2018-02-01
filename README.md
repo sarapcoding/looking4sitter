@@ -25,3 +25,10 @@ Nombre | Apellidos | Correo | Cuenta de GitHub
 ------- | ------- | ------- | -------
 Sara Patricia | Núñez Aguirre | sp.nuneza | sarapcoding
 Alejandro | Checha Sánchez-Isasi | a.checas | xialda
+
+## Herramienta de organización: Trello
+Se ha empleado Trello para la organización del proyecto. Pueden verse los tableros en el siguiente enlace:
+[Fase 2](https://trello.com/b/qOFdWSJC)
+Fase 3 (no empezado)
+Fase 4 (no empezado)
+Fase 5 (no empezado)
