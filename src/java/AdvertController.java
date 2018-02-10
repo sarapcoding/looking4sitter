@@ -14,6 +14,11 @@ public class AdvertController {
 		return "boardSitter_template";
 	}
 	
+	@RequestMapping ("/publicar+anuncio")
+	public String publicarAnuncio (Model model){
+		return "enviarAnuncio";
+		
+	}
 	@RequestMapping ("/add+anuncio")
 	public String addAdvert (Model model){
 		return "successAdvert_template";
