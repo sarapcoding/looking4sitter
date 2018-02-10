@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller 
 public class AppController {
-
 	@RequestMapping ("/")
 	public String arranque (Model model){
 		return "welcome_template";
@@ -26,10 +25,13 @@ public class AppController {
 		return "principal_template";
 	}
 	@PostMapping ("/inicio+sesion")
-	public String verificacionInicioSesion (Model model, @RequestParam String usuario, @RequestParam String contraseÃ±a){
+	public String verificacionInicioSesion (Model model, @RequestParam String usuario, @RequestParam String contraseña){
 		
 		return "boardSitter_template";
 		//return "boardParent_template";
-		
+	}
+	@RequestMapping ("/advert+added")
+	public String volverTablon (Model model){
+		return "boardParent_template";
 	}
 }
