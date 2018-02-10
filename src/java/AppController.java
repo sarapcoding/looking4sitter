@@ -29,6 +29,7 @@ public class AppController {
 	public String verificacionInicioSesion (Model model, @RequestParam String usuario, @RequestParam String contraseña){
 		
 		return "boardSitter_template";
+		//return "boardParent_template";
 		
 	}
 }
