@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.prueba</groupId>
-	<artifactId>app_dad</artifactId>
+	<artifactId>prueba_git</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>app_dad</name>
+	<name>prueba_git</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -63,14 +63,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>5.0.12.Final</version>
-		</dependency>
-				
-
 
 	</dependencies>
 
