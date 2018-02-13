@@ -4,16 +4,19 @@
 Looking4Sitter es una aplicación web en la cual los padres o guarderias podrán buscar el niñero o niñera adecuado a sus necesidades. Cuenta con una lista de niñeros que muestran sus cualidades, páginas individuales para cada niñero con comentarios y puntuación de otros padres al niñero, un tablón de anuncios donde los padres podrán informar de qué tipo de niñero buscan y un sistema de mensajería.
 
 ## Entidades
+Las entidades cuentan con un Id único y autoincremental que se comporta como la Primary Key de su tabla específica.
 Nombre | Descripción
 ------- | -------
-Padre | El usuario padre podrá contratar los servicios tanto de Sitters como de Star Sitters, además de poder publicar anuncios de búsqueda de Sitters según sus condiciones
-Sitter | Se trata de un niñero autónomo (a domicilio) que no trabaja en ninguna guardería ni centro especializado pero con experiencia medida por el número de recomendaciones que recibe por parte del sistema de puntuación del site
-Star Sitter | Se trata de un niñero con experiencia y que trabaja en un centro especializado o guardería, que podrá trabajar o no de forma autónoma (a domicilio)
-Guarderia | La guarderia podra tanto contactar con niñeros para su contratación al mismo tiempo que puede ofertarse a los padres para que hagan uso de sus servicios.
-Usuario Invitado | El usuario invitado podrá ver las páginas de los centros, los Sitters y los Star Sitters pero no podrá comentar, recomendar ni contactar por mensajería con ellos
-Administrador | Persona a cargo del site que podrá modificar la información de la BBDD de Sitters y Centros
+Usuario | Los usuarios cuentan con los siguientes atributos: login (string único de identificación), nombre, email, password, provincia, tarifa (para Sitters y Star Sitters) y descripción. Los usuarios vienen definidos por su relación con el tipo de Perfil con el que cuentan.
+Perfil | Cada perfil viene identificado con su nombre. Se cuenta con un Administrador, Padre, Sitter, Star Sitter y Centro. Cada perfil cuenta con una relación con varios usuarios que viene definida en la tabla de Relacion_Usuario_Perfil.
+Relacion_Usuario_Perfil | Cada registro de esta entidad define una relación entre un usuario y su tipo de perfil (ambas por Id).
+Relacion_Sitter_Centro | Se puede ver la relación entre un Star Sitter y un centro mediante la relación entre ambos tipos de usuario en esta tabla. Un centro puede contar con varios Sitters.
 Anuncio | Escrito por los padres y agregado al tablón de anuncios. Los niñeros pueden pinchar en el y acceder a los datos de contacto del padre
 Comentario | Comentario de los padres al niñero en el que se indica tambien la puntuación.
+Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensajes.
+
+## Diagrama
+![alt text](https://imgur.com/a/rtC24 "Diagrama de la Base de Datos")
 
 ## Funcionalidades del servicio interno
 - Servicio de notificación ante la recepcion de mensajes, tanto dentro de la propia pagina como notificacion via e-mail.
