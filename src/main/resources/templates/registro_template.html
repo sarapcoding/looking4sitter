@@ -5,7 +5,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="verificacion+registro">
+ {{#nombre}}
+ El nombre de usuario se encuentra en uso. Por favor, escoja otro
+ {{/nombre}}
+ {{#correo}}
+ El email introducido se encuentra en uso. Por favor, escoja otro.
+ {{/correo}}
+ {{#password}}
+ Las contraseñas no coinciden.Por favor, intentelo de nuevo
+ {{/password}}
+<form action="verificacion+registro" method="post">
 		<p>Usuario :</p><input type='text' name='usuario' />
 		<p>Contraseña :</p><input type="password" name='contraseña' />
 		<p>Confirmar contraseña :</p><input type="password" name='contraseña2' />
