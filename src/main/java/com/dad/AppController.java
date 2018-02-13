@@ -48,16 +48,21 @@ public class AppController {
 					return "registroExistoso_template";
 				}
 				boolean password = false;
-			}boolean correo = false; 
-		}boolean nombre=false;
+				return "registro_template";
+			}
+			boolean correo = false;
+			return "registro_template";
+		}
+		boolean nombre=false;
+		return "registro_template";
 	}	
 		
-	@RequestMapping ("/registro+exito")
-	public String redireccionRegistro(Model model){}	
+	//@RequestMapping ("/registro+exito")
+	//public String redireccionRegistro(Model model){}	
 		
 		
 		
-	}
+	
 	@RequestMapping ("/entrar")
 	public String entrarInvitado (Model model){
 		return "principal_template";
