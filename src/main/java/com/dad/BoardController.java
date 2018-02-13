@@ -14,7 +14,7 @@ public class BoardController {
 	//@Autowired
 	//private AdvertRepository anuncioRepositorio;
 	@PostMapping("/nuevoAnuncio")
-	public String publicarAnuncio(Model model, Advert anuncio) {
+	public String publicarAnuncio(Model model, Anuncios anuncio) {
 
 		/*anuncioRepositorio.save(anuncio);
 		model.addAttribute("anuncios", anuncioRepositorio.findAll());

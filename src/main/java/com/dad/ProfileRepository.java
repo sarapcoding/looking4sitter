@@ -2,8 +2,8 @@ package com.dad;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.dad.Profile;
+import com.dad.Perfiles;
 
-public interface ProfileRepository extends CrudRepository<Profile,Long>{
+public interface ProfileRepository extends CrudRepository<Perfiles,Long>{
 	
 }

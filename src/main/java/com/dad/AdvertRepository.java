@@ -2,8 +2,8 @@ package com.dad;
 
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
-import com.dad.Advert;
+import com.dad.Anuncios;
 
-public interface AdvertRepository extends CrudRepository<Advert,Long>{
+public interface AdvertRepository extends CrudRepository<Anuncios,Long>{
 
 }

@@ -23,7 +23,7 @@ public class AdvertController {
 		
 	}
 	@RequestMapping ("/add+anuncio")
-	public String addAdvert (Model model, Advert anuncio){
+	public String addAdvert (Model model, Anuncios anuncio){
 		anuncioRepositorio.save(anuncio);
 		return "successAdvert_template";
 	}
