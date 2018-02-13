@@ -4,8 +4,8 @@
 Looking4Sitter es una aplicación web en la cual los padres o guarderias podrán buscar el niñero o niñera adecuado a sus necesidades. Cuenta con una lista de niñeros que muestran sus cualidades, páginas individuales para cada niñero con comentarios y puntuación de otros padres al niñero, un tablón de anuncios donde los padres podrán informar de qué tipo de niñero buscan y un sistema de mensajería.
 
 ## Entidades
-Las entidades cuentan con un Id único y autoincremental que se comporta como la Primary Key de su tabla específica.
-Nombre | Descripción
+
+Nombre | Descripción (Las entidades cuentan con un Id único y autoincremental que se comporta como la Primary Key de su tabla específica)
 ------- | -------
 Usuario | Los usuarios cuentan con los siguientes atributos: login (string único de identificación), nombre, email, password, provincia, tarifa (para Sitters y Star Sitters) y descripción. Los usuarios vienen definidos por su relación con el tipo de Perfil con el que cuentan.
 Perfil | Cada perfil viene identificado con su nombre. Se cuenta con un Administrador, Padre, Sitter, Star Sitter y Centro. Cada perfil cuenta con una relación con varios usuarios que viene definida en la tabla de Relacion_Usuario_Perfil.
@@ -16,7 +16,7 @@ Comentario | Comentario de los padres al niñero en el que se indica tambien la 
 Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensajes.
 
 ## Diagrama
-![diagrama] (https://github.com/sarapcoding/looking4sitter/blob/master/diagrama_bbdd.PNG)
+![Diagrama] (https://github.com/sarapcoding/looking4sitter/blob/master/diagrama_bbdd.PNG)
 
 ## Funcionalidades del servicio interno
 - Servicio de notificación ante la recepcion de mensajes, tanto dentro de la propia pagina como notificacion via e-mail.
