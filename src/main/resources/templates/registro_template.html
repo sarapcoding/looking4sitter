@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ {{#nombre}}
+ El nombre de usuario se encuentra en uso. Por favor, escoja otro
+ {{/nombre}}
+ {{#correo}}
+ El email introducido se encuentra en uso. Por favor, escoja otro.
+ {{/correo}}
+ {{#password}}
+ Las contraseñas no coinciden.Por favor, intentelo de nuevo
+ {{/password}}
+<form action="verificacion+registro" method="post">
+		<p>Usuario :</p><input type='text' name='usuario' />
+		<p>Password :</p><input type="password" name='contrasena' />
+		<p>Confirmar password :</p><input type="password" name='contrasena2' />
+		<p>E-mail :</p><input type="email" name='email' />
+		<br>
+		<br>
+		<input type="radio" id="sitter" name='tipo' value="sitter"/>
+		<label for=sitter>Cuidador</label>
+		<input type="radio" id="parent" name='tipo' value="parent"/>
+		<label for=parent>Padre</label>
+		<input type="radio" id="center" name='tipo' value="center"/>
+		<label for=center>Centro</label>
+		<br>
+		<br>
+		<input type='submit' value='Registrar' />
+		</form>
+</body>
+</html>
