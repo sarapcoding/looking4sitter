@@ -2,7 +2,7 @@ package com.dad;
 
 import java.util.List;
 import com.dad.UserRepository;
-import com.dad.User;
+import com.dad.Usuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,18 +39,18 @@ public class AppController {
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
 			@RequestParam String contrasena2,@RequestParam String email, @RequestParam String tipo ){
 		//"select Id from Usuarios where Login=usuario"
-		List<User> coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
-		List<User> coincidenciasEmail = usuarioRepositorio.findByEmail(email);
+		List<Usuarios> coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
+		List<Usuarios> coincidenciasEmail = usuarioRepositorio.findByEmail(email);
 		if (coincidenciasNombre.isEmpty()){
 			if (coincidenciasEmail.isEmpty()){
 				if (contrasena.equals(contrasena2)){
-					User nuevoUsuario = new User();
+					Usuarios nuevoUsuario = new Usuarios();
 					// usuario,"Nombre",email,contrasena,"Provincia","Descrpcion"
 					nuevoUsuario.setLogin(usuario);
 					nuevoUsuario.setEmail(email);
 					nuevoUsuario.setPassword(contrasena);
 					usuarioRepositorio.save(nuevoUsuario);
-					return "registroExistoso_template";
+					return "registroExitoso_template";
 				}
 				boolean password = false;
 				return "registro_template";

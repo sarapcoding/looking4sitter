@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Usuarios {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -20,7 +20,7 @@ public class User {
 	private String descripcion;
 		 
 	
-	protected User() {}
+	protected Usuarios() {}
 	
 
 
