@@ -16,7 +16,9 @@ Comentario | Comentario de los padres al niñero en el que se indica tambien la 
 Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensajes.
 
 ## Diagrama
-![Diagrama] (https://github.com/sarapcoding/looking4sitter/blob/master/diagrama_bbdd.PNG)
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/diagrama_bbdd.PNG"
+     alt="Diagrama"
+     style="float: left; margin-right: 10px;" />
 
 ## Funcionalidades del servicio interno
 - Servicio de notificación ante la recepcion de mensajes, tanto dentro de la propia pagina como notificacion via e-mail.
