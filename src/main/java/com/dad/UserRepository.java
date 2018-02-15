@@ -12,6 +12,7 @@ public interface UserRepository extends CrudRepository<Usuarios,Long>{
 //	@Query("select u.* from Usuarios u where u.Login = :login")
 	List<Usuarios> findByLogin(@Param("login") String login);
 	
+	
 //	@Query("select u.* from Usuarios u where u.Email = :email")
 	List<Usuarios> findByEmail (@Param("email") String email);
 	//List<User> findByLoginOrEmail (String Login, String Email);
