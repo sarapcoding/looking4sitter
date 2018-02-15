@@ -78,6 +78,7 @@ public class AppController {
 					nuevaRelacion.setId_Usuario(usuario_guardado.getId());
 					System.out.println(nuevaRelacion.toString());
 					upRepositorio.save(nuevaRelacion);
+					model.addAttribute("nombre_provisional",usuario);
 					return "registroExitoso_template";
 				}
 				model.addAttribute("password",true);
@@ -90,8 +91,10 @@ public class AppController {
 		return "registro_template";
 	}	
 		
-	//@RequestMapping ("/registro+exito")
-	//public String redireccionRegistro(Model model){}	
+	@RequestMapping ("/exito+registro")
+	public String redireccionRegistro(Model model){
+		return "continuacionRegistro_template";
+	}	
 		
 	/*
 	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="No such order")	
