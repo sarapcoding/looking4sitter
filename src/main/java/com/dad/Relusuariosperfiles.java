@@ -12,11 +12,11 @@ import javax.persistence.OneToOne;
 public class Relusuariosperfiles {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	@OneToOne
-	private Perfiles Id_Perfil;
+	private Perfiles id_Perfil;
 	@OneToMany
-	private List<Usuarios> Id_Usuario;
+	private List<Usuarios> id_Usuario;
 	
 	
 	
@@ -25,7 +25,7 @@ public class Relusuariosperfiles {
 	
 	@Override
 	public String toString() {
-		return "Relación [Perfil="+this.Id_Perfil.getNombre()+",Usuarios="+this.Id_Usuario+"]";
+		return "Relación [Perfil="+this.id_Perfil.getNombre()+",Usuarios="+this.id_Usuario+"]";
 	}
 	
 	

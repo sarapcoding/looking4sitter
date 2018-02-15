@@ -12,16 +12,16 @@ import javax.persistence.OneToOne;
 public class Relsittercentros {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	@OneToOne
-	private Usuarios Id_Centro;
+	private Usuarios id_Centro;
 	@OneToMany
-	private List<Usuarios> Id_Sitter;
+	private List<Usuarios> id_Sitter;
 	public Relsittercentros() {}
 	
 	@Override
 	public String toString() {
-		return "Relación [Centro="+this.Id_Centro.getNombre()+",Sitters="+this.Id_Sitter+"]";
+		return "Relación [Centro="+this.id_Centro.getNombre()+",Sitters="+this.id_Sitter+"]";
 	}
 	
 	

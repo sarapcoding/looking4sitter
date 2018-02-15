@@ -9,74 +9,75 @@ import javax.persistence.Id;
 public class Comentarios {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
-	private Long Id_Usuario_Origen;
-	private Long Id_Usuario_Destino;
-	private int Puntuacion;
-	private String Comentario;
-	private String Fecha; // DD-MM-YY
+	private Long id;
+	private Long id_Usuario_Origen;
+	private Long id_Usuario_Destino;
+	private int puntuacion;
+	private String comentario;
+	private String fecha; // DD-MM-YY
 	
 	public Comentarios() {}
 	
 	public Comentarios(Long origen, Long destino, int puntos, String comentario, String fecha) {
-		this.Id_Usuario_Origen=origen;
-		this.Id_Usuario_Destino=destino;
-		this.Puntuacion=puntos;
-		this.Comentario=comentario;
-		this.Fecha=fecha;
+		this.id_Usuario_Origen=origen;
+		this.id_Usuario_Destino=destino;
+		this.puntuacion=puntos;
+		this.comentario=comentario;
+		this.fecha=fecha;
 	}
 	
+
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public Long getId_Usuario_Origen() {
-		return Id_Usuario_Origen;
+		return id_Usuario_Origen;
 	}
 
 	public void setId_Usuario_Origen(Long id_Usuario_Origen) {
-		Id_Usuario_Origen = id_Usuario_Origen;
+		this.id_Usuario_Origen = id_Usuario_Origen;
 	}
 
 	public Long getId_Usuario_Destino() {
-		return Id_Usuario_Destino;
+		return id_Usuario_Destino;
 	}
 
 	public void setId_Usuario_Destino(Long id_Usuario_Destino) {
-		Id_Usuario_Destino = id_Usuario_Destino;
+		this.id_Usuario_Destino = id_Usuario_Destino;
 	}
 
 	public int getPuntuacion() {
-		return Puntuacion;
+		return puntuacion;
 	}
 
 	public void setPuntuacion(int puntuacion) {
-		Puntuacion = puntuacion;
+		this.puntuacion = puntuacion;
 	}
 
 	public String getComentario() {
-		return Comentario;
+		return comentario;
 	}
 
 	public void setComentario(String comentario) {
-		Comentario = comentario;
+		this.comentario = comentario;
 	}
 
 	public String getFecha() {
-		return Fecha;
+		return fecha;
 	}
 
 	public void setFecha(String fecha) {
-		Fecha = fecha;
+		this.fecha = fecha;
 	}
 
 	@Override
 	public String toString() {
-		return "Comentario [Padre="+this.Id_Usuario_Origen.toString()+",Sitter="+this.Id_Usuario_Destino.toString()+",Puntuación="+Integer.toString(this.Puntuacion)+",Comentario="+this.Comentario+",Fecha="+this.Fecha+";";
+		return "Comentario [Padre="+this.id_Usuario_Origen.toString()+",Sitter="+this.id_Usuario_Destino.toString()+",Puntuación="+Integer.toString(this.puntuacion)+",Comentario="+this.comentario+",Fecha="+this.fecha+";";
 		
 	}
 }

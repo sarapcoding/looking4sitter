@@ -8,8 +8,8 @@ import javax.persistence.Id;
 public class Perfiles {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
-	private String Nombre;
+	private Long id;
+	private String nombre;
 	/*
 	 * Los perfiles existentes son:
 	 * Admin
@@ -21,24 +21,24 @@ public class Perfiles {
 	 * */
 	public Perfiles() {}
 	public Perfiles(String nombre) {
-		this.Nombre= nombre;
+		this.nombre= nombre;
 	}
 	
 	@Override
 	public String toString() {
-		return "Perfil [Nombre="+this.Nombre+"]";
+		return "Perfil [Nombre="+this.nombre+"]";
 	}
 	public Long getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 	
 
