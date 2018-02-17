@@ -10,7 +10,7 @@ public class Anuncios {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	// Atributos del anuncio
-	private Long id_Usuario;
+	private Long idUsuario;
 	private String asunto;
 	private String cuerpo;
 	private String fecha; // DD-MM-YY
@@ -19,17 +19,71 @@ public class Anuncios {
 	 
 	public Anuncios() {}
 
-	public Anuncios(Long user,String asunto, String cuerpo, String fecha) {
-		this.id_Usuario=user;
-		this.asunto=asunto;
-		this.cuerpo=cuerpo;
-		this.fecha=fecha;
-		
+	
+
+	public Long getId() {
+		return id;
 	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
+
+	public String getAsunto() {
+		return asunto;
+	}
+
+
+
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+
+
+
+	public String getCuerpo() {
+		return cuerpo;
+	}
+
+
+
+	public void setCuerpo(String cuerpo) {
+		this.cuerpo = cuerpo;
+	}
+
+
+
+	public String getFecha() {
+		return fecha;
+	}
+
+
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Anuncio: [Padre="+this.id_Usuario.toString()+",Asunto="+this.asunto+",Cuerpo="+this.cuerpo+",Fecha="+this.fecha+"]";
+		return "Anuncio: [Padre="+this.idUsuario.toString()+",Asunto="+this.asunto+",Cuerpo="+this.cuerpo+",Fecha="+this.fecha+"]";
 	}
 	
 }
