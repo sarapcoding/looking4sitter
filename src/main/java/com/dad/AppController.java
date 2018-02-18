@@ -1,6 +1,7 @@
 
 package com.dad;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,7 +69,16 @@ public class AppController {
 			String perfil_n = perfil.getNombre();
 			model.addAttribute("mynameis", nombre.toString());
 			model.addAttribute("myprofileis", perfil_n.toString());
-			return "pruebaSesion_template";
+			if (perfil_n.toUpperCase().equals("PADRE")) {
+				model.addAttribute("padre", true);
+			} else if (perfil_n.toUpperCase().equals("SITTER")) {
+				model.addAttribute("sitter", true);
+			} else if (perfil_n.toUpperCase().equals("STAR SITTER")) {
+				model.addAttribute("star_sitter", true);
+			} else if (perfil_n.toUpperCase().equals("CENTRO")) {
+				model.addAttribute("centro", true);
+			}
+			return "boardUser_template";
 			//UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
 			//request.getSession().setAttribute("usuario_actual",usuario_actual);
 			//UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession.getAttribute("usuario_actual");
@@ -86,7 +96,7 @@ public class AppController {
 			String perfil = usuario_actual.getPerfil().getNombre();
 			model.addAttribute("nombreusuario", nombre);
 			model.addAttribute("perfilusuario", perfil);
-			return "pruebaSesion_template";
+			return "boardUser_template";
 		}
 		return "inicioSesion_template";
 	}
@@ -149,5 +159,88 @@ public class AppController {
 	public String entrarInvitado (Model model){
 		return "principal_template";
 	}
+	
+	
+	private Usuarios giveMeUser(List<Usuarios> list, Long id) {
+		Usuarios n = new Usuarios();
+		for (Usuarios x : list) {
+			if(id.equals(x.getId())){
+				list.remove(x);
+				return x;
+			}
+		}
+		return null;
+		
+	}
+	
+	@RequestMapping("/busqueda-avanzada-sitters")
+	public String busquedaAvanzada(Model model, @RequestParam String provincia,@RequestParam String tarifa_max) {
+		List<Usuarios> sitters = new ArrayList();
+		List<Usuarios> resultado = new ArrayList();
+		//Set<Usuarios> set_sitters = new HashSet();
+		
+		if (provincia == null) {
+			model.addAttribute("provincia_vacia",true);
+			return "boardUser_template";
+		} else {
+			List<Usuarios> list_provincia = usuarioRepositorio.findByProvincia(provincia);
+			if (!tarifa_max.equals("0")) {
+				int tarifa_h = Integer.parseInt(tarifa_max);
+				// En caso de tener ambos valores: findByTarifaAndProvincia lj sitters/starsitters
+				for (Usuarios y : list_provincia) {
+					if(y.getTarifa() > tarifa_h) {
+						list_provincia.remove(y);
+					}
+				}
+			}
+			
+			sitters.addAll(list_provincia);
+			
+		}
+		
+		//Lista sin duplicados
+		//sitters.addAll(set_sitters);
+		
+		if (!sitters.isEmpty()) {//se han hallado resultados
+			model.addAttribute("encontrado",true);
+			// conseguir idperfil de sitter y star sitter
+			List<Perfiles> list_s = perfilRepositorio.findByNombre("Sitter");
+			Perfiles sitt = list_s.get(0);
+			Long idperfils = sitt.getId();
+			
+			/*
+			 * 
+			 * List<Perfiles> list_ss = perfilRepositorio.findByNombre("Star Sitter");
+			Perfiles ssitt = list_ss.get(0);
+			Long idperfilss = ssitt.getId();
+			List<Relusuariosperfiles> list_star = upRepositorio.findByIdperfil(idperfilss);//star sitter
+			 * 
+			 * 
+			 * 
+			 * */
+			
+			List<Relusuariosperfiles> list_sitters = upRepositorio.findByIdperfil(idperfils);//sitter
+			
+			for (Relusuariosperfiles s : list_sitters) {
+				Long idusuario = s.getIdusuario(); // consigo un id de usuario
+				// buscar en la lista de "sitters" el usuario que tenga ese id
+				Usuarios u = giveMeUser(sitters,idusuario);
+				if (u != null) {
+					resultado.add(u);
+				}
+			}
+			
+			model.addAttribute("resultado_final",resultado);
+			
+		} else {// no hay resultados
+			model.addAttribute("vacio",true);
+		}
+		
+		
+		return "resultadosBusquedaSitters_template";
+		
+	}
+	
+	
 	
 	}

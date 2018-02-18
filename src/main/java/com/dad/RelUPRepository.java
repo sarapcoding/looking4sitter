@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface RelUPRepository extends CrudRepository<Relusuariosperfiles,Long>{
 	List<Relusuariosperfiles> findByIdusuario(Long idusuario);
-	
+	List<Relusuariosperfiles> findByIdperfil(Long idperfil);
 }

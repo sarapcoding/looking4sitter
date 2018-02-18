@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Resultado de búsqueda de sitters</title>
+</head>
+<body>
+{{#vacio}}
+<h2>No se han encontrado resultados</h2>
+	<form action="busqueda-avanzada-sitters">
+		<input type='submit' value='Volver' />
+	</form>
+{{/vacio}}
+
+{{#encontrado}}
+<h2>Resultados para la búsqueda de Sitters</h2>
+	<c:if test="${not empty lists}">
+		<ul>
+			<c:forEach var="resultado_final" items="${lists}">
+				<li>${resultado_final}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+
+	<form action="busqueda-avanzada-sitters">
+		<input type='submit' value='Volver' />
+	</form>
+
+
+{{/encontrado}}
+
+
+</body>
+</html>

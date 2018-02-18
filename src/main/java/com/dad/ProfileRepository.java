@@ -8,4 +8,5 @@ import com.dad.Perfiles;
 
 public interface ProfileRepository extends CrudRepository<Perfiles,Long>{
 	List<Perfiles> findById(Long id);
+	List<Perfiles> findByNombre(String nombre);
 }

@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Perfil de {{myprofileis}}</title>
 </head>
 <body>
-<p>Filtrar cuidadores</p>
+<h1>Cuenta de {{mynameis}}</h1>
+
+{{#padre}}
+	<form action="busqueda-avanzada-sitters">
+	<h2>Búsqueda avanzada de sitters</h2>
+		{{#provincia_vacia}}
+		<p><b>Por favor introduzca provincia y/o tarifa</b></p>
+		{{/provincia_vacia}}
+		<p>Provincia (campo obligatorio): </p><input type="text" name="provincia" />
+		<p>Tarifa máxima (si no hay máximo, escriba 0): </p><input type="text" name="tarifa_max"/>
+		<input type='submit' value='Buscar' />
+		
+	</form>
+		
+		
+{{/padre}}
+
+{{#sitter}}
+	<h2>Tablón de anuncios</h2>
+	<h2>Búsqueda de anuncio</h2>
 	<form action="publicar+anuncio">
 		<input type='submit' value='Publicar anuncio' />
-	<form action="busqueda+sitter">
-		<p>Ciudad :</p><input type="search" name='ciudad' />
-		<p>Salario minimo:</p><input type="number" name="salario"/>
-		<input type='submit' value='Buscar' />
+{{/sitter}}
+
+{{#star_sitter}}
+{{/star_sitter}}
+
+{{#centro}}
+	<h2>Búsqueda de Sitters</h2>
+{{/centro}}
+
+
+
 </body>
 </html>
