@@ -2,21 +2,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Perfil de {{myprofileis}}</title>
+<title>Perfil</title>
 </head>
 <body>
-<h1>Cuenta de {{mynameis}}</h1>
+<h1>Página principal</h1>
 
 {{#padre}}
-	<form action="busqueda-avanzada-sitters">
+
 	<h2>Búsqueda avanzada de sitters</h2>
-		{{#provincia_vacia}}
-		<p><b>Por favor introduzca provincia y/o tarifa</b></p>
-		{{/provincia_vacia}}
-		<p>Provincia (campo obligatorio): </p><input type="text" name="provincia" />
-		<p>Tarifa máxima (si no hay máximo, escriba 0): </p><input type="text" name="tarifa_max"/>
+	
+	<form action="busqueda-avanzada-sitters" method="post">
+		<p>Provincia (campo obligatorio): </p><input type='text' name='provincia' />
+		<p>Tarifa máxima (si no hay máximo, escriba 0): </p><input type='text' name='tarifa_max' />
 		<input type='submit' value='Buscar' />
-		
 	</form>
 		
 		
@@ -27,6 +25,7 @@
 	<h2>Búsqueda de anuncio</h2>
 	<form action="publicar+anuncio">
 		<input type='submit' value='Publicar anuncio' />
+	</form>
 {{/sitter}}
 
 {{#star_sitter}}

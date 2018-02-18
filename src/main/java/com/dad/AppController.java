@@ -174,14 +174,15 @@ public class AppController {
 	}
 	
 	@RequestMapping("/busqueda-avanzada-sitters")
-	public String busquedaAvanzada(Model model, @RequestParam String provincia,@RequestParam String tarifa_max) {
+	public String busquedaAvanzada(Model model,
+			@RequestParam String provincia,
+			@RequestParam String tarifa_max) {
 		List<Usuarios> sitters = new ArrayList();
 		List<Usuarios> resultado = new ArrayList();
-		//Set<Usuarios> set_sitters = new HashSet();
 		
-		if (provincia == null) {
+		if (provincia.equals("")) {
 			model.addAttribute("provincia_vacia",true);
-			return "boardUser_template";
+			return "resultadosBusquedasSitters_template";
 		} else {
 			List<Usuarios> list_provincia = usuarioRepositorio.findByProvincia(provincia);
 			if (!tarifa_max.equals("0")) {
@@ -230,14 +231,14 @@ public class AppController {
 				}
 			}
 			
-			model.addAttribute("resultado_final",resultado);
+			model.addAttribute("resultadofinal",resultado);
 			
 		} else {// no hay resultados
 			model.addAttribute("vacio",true);
 		}
 		
 		
-		return "resultadosBusquedaSitters_template";
+		return "resultadoBusquedasSitters_template";
 		
 	}
 	

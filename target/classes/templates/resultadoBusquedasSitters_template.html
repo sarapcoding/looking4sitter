@@ -5,22 +5,30 @@
 <title>Resultado de búsqueda de sitters</title>
 </head>
 <body>
+{{#provincias_vacias}}
+<h2>Provincia vacía</h2>
+	<form action="boardUser_template">
+		<input type='submit' value='Volver' />
+	</form>
+{{/provincias_vacias}}
+
 {{#vacio}}
 <h2>No se han encontrado resultados</h2>
-	<form action="busqueda-avanzada-sitters">
+	<form action="boardUser_template">
 		<input type='submit' value='Volver' />
 	</form>
 {{/vacio}}
 
 {{#encontrado}}
 <h2>Resultados para la búsqueda de Sitters</h2>
-	<c:if test="${not empty lists}">
-		<ul>
-			<c:forEach var="resultado_final" items="${lists}">
-				<li>${resultado_final}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+	<table>
+		{{#resultadofinal}}
+		<tr>
+		<td>{{-index}}</td>
+		<td>{{.}}</td>
+		</tr>
+		{{/resultadofinal}}
+	</table>
 
 	<form action="busqueda-avanzada-sitters">
 		<input type='submit' value='Volver' />

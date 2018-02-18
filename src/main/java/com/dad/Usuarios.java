@@ -119,9 +119,15 @@ public class Usuarios {
 	}
 
 
-
+/*
 	@Override
 	public String toString() {
 		return "Usuario [Login=" + this.login +", Nombre=" + this.nombre +", Provincia="+this.provincia +"]";
 	}
+*/
+	@Override
+	public String toString() {
+		return "Login=" + this.login +" - Nombre=" + this.nombre +" - Provincia="+this.provincia +" - Tarifa="+this.tarifa;
+	}
+	
 }
