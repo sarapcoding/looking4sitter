@@ -7,16 +7,14 @@
 <body>
 {{#provincias_vacias}}
 <h2>Provincia vacía</h2>
-	<form action="boardUser_template">
+	<form action="busqueda-avanzada-sitters">
 		<input type='submit' value='Volver' />
 	</form>
 {{/provincias_vacias}}
 
 {{#vacio}}
 <h2>No se han encontrado resultados</h2>
-	<form action="boardUser_template">
-		<input type='submit' value='Volver' />
-	</form>
+	<input type="submit" value="Intentar de nuevo" onclick="window.location='../perfil-usuario';" />
 {{/vacio}}
 
 {{#encontrado}}
@@ -30,9 +28,7 @@
 		{{/resultadofinal}}
 	</table>
 
-	<form action="busqueda-avanzada-sitters">
-		<input type='submit' value='Volver' />
-	</form>
+	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 
 
 {{/encontrado}}

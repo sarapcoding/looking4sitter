@@ -42,7 +42,7 @@ public class AppController {
 		return "inicioSesion_template";
 	}
 	@PostMapping ("/inicio+sesion")
-	public String verificacionInicioSesion (Model model, @RequestParam String usuario, @RequestParam String contrasena){
+	public String verificacionInicioSesion (HttpServletRequest request,Model model, @RequestParam String usuario, @RequestParam String contrasena){
 		List<Usuarios> list_u = usuarioRepositorio.findByLogin(usuario);
 		if (list_u.isEmpty()) {
 			// Usuario no encontrado
@@ -52,37 +52,35 @@ public class AppController {
 		Usuarios usuario_encontrado = list_u.get(0);
 		// Comparacion contraseña
 		if (usuario_encontrado.getPassword().equals(contrasena)) {
-			/*Búsqueda del tipo de usuario:
-			 * carga id del usuario
-			 * buscar en relacion usuario-perfil el perfil
-			 * cargar el tipo de perfil de la tabla de perfiles
-			 * pasar el tipo con model.addattribute para la carga del boarduser_template
-			 * 
-			 * */
 			Long id_user = usuario_encontrado.getId();
 			List<Relusuariosperfiles> list_rel = upRepositorio.findByIdusuario(id_user);
 			Relusuariosperfiles rel = list_rel.get(0);
 			Long id_perfil = rel.getIdperfil();
 			List<Perfiles> list_perf = perfilRepositorio.findById(id_perfil);
 			Perfiles perfil = list_perf.get(0);
-			String nombre = usuario_encontrado.getNombre();
-			String perfil_n = perfil.getNombre();
-			model.addAttribute("mynameis", nombre.toString());
-			model.addAttribute("myprofileis", perfil_n.toString());
-			if (perfil_n.toUpperCase().equals("PADRE")) {
+			
+			UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
+			request.getSession().setAttribute("usuario_actual",usuario_actual);
+			String mynameis = usuario_actual.getUsuario().getNombre();
+			String myprofileis = usuario_actual.getPerfil().getNombre();
+			model.addAttribute("mynameis", mynameis);
+			model.addAttribute("myprofileis", myprofileis);
+			
+			//UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession.getAttribute("usuario_actual");
+			
+			
+			if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("PADRE")) {
 				model.addAttribute("padre", true);
-			} else if (perfil_n.toUpperCase().equals("SITTER")) {
+			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("SITTER")) {
 				model.addAttribute("sitter", true);
-			} else if (perfil_n.toUpperCase().equals("STAR SITTER")) {
+			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("STAR SITTER")) {
 				model.addAttribute("star_sitter", true);
-			} else if (perfil_n.toUpperCase().equals("CENTRO")) {
+			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("CENTRO")) {
 				model.addAttribute("centro", true);
 			}
+			
+			
 			return "boardUser_template";
-			//UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
-			//request.getSession().setAttribute("usuario_actual",usuario_actual);
-			//UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession.getAttribute("usuario_actual");
-			//return "boardUser_template";
 		}
 		model.addAttribute("correcto",true);
 		return "inicioSesion_template";
@@ -216,8 +214,6 @@ public class AppController {
 			Long idperfilss = ssitt.getId();
 			List<Relusuariosperfiles> list_star = upRepositorio.findByIdperfil(idperfilss);//star sitter
 			 * 
-			 * 
-			 * 
 			 * */
 			
 			List<Relusuariosperfiles> list_sitters = upRepositorio.findByIdperfil(idperfils);//sitter
@@ -239,6 +235,30 @@ public class AppController {
 		
 		
 		return "resultadoBusquedasSitters_template";
+		
+	}
+	
+	
+	
+	@RequestMapping ("/perfil-usuario")
+	public String perfilUsuario (HttpServletRequest request,Model model){
+		UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
+		String mynameis = usuario_actual.getUsuario().getNombre();
+		String myprofileis = usuario_actual.getPerfil().getNombre();
+		model.addAttribute("mynameis", mynameis);
+		model.addAttribute("myprofileis", myprofileis);
+		
+		if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("PADRE")) {
+			model.addAttribute("padre", true);
+		} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("SITTER")) {
+			model.addAttribute("sitter", true);
+		} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("STAR SITTER")) {
+			model.addAttribute("star_sitter", true);
+		} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("CENTRO")) {
+			model.addAttribute("centro", true);
+		}
+		
+		return "boardUser_template";
 		
 	}
 	
