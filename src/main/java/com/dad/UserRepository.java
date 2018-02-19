@@ -16,17 +16,25 @@ public interface UserRepository extends CrudRepository<Usuarios,Long>{
 	List<Usuarios> findByLogin(String login);
 	List<Usuarios> findByEmail (String email);
 	List<Usuarios> findByProvincia(String provincia);
-	List<Usuarios> findByTarifa(int tarifa);
+	List<Usuarios> findByProvinciaIsLike(String provincia);
 	List<Usuarios> findById(Long id);
-	/*
-	 * @Query("select u from usuarios u where u.Tarifa > :tarifa")
-	 * List<Usuarios> findByMaxTarifa(@Param("tarifa") int tarifa);
-	 * 
-	 * */
+	
+	@Query(
+			value="select * from usuarios where Tarifa <= ?1",
+			nativeQuery = true)
+	List<Usuarios> findByTarifa(int tarifa);
 	
 	/*
-	@Query("select u from usuarios u where u.Tarifa > :tarifa and upper(u.Provincia) = upper(:provincia)")
-	public List<Usuarios> findByMaxTarifaAndProvincia(@Param("tarifa") int tarifa,@Param("provincia") String provincia);
+	@Query(
+			value="select * from usuarios where 1=1 ?1 ?2",
+			nativeQuery = true)
+	List<Usuarios> findByProvinciaAndTarifa(String provincia,String tarifa);
 	*/
+	@Query(
+			value="select * from usuarios where upper(Provincia) = upper(?1) and Tarifa <= ?2",
+			nativeQuery = true)
+	List<Usuarios> findByProvinciaAndTarifa(String provincia,int tarifa);
+	
+	
 
 }

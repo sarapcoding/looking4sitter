@@ -12,8 +12,8 @@
 	<h2>Búsqueda avanzada de sitters</h2>
 	
 	<form action="busqueda-avanzada-sitters" method="post">
-		<p>Provincia (campo obligatorio): </p><input type='text' name='provincia' />
-		<p>Tarifa máxima (si no hay máximo, escriba 0): </p><input type='text' name='tarifa_max' />
+		<p>Provincia: </p><input type='text' name='provincia' />
+		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
 		<input type='submit' value='Buscar' />
 	</form>
 		
@@ -32,7 +32,12 @@
 {{/star_sitter}}
 
 {{#centro}}
-	<h2>Búsqueda de Sitters</h2>
+	<h2>Búsqueda avanzada de sitters</h2>
+	<form action="busqueda-avanzada-sitters" method="post">
+		<p>Provincia: </p><input type='text' name='provincia' />
+		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
+		<input type='submit' value='Buscar' />
+	</form>
 {{/centro}}
 
 

@@ -160,7 +160,6 @@ public class AppController {
 	
 	
 	private Usuarios giveMeUser(List<Usuarios> list, Long id) {
-		Usuarios n = new Usuarios();
 		for (Usuarios x : list) {
 			if(id.equals(x.getId())){
 				list.remove(x);
@@ -175,46 +174,35 @@ public class AppController {
 	public String busquedaAvanzada(Model model,
 			@RequestParam String provincia,
 			@RequestParam String tarifa_max) {
-		List<Usuarios> sitters = new ArrayList();
-		List<Usuarios> resultado = new ArrayList();
+		/*
+		String prov_q = new String();
+		String tar_q = new String();
+		*/
+		int tarifa_h;
+		List<Usuarios> resultado = new ArrayList<>();
+		List<Usuarios> sitters = new ArrayList<>();
 		
-		if (provincia.equals("")) {
-			model.addAttribute("provincia_vacia",true);
-			return "resultadosBusquedasSitters_template";
-		} else {
-			List<Usuarios> list_provincia = usuarioRepositorio.findByProvincia(provincia);
-			if (!tarifa_max.equals("0")) {
-				int tarifa_h = Integer.parseInt(tarifa_max);
-				// En caso de tener ambos valores: findByTarifaAndProvincia lj sitters/starsitters
-				for (Usuarios y : list_provincia) {
-					if(y.getTarifa() > tarifa_h) {
-						list_provincia.remove(y);
-					}
-				}
+		if ((provincia == null) || (provincia == "")) {// si la provincia es null
+			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
+				sitters = (List<Usuarios>) usuarioRepositorio.findAll();
+			} else {
+				tarifa_h = Integer.parseInt(tarifa_max);
+				sitters = usuarioRepositorio.findByTarifa(tarifa_h);
 			}
-			
-			sitters.addAll(list_provincia);
-			
+		} else { // si tengo provincia
+			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
+				sitters = usuarioRepositorio.findByProvinciaIsLike(provincia);
+			} else { // si no
+				tarifa_h = Integer.parseInt(tarifa_max);
+				sitters = usuarioRepositorio.findByProvinciaAndTarifa(provincia, tarifa_h);
+			}
 		}
-		
-		//Lista sin duplicados
-		//sitters.addAll(set_sitters);
 		
 		if (!sitters.isEmpty()) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
-			// conseguir idperfil de sitter y star sitter
 			List<Perfiles> list_s = perfilRepositorio.findByNombre("Sitter");
 			Perfiles sitt = list_s.get(0);
 			Long idperfils = sitt.getId();
-			
-			/*
-			 * 
-			 * List<Perfiles> list_ss = perfilRepositorio.findByNombre("Star Sitter");
-			Perfiles ssitt = list_ss.get(0);
-			Long idperfilss = ssitt.getId();
-			List<Relusuariosperfiles> list_star = upRepositorio.findByIdperfil(idperfilss);//star sitter
-			 * 
-			 * */
 			
 			List<Relusuariosperfiles> list_sitters = upRepositorio.findByIdperfil(idperfils);//sitter
 			
@@ -226,16 +214,16 @@ public class AppController {
 					resultado.add(u);
 				}
 			}
-			
+			if (resultado.isEmpty()) {
+				model.addAttribute("vacio",true);
+				return "resultadoBusquedasSitters_template";
+			}
 			model.addAttribute("resultadofinal",resultado);
 			
 		} else {// no hay resultados
 			model.addAttribute("vacio",true);
 		}
-		
-		
 		return "resultadoBusquedasSitters_template";
-		
 	}
 	
 	
