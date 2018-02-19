@@ -11,6 +11,7 @@ public class Anuncios {
 	private Long id;
 	// Atributos del anuncio
 	private Long id_Usuario;
+	private String nombre;
 	private String asunto;
 	private String cuerpo;
 	private String fecha; // DD-MM-YY
@@ -25,6 +26,38 @@ public class Anuncios {
 		this.cuerpo=cuerpo;
 		this.fecha=fecha;
 		
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getAsunto() {
+		return asunto;
+	}
+
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+
+	public String getCuerpo() {
+		return cuerpo;
+	}
+
+	public void setCuerpo(String cuerpo) {
+		this.cuerpo = cuerpo;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 
 	@Override

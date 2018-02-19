@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.dad.Usuarios;
+
 
 
 public interface UserRepository extends CrudRepository<Usuarios,Long>{
