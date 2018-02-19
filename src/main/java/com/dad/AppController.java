@@ -8,6 +8,8 @@ import com.dad.ProfileRepository;
 import com.dad.Relusuariosperfiles;
 import com.dad.RelUPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +27,10 @@ public class AppController {
 	/*@Autowired
 	private ProfileRepository perfilRepositorio;
 	@Autowired
-	private RelUPRepository upRepositorio;
-	*/
+	private RelUPRepository upRepositorio;*/
+	@Autowired
+	private AdvertRepository anuncioRepositorio;
+	
 	@RequestMapping ("/")
 	public String arranque (Model model){
 		return "welcome_template";
@@ -46,7 +50,10 @@ public class AppController {
 		Usuarios usuario_encontrado = list_u.get(0);
 		// Comparacion contraseña
 		if (usuario_encontrado.getPassword().equals(contrasena)) {
-			return "boardParent_template";
+			//Distinguir por tipo. SI es padre cargar los sitter. Si es sitter, cargar los anuncios.
+			Page<Anuncios> a = anuncioRepositorio.findAll(new PageRequest(0,20));
+			model.addAttribute("anuncios", a);
+			return "boardSitter_template";
 		}
 		model.addAttribute("correcto",true);
 		return "inicioSesion_template";

@@ -11,10 +11,12 @@
 		<p>Fecha de inicio:</p><input type="date" name="fecha" />
 		<p>Salario minimo:</p><input type="number" name="salario"/>
 		<input type='submit' value='Buscar' />
+	<p>Anuncios registrados</p>
 	{{#anuncios}}
-		Nombre : {{anuncio.nombre}}
-		Asunto: {{anuncio.asunto}}
-		Comentario: {{anuncio.comentario}}
+		Nombre : {{nombre}}
+		Asunto: {{asunto}}
+		Comentario: {{cuerpo}}
+		Fecha:{{fecha}}
 	{{/anuncios}}	
 </body>
 </html>
