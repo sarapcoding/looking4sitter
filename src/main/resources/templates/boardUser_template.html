@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Perfil de {{myprofileis}}</title>
+</head>
+<body>
+<h1>Página principal de {{mynameis}}</h1>
+
+{{#padre}}
+
+	<h2>Búsqueda avanzada de sitters</h2>
+	<form action="busqueda-avanzada-sitters" method="post">
+		<p>Provincia: </p><input type='text' name='provincia' />
+		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
+		<input type='submit' value='Buscar' />
+	</form>
+	
+	<h2>Publicar anuncio</h2>
+	<form action="publicar+anuncio">
+		<input type='submit' value='Publicar anuncio' />
+	</form>
+	
+		
+		
+{{/padre}}
+
+{{#sitter}}
+<h2>Tablón de anuncios</h2>
+	<h2>Búsqueda de anuncio</h2>
+	<!--  <form action="publicar+anuncio"><input type='submit' value='Publicar anuncio' /></form> -->
+
+	<p>Filtrar Anuncios</p>
+	<form action="encontrar+anuncio">
+		<!-- <p>Ciudad :</p><input type="search" name='ciudad' /> -->
+		<p>Fecha de inicio:</p><input type="date" name="fecha" />
+		<!-- <p>Salario minimo:</p><input type="number" name="salario"/> -->
+		<input type='submit' value='Buscar' />
+	
+	
+	</form>
+	
+{{/sitter}}
+
+{{#star_sitter}}
+{{/star_sitter}}
+
+{{#centro}}
+	<h2>Búsqueda avanzada de sitters</h2>
+	<form action="busqueda-avanzada-sitters" method="post">
+		<p>Provincia: </p><input type='text' name='provincia' />
+		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
+		<input type='submit' value='Buscar' />
+	</form>
+{{/centro}}
+
+
+
+</body>
+</html>
