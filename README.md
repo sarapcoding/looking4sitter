@@ -62,13 +62,20 @@ Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensaj
 
 
 # Búsqueda de sitters
-https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_sitters.PNG
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_sitters.PNG"
+     alt="Búsqueda sitters"
+     style="float: left; margin-right: 10px;" />
 
 # Búsqueda de anuncios
-https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_anuncio.PNG
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_anuncio.PNG"
+     alt="Búsqueda anuncio"
+     style="float: left; margin-right: 10px;" />
 
 # Creación de un anuncio
-https://github.com/sarapcoding/looking4sitter/blob/master/anuncio_creado.PNG
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/anuncio_creado.PNG"
+     alt="Creación anuncio"
+     style="float: left; margin-right: 10px;" />
+
 
 ## Funcionalidades del servicio interno
 - Servicio de notificación ante la recepcion de mensajes, tanto dentro de la propia pagina como notificacion via e-mail.
