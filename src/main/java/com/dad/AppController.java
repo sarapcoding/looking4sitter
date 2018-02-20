@@ -7,10 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
-import com.dad.Usuarios;
-import com.dad.Perfiles;
+import com.dad.Usuario;
+import com.dad.Perfil;
 import com.dad.ProfileRepository;
-import com.dad.Relusuariosperfiles;
+import com.dad.Relusuarioperfil;
 import com.dad.RelUPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,21 +43,21 @@ public class AppController {
 	}
 	@PostMapping ("/inicio+sesion")
 	public String verificacionInicioSesion (HttpServletRequest request,Model model, @RequestParam String usuario, @RequestParam String contrasena){
-		List<Usuarios> list_u = usuarioRepositorio.findByLogin(usuario);
+		List<Usuario> list_u = usuarioRepositorio.findByLogin(usuario);
 		if (list_u.isEmpty()) {
 			// Usuario no encontrado
 			model.addAttribute("correcto",true);
 			return "inicioSesion_template";
 		}
-		Usuarios usuario_encontrado = list_u.get(0);
+		Usuario usuario_encontrado = list_u.get(0);
 		// Comparacion contraseña
 		if (usuario_encontrado.getPassword().equals(contrasena)) {
 			Long id_user = usuario_encontrado.getId();
-			List<Relusuariosperfiles> list_rel = upRepositorio.findByIdusuario(id_user);
-			Relusuariosperfiles rel = list_rel.get(0);
+			List<Relusuarioperfil> list_rel = upRepositorio.findByIdusuario(id_user);
+			Relusuarioperfil rel = list_rel.get(0);
 			Long id_perfil = rel.getIdperfil();
-			List<Perfiles> list_perf = perfilRepositorio.findById(id_perfil);
-			Perfiles perfil = list_perf.get(0);
+			List<Perfil> list_perf = perfilRepositorio.findById(id_perfil);
+			Perfil perfil = list_perf.get(0);
 			
 			UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
 			request.getSession().setAttribute("usuario_actual",usuario_actual);
@@ -126,8 +126,8 @@ public class AppController {
 	}
 	
 	
-	private Usuarios giveMeUser(List<Usuarios> list, Long id) {
-		for (Usuarios x : list) {
+	private Usuario giveMeUser(List<Usuario> list, Long id) {
+		for (Usuario x : list) {
 			if(id.equals(x.getId())){
 				list.remove(x);
 				return x;
@@ -146,12 +146,12 @@ public class AppController {
 		String tar_q = new String();
 		*/
 		int tarifa_h;
-		List<Usuarios> resultado = new ArrayList<>();
-		List<Usuarios> sitters = new ArrayList<>();
+		List<Usuario> resultado = new ArrayList<>();
+		List<Usuario> sitters = new ArrayList<>();
 		
 		if ((provincia == null) || (provincia == "")) {// si la provincia es null
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-				sitters = (List<Usuarios>) usuarioRepositorio.findAll();
+				sitters = (List<Usuario>) usuarioRepositorio.findAll();
 			} else {
 				tarifa_h = Integer.parseInt(tarifa_max);
 				sitters = usuarioRepositorio.findByTarifa(tarifa_h);
@@ -167,16 +167,16 @@ public class AppController {
 		
 		if (!sitters.isEmpty()) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
-			List<Perfiles> list_s = perfilRepositorio.findByNombre("Sitter");
-			Perfiles sitt = list_s.get(0);
+			List<Perfil> list_s = perfilRepositorio.findByNombre("Sitter");
+			Perfil sitt = list_s.get(0);
 			Long idperfils = sitt.getId();
 			
-			List<Relusuariosperfiles> list_sitters = upRepositorio.findByIdperfil(idperfils);//sitter
+			List<Relusuarioperfil> list_sitters = upRepositorio.findByIdperfil(idperfils);//sitter
 			
-			for (Relusuariosperfiles s : list_sitters) {
+			for (Relusuarioperfil s : list_sitters) {
 				Long idusuario = s.getIdusuario(); // consigo un id de usuario
 				// buscar en la lista de "sitters" el usuario que tenga ese id
-				Usuarios u = giveMeUser(sitters,idusuario);
+				Usuario u = giveMeUser(sitters,idusuario);
 				if (u != null) {
 					resultado.add(u);
 				}

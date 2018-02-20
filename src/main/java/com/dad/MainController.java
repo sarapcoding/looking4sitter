@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 // Entidades
-import com.dad.Usuarios;
+import com.dad.Usuario;
 import com.dad.Comentarios;
 import com.dad.Mensajes;
-import com.dad.Perfiles;
-import com.dad.Anuncios;
-import com.dad.Relusuariosperfiles;
-import com.dad.Relsittercentros;
+import com.dad.Perfil;
+import com.dad.Anuncio;
+import com.dad.Relusuarioperfil;
+import com.dad.Relsittercentro;
 // Repositorios
 import com.dad.UserRepository;
 import com.dad.RemarkRepository;
@@ -49,7 +49,7 @@ public class MainController {
 											@RequestParam String pass,
 											@RequestParam String provincia,
 											@RequestParam String descripcion) {
-		Usuarios n = new Usuarios();
+		Usuario n = new Usuario();
 		n.setLogin(login);
 		n.setNombre(nombre);
 		n.setEmail(email);
@@ -61,7 +61,7 @@ public class MainController {
 	}
 	
 	@GetMapping(path="/all")
-	public @ResponseBody Iterable<Usuarios> getAllUsers(){
+	public @ResponseBody Iterable<Usuario> getAllUsers(){
 		return userRepository.findAll();
 	}
 

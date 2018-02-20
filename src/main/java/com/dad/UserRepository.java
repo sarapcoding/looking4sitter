@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dad.Usuarios;
+import com.dad.Usuario;
 
 /*
 @Repository
@@ -38,17 +38,17 @@ public interface UserRepository extends JpaRepository<Usuarios,Long>{
 
 
 @Repository
-public interface UserRepository extends CrudRepository<Usuarios,Long>{
-List<Usuarios> findByLogin(String login);
-	List<Usuarios> findByEmail (String email);
-	List<Usuarios> findByProvincia(String provincia);
-	List<Usuarios> findByProvinciaIsLike(String provincia);
-	List<Usuarios> findById(Long id);
+public interface UserRepository extends CrudRepository<Usuario,Long>{
+List<Usuario> findByLogin(String login);
+	List<Usuario> findByEmail (String email);
+	List<Usuario> findByProvincia(String provincia);
+	List<Usuario> findByProvinciaIsLike(String provincia);
+	List<Usuario> findById(Long id);
 	
 	@Query(
 			value="select * from usuarios where Tarifa <= ?1",
 			nativeQuery = true)
-	List<Usuarios> findByTarifa(int tarifa);
+	List<Usuario> findByTarifa(int tarifa);
 	
 	
 	//@Query(
@@ -59,7 +59,7 @@ List<Usuarios> findByLogin(String login);
 	@Query(
 			value="select * from usuarios where Provincia like ?1 and Tarifa <= ?2",
 			nativeQuery = true)
-	List<Usuarios> findByProvinciaAndTarifa(String provincia,int tarifa);
+	List<Usuario> findByProvinciaAndTarifa(String provincia,int tarifa);
 	
 }
 

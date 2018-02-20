@@ -23,7 +23,7 @@ public class AdvertController {
 		int num_pag = 0;
 		int num_elem = 4;
 		//Page<Anuncios> coincidencias_ciudad = anuncioRepositorio.findByCiudad(ciudad,new PageRequest(num_pag, num_elem));
-		Page<Anuncios> coincidencias_fecha = anuncioRepositorio.findByFecha(fecha,new PageRequest(num_pag, num_elem));
+		Page<Anuncio> coincidencias_fecha = anuncioRepositorio.findByFecha(fecha,new PageRequest(num_pag, num_elem));
 		if (coincidencias_fecha.getTotalElements()==0){
 			model.addAttribute("fail", true);
 		} else {
@@ -73,7 +73,7 @@ public class AdvertController {
 		UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
 		Long idusuario = usuario_actual.getUsuario().getId();
 		//String login = usuario_actual.getUsuario().getLogin();
-		Anuncios anuncio = new Anuncios();
+		Anuncio anuncio = new Anuncio();
 		anuncio.setIdusuario(idusuario);
 		//anuncio.setNombre(login);
 		anuncio.setAsunto(asunto);
