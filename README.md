@@ -15,10 +15,60 @@ Anuncio | Escrito por los padres y agregado al tablón de anuncios. Los niñeros
 Comentario | Comentario de los padres al niñero en el que se indica tambien la puntuación.
 Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensajes.
 
-## Diagrama
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/diagrama_bbdd.PNG"
-     alt="Diagrama"
+## Diagrama UML
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/diagramaUML.PNG"
+     alt="Diagrama UML"
      style="float: left; margin-right: 10px;" />
+
+## Capturas
+# Inicio
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/welcome.PNG"
+     alt="Página de inicio"
+     style="float: left; margin-right: 10px;" />
+     
+# Inicio sesión
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/inicio_padre.PNG"
+     alt="Inicio sesión"
+     style="float: left; margin-right: 10px;" />
+     
+# Perfiles
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/perfil_padre.PNG"
+     alt="Perfil padre"
+     style="float: left; margin-right: 10px;" />
+
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/perfil_sitter.PNG"
+     alt="Perfil Sitter"
+     style="float: left; margin-right: 10px;" />
+
+
+# Registro
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_1.PNG"
+     alt="Registro"
+     style="float: left; margin-right: 10px;" />
+     
+     
+ <img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_2.PNG"
+     alt="Registro"
+     style="float: left; margin-right: 10px;" />
+     
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_3.PNG"
+     alt="Registro"
+     style="float: left; margin-right: 10px;" />
+     
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_4.PNG"
+     alt="Registro"
+     style="float: left; margin-right: 10px;" />
+
+
+
+# Búsqueda de sitters
+https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_sitters.PNG
+
+# Búsqueda de anuncios
+https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_anuncio.PNG
+
+# Creación de un anuncio
+https://github.com/sarapcoding/looking4sitter/blob/master/anuncio_creado.PNG
 
 ## Funcionalidades del servicio interno
 - Servicio de notificación ante la recepcion de mensajes, tanto dentro de la propia pagina como notificacion via e-mail.
