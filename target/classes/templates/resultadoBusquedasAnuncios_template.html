@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Resultado de búsqueda de anuncios</title>
+</head>
+<body>
+	
+<h2>Tablon de anuncios</h2>
+
+	
+{{#encontrado}}
+	{{#anuncios}}
+	Asunto: {{asunto}}
+	Fecha:{{fecha}}
+	<br>
+	{{/anuncios}}
+	
+<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
+	
+	
+{{/encontrado}}
+		
+	{{#fail}}
+		<h2>No se han encontrado resultados</h2>
+		<input type="submit" value="Intentar de nuevo" onclick="window.location='../perfil-usuario';" />
+	{{/fail}}
+</body>
+</html>
