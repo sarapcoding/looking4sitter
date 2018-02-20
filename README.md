@@ -20,7 +20,7 @@ Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensaj
      alt="Diagrama UML"
      style="float: left; margin-right: 10px;" />
 ## Diagrama de entidades y su relación
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_2.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/diagrama_bbdd.PNG"
      alt="Diagrama entidades"
      style="float: left; margin-right: 10px;" />
 
