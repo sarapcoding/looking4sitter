@@ -53,11 +53,7 @@ public class AppController {
 		// Comparacion contraseña
 		if (usuario_encontrado.getPassword().equals(contrasena)) {
 			Long id_user = usuario_encontrado.getId();
-			List<Relusuarioperfil> list_rel = upRepositorio.findByIdusuario(id_user);
-			Relusuarioperfil rel = list_rel.get(0);
-			Long id_perfil = rel.getIdperfil();
-			List<Perfil> list_perf = perfilRepositorio.findById(id_perfil);
-			Perfil perfil = list_perf.get(0);
+			Perfil perfil = usuario_encontrado.getPerfil();
 			
 			UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
 			request.getSession().setAttribute("usuario_actual",usuario_actual);
@@ -137,6 +133,8 @@ public class AppController {
 		
 	}
 	
+	
+	// MODIFICAR
 	@RequestMapping("/busqueda-avanzada-sitters")
 	public String busquedaAvanzada(Model model,
 			@RequestParam String provincia,
@@ -146,8 +144,8 @@ public class AppController {
 		String tar_q = new String();
 		*/
 		int tarifa_h;
-		List<Usuario> resultado = new ArrayList<>();
-		List<Usuario> sitters = new ArrayList<>();
+		List<Usuario> resultado = new ArrayList();
+		List<Usuario> sitters = new ArrayList();
 		
 		if ((provincia == null) || (provincia == "")) {// si la provincia es null
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
@@ -167,21 +165,16 @@ public class AppController {
 		
 		if (!sitters.isEmpty()) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
-			List<Perfil> list_s = perfilRepositorio.findByNombre("Sitter");
-			Perfil sitt = list_s.get(0);
-			Long idperfils = sitt.getId();
-			
-			List<Relusuarioperfil> list_sitters = upRepositorio.findByIdperfil(idperfils);//sitter
-			
-			for (Relusuarioperfil s : list_sitters) {
-				Long idusuario = s.getIdusuario(); // consigo un id de usuario
-				// buscar en la lista de "sitters" el usuario que tenga ese id
-				Usuario u = giveMeUser(sitters,idusuario);
-				if (u != null) {
+			// Sacamos los sitters
+			List<Perfil> list_p = perfilRepositorio.findByNombre("Sitter");
+			Perfil p = list_p.get(0);
+			for (Usuario u : sitters) {
+				if (u.getPerfil().equals(p)) {
 					resultado.add(u);
 				}
 			}
-			if (resultado.isEmpty()) {
+			
+			if (resultado.isEmpty()) { // no hay sitters
 				model.addAttribute("vacio",true);
 				return "resultadoBusquedasSitters_template";
 			}

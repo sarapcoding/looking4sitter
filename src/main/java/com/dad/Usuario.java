@@ -35,7 +35,12 @@ public class Usuario {
 	@OneToOne
 	private Usuario centro;
 	
-	//private List<Comentario> comentario;
+	@OneToMany(mappedBy="origen")
+	private List<Comentario> comentario_escrito;
+	
+	@OneToMany(mappedBy="destino")
+	private List<Comentario> comentario_destinado;
+	
 	//private List<Mensaje> mensaje;
 		 
 	
@@ -159,6 +164,54 @@ public Perfil getPerfil() {
 
 	public void setAnuncio(List<Anuncio> anuncio) {
 		this.anuncio = anuncio;
+	}
+
+
+
+	public String getApellido() {
+		return apellido;
+	}
+
+
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+
+
+	public Usuario getCentro() {
+		return centro;
+	}
+
+
+
+	public void setCentro(Usuario centro) {
+		this.centro = centro;
+	}
+
+
+
+	public List<Comentario> getComentario_escrito() {
+		return comentario_escrito;
+	}
+
+
+
+	public void setComentario_escrito(List<Comentario> comentario_escrito) {
+		this.comentario_escrito = comentario_escrito;
+	}
+
+
+
+	public List<Comentario> getComentario_destinado() {
+		return comentario_destinado;
+	}
+
+
+
+	public void setComentario_destinado(List<Comentario> comentario_destinado) {
+		this.comentario_destinado = comentario_destinado;
 	}
 
 

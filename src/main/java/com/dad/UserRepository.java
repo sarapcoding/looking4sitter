@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dad.Usuario;
 
-/*
-@Repository
-public interface UserRepository extends JpaRepository<Usuarios,Long>{
 
-	List<Usuarios> findByLogin(String login,Pageable page);
-	List<Usuarios> findByEmail (String email,Pageable page);
-	List<Usuarios> findByProvincia(String provincia);
-	List<Usuarios> findByProvinciaIsLike(String provincia);
-	List<Usuarios> findById(Long id);
+@Repository
+public interface UserRepository extends JpaRepository<Usuario,Long>{
+
+	List<Usuario> findByLogin(String login);
+	List<Usuario> findByEmail (String email);
+	List<Usuario> findByProvincia(String provincia);
+	List<Usuario> findByProvinciaIsLike(String provincia);
+	List<Usuario> findById(Long id);
 	
 	@Query(
 			value="select * from usuarios where Tarifa <= ?1",
 			nativeQuery = true)
-	Page<Usuarios> findByTarifa(int tarifa,Pageable page);
+	List<Usuario> findByTarifa(int tarifa);
 	
 	@Query(
 			value="select * from usuarios where Provincia like ?1 and Tarifa <= ?2",
 			nativeQuery = true)
-	List<Usuarios> findByProvinciaAndTarifa(String provincia,int tarifa);
+	List<Usuario> findByProvinciaAndTarifa(String provincia,int tarifa);
 
 }
-*/
 
 
+/*
 @Repository
 public interface UserRepository extends CrudRepository<Usuario,Long>{
 List<Usuario> findByLogin(String login);
@@ -62,4 +62,5 @@ List<Usuario> findByLogin(String login);
 	List<Usuario> findByProvinciaAndTarifa(String provincia,int tarifa);
 	
 }
+*/
 

@@ -71,11 +71,9 @@ public class AdvertController {
 	public String addAdvert (HttpServletRequest request, Model model, @RequestParam String asunto,
 			@RequestParam String fecha,	@RequestParam String cuerpo){
 		UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
-		Long idusuario = usuario_actual.getUsuario().getId();
-		//String login = usuario_actual.getUsuario().getLogin();
+		Usuario usuario = usuario_actual.getUsuario();
 		Anuncio anuncio = new Anuncio();
-		anuncio.setIdusuario(idusuario);
-		//anuncio.setNombre(login);
+		anuncio.setUsuario(usuario);
 		anuncio.setAsunto(asunto);
 		anuncio.setFecha(fecha);
 		anuncio.setCuerpo(cuerpo);

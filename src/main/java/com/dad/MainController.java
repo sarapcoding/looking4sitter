@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 // Entidades
 import com.dad.Usuario;
-import com.dad.Comentarios;
+import com.dad.Comentario;
 import com.dad.Mensajes;
 import com.dad.Perfil;
 import com.dad.Anuncio;
