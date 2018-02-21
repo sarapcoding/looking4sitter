@@ -12,7 +12,6 @@ import com.dad.Comentario;
 import com.dad.Mensajes;
 import com.dad.Perfil;
 import com.dad.Anuncio;
-import com.dad.Relusuarioperfil;
 import com.dad.Relsittercentro;
 // Repositorios
 import com.dad.UserRepository;
@@ -20,7 +19,6 @@ import com.dad.RemarkRepository;
 import com.dad.MessageRepository;
 import com.dad.ProfileRepository;
 import com.dad.AdvertRepository;
-import com.dad.RelUPRepository;
 import com.dad.RelSCRepository;
 
 
@@ -37,8 +35,7 @@ public class MainController {
 	private ProfileRepository profileRepository;
 	@Autowired
 	private AdvertRepository advertRepository;
-	@Autowired
-	private RelUPRepository relupRepository;
+
 	@Autowired
 	private RelSCRepository relscRepository;
 	

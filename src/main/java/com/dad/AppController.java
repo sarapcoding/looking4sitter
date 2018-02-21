@@ -4,14 +4,13 @@ package com.dad;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
 import com.dad.Usuario;
 import com.dad.Perfil;
 import com.dad.ProfileRepository;
-import com.dad.Relusuarioperfil;
-import com.dad.RelUPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -30,8 +29,38 @@ public class AppController {
 	private UserRepository usuarioRepositorio;
 	@Autowired
 	private ProfileRepository perfilRepositorio;
-	@Autowired
-	private RelUPRepository upRepositorio;
+
+	@PostConstruct
+	public void init() {
+		// carga de datos al arrancar la aplicación
+		Perfil administrador = new Perfil("administrador");
+		Perfil padre = new Perfil("padre");
+		Perfil sitter = new Perfil("sitter");
+		Perfil starSitter = new Perfil("star sitter");
+		Perfil centro = new Perfil("centro");
+		
+		Usuario us1 = new Usuario("padrede2","Antonio","García","padrede2123","padrede2@email.com","Madrid",0,"feliz",padre);
+		Usuario us2 = new Usuario("mia","Amelia","G","mia123","mia@email.com","Madrid",15,"lala",sitter);
+		Usuario us3 = new Usuario("flor","Flor","Blanca","flor123","flor@email.com","Barcelona",13,"po",sitter);
+		Usuario us4 = new Usuario("caracoles","Caracoles Center","","caracoles123","caracoles@email.com","Madrid",0,"tinky",centro);
+		
+		usuarioRepositorio.save(us1);
+		usuarioRepositorio.save(us2);
+		usuarioRepositorio.save(us3);
+		usuarioRepositorio.save(us4);
+		
+		sitter.getUsuario().add(us2);
+		sitter.getUsuario().add(us3);
+		padre.getUsuario().add(us1);
+		centro.getUsuario().add(us4);
+		
+		perfilRepositorio.save(administrador);
+		perfilRepositorio.save(padre);
+		perfilRepositorio.save(sitter);
+		perfilRepositorio.save(starSitter);
+		perfilRepositorio.save(centro);
+	}
+	
 	
 	@RequestMapping ("/")
 	public String arranque (Model model){
@@ -52,7 +81,6 @@ public class AppController {
 		Usuario usuario_encontrado = list_u.get(0);
 		// Comparacion contraseña
 		if (usuario_encontrado.getPassword().equals(contrasena)) {
-			Long id_user = usuario_encontrado.getId();
 			Perfil perfil = usuario_encontrado.getPerfil();
 			
 			UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);

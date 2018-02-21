@@ -1,4 +1,5 @@
 package com.dad;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -29,7 +30,8 @@ public class Perfil {
 	public Perfil() {}
 	
 	public Perfil(String nombre) {
-		this.nombre= nombre;
+		this.setNombre(nombre);
+		this.setUsuario(new ArrayList<>());
 	}
 	
 	@Override
@@ -48,6 +50,16 @@ public class Perfil {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public List<Usuario> getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(List<Usuario> usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 	
 
 }

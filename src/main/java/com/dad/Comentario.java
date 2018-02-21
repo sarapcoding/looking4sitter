@@ -17,6 +17,7 @@ public class Comentario {
 	
 	@ManyToOne
 	private Usuario destino;
+	
 	private int puntuacion;
 	private String comentario;
 	private String fecha; // DD-MM-YY

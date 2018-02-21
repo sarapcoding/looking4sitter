@@ -8,8 +8,6 @@ import com.dad.UserRepository;
 import com.dad.Usuario;
 import com.dad.Perfil;
 import com.dad.ProfileRepository;
-import com.dad.Relusuarioperfil;
-import com.dad.RelUPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -27,8 +25,6 @@ public class CenterController {
 	private UserRepository usuarioRepositorio;
 	@Autowired
 	private ProfileRepository perfilRepositorio;
-	@Autowired
-	private RelUPRepository upRepositorio;
 	
 	
 	

@@ -15,9 +15,7 @@ public class UserController {
 	private UserRepository usuarioRepositorio;
 	@Autowired
 	private ProfileRepository perfilRepositorio;
-	@Autowired
-	private RelUPRepository upRepositorio;
-	
+
 	/*
 	@PostMapping ("/verificacion+registro")
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
@@ -88,6 +86,7 @@ public class UserController {
 			@RequestParam String email, @RequestParam String tipo, @RequestParam String nombre, @RequestParam String provincia
 			, @RequestParam int tarifa, @RequestParam String descripcion){
 		Usuario nuevoUsuario = new Usuario();
+		Perfil perfil = perfilRepositorio.findOne(Long.parseLong(tipo));
 		// usuario,"Nombre",email,contrasena,"Provincia","Descrpcion"
 		nuevoUsuario.setLogin(login);
 		nuevoUsuario.setEmail(email);
@@ -96,16 +95,11 @@ public class UserController {
 		nuevoUsuario.setProvincia (provincia);
 		nuevoUsuario.setTarifa(tarifa);
 		nuevoUsuario.setDescripcion(descripcion);
-		
+		nuevoUsuario.setPerfil(perfil);
 		Usuario usuario_guardado = new Usuario();
 		usuario_guardado = usuarioRepositorio.save(nuevoUsuario);
 		// Creación de la nueva relación entre un usuario y su perfil
-		Relusuarioperfil nuevaRelacion = new Relusuarioperfil();
-		Perfil perfil = perfilRepositorio.findOne(Long.parseLong(tipo));
-		nuevaRelacion.setPerfil(perfil);
-		nuevaRelacion.setUsuario(usuario_guardado);
-		System.out.println(nuevaRelacion.toString());
-		upRepositorio.save(nuevaRelacion);
+		perfil.getUsuario().add(nuevoUsuario);
 		return "registroExitoso_template";
 	}
 }

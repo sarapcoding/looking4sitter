@@ -44,9 +44,30 @@ public class Usuario {
 	//private List<Mensaje> mensaje;
 		 
 	
-	protected Usuario() {}
+	protected Usuario(String login,
+					String nombre,
+					String apellido,
+					String password,
+					String email,
+					String provincia,
+					int tarifa,
+					String descrip,
+					Perfil perfil
+					) {
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setPassword(password);
+		this.setEmail(email);
+		this.setProvincia(provincia);
+		this.setTarifa(tarifa);
+		this.setDescripcion(descrip);
+		this.setPerfil(perfil);
+	}
 	
 
+	public Usuario() {
+		
+	}
 
 	public Long getId() {
 		return id;
