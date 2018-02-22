@@ -27,11 +27,13 @@ public class Perfil {
 	 * Star Sitter
 	 * Centro
 	 * */
-	public Perfil() {}
+	public Perfil() {
+		this.usuario = new ArrayList<>();
+	}
 	
 	public Perfil(String nombre) {
 		this.setNombre(nombre);
-		this.setUsuario(new ArrayList<>());
+		this.usuario = new ArrayList<>();
 	}
 	
 	@Override
@@ -55,8 +57,8 @@ public class Perfil {
 		return usuario;
 	}
 
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario.add(usuario);
 	}
 	
 	

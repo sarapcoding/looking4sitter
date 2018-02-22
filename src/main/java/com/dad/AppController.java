@@ -29,6 +29,10 @@ public class AppController {
 	private UserRepository usuarioRepositorio;
 	@Autowired
 	private ProfileRepository perfilRepositorio;
+	@Autowired
+	private AdvertRepository anuncioRepositorio;
+	@Autowired
+	private RemarkRepository comentarioRepositorio;
 
 	@PostConstruct
 	public void init() {
@@ -44,15 +48,20 @@ public class AppController {
 		Usuario us3 = new Usuario("flor","Flor","Blanca","flor123","flor@email.com","Barcelona",13,"po",sitter);
 		Usuario us4 = new Usuario("caracoles","Caracoles Center","","caracoles123","caracoles@email.com","Madrid",0,"tinky",centro);
 		
+		us1.setPerfil(padre);
+		us2.setPerfil(sitter);
+		us3.setPerfil(sitter);
+		us4.setPerfil(centro);
+		
 		usuarioRepositorio.save(us1);
 		usuarioRepositorio.save(us2);
 		usuarioRepositorio.save(us3);
 		usuarioRepositorio.save(us4);
 		
-		sitter.getUsuario().add(us2);
-		sitter.getUsuario().add(us3);
-		padre.getUsuario().add(us1);
-		centro.getUsuario().add(us4);
+		sitter.setUsuario(us2);
+		sitter.setUsuario(us3);
+		padre.setUsuario(us1);
+		centro.setUsuario(us4);
 		
 		perfilRepositorio.save(administrador);
 		perfilRepositorio.save(padre);

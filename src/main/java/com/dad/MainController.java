@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 // Entidades
 import com.dad.Usuario;
 import com.dad.Comentario;
-import com.dad.Mensajes;
+import com.dad.Mensaje;
 import com.dad.Perfil;
 import com.dad.Anuncio;
 // Repositorios

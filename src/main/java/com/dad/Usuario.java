@@ -1,5 +1,6 @@
 package com.dad;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -62,10 +63,16 @@ public class Usuario {
 		this.setTarifa(tarifa);
 		this.setDescripcion(descrip);
 		this.setPerfil(perfil);
+		this.anuncio = new ArrayList<>();
+		this.comentario_destinado = new ArrayList<>();
+		this.comentario_escrito= new ArrayList<>();
 	}
 	
 
 	public Usuario() {
+		this.anuncio = new ArrayList<>();
+		this.comentario_destinado = new ArrayList<>();
+		this.comentario_escrito= new ArrayList<>();
 		
 	}
 
@@ -183,8 +190,8 @@ public Perfil getPerfil() {
 
 
 
-	public void setAnuncio(List<Anuncio> anuncio) {
-		this.anuncio = anuncio;
+	public void setAnuncio(Anuncio anuncio) {
+		this.anuncio.add(anuncio);
 	}
 
 
@@ -219,8 +226,8 @@ public Perfil getPerfil() {
 
 
 
-	public void setComentario_escrito(List<Comentario> comentario_escrito) {
-		this.comentario_escrito = comentario_escrito;
+	public void setComentario_escrito(Comentario comentario_escrito) {
+		this.comentario_escrito.add(comentario_escrito);
 	}
 
 
@@ -231,8 +238,8 @@ public Perfil getPerfil() {
 
 
 
-	public void setComentario_destinado(List<Comentario> comentario_destinado) {
-		this.comentario_destinado = comentario_destinado;
+	public void setComentario_destinado(Comentario comentario_destinado) {
+		this.comentario_destinado.add(comentario_destinado);
 	}
 
 
