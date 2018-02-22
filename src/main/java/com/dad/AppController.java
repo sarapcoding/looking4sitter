@@ -48,10 +48,16 @@ public class AppController {
 		Usuario us3 = new Usuario("flor","Flor","Blanca","flor123","flor@email.com","Barcelona",13,"po",sitter);
 		Usuario us4 = new Usuario("caracoles","Caracoles Center","","caracoles123","caracoles@email.com","Madrid",0,"tinky",centro);
 		
-		us1.setPerfil(padre);
-		us2.setPerfil(sitter);
-		us3.setPerfil(sitter);
-		us4.setPerfil(centro);
+		Perfil administrador_guardado=perfilRepositorio.save(administrador);
+		Perfil padre_guardado=perfilRepositorio.save(padre);
+		Perfil sitter_guardado=perfilRepositorio.save(sitter);
+		Perfil atarSitter_guardado=perfilRepositorio.save(starSitter);
+		Perfil centro_guardado=perfilRepositorio.save(centro);
+		
+		us1.setPerfil(padre_guardado);
+		us2.setPerfil(sitter_guardado);
+		us3.setPerfil(sitter_guardado);
+		us4.setPerfil(centro_guardado);
 		
 		usuarioRepositorio.save(us1);
 		usuarioRepositorio.save(us2);
@@ -63,11 +69,7 @@ public class AppController {
 		padre.setUsuario(us1);
 		centro.setUsuario(us4);
 		
-		perfilRepositorio.save(administrador);
-		perfilRepositorio.save(padre);
-		perfilRepositorio.save(sitter);
-		perfilRepositorio.save(starSitter);
-		perfilRepositorio.save(centro);
+		
 	}
 	
 	
