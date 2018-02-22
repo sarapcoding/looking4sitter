@@ -12,14 +12,12 @@ import com.dad.Comentario;
 import com.dad.Mensajes;
 import com.dad.Perfil;
 import com.dad.Anuncio;
-import com.dad.Relsittercentro;
 // Repositorios
 import com.dad.UserRepository;
 import com.dad.RemarkRepository;
 import com.dad.MessageRepository;
 import com.dad.ProfileRepository;
 import com.dad.AdvertRepository;
-import com.dad.RelSCRepository;
 
 
 @Controller
@@ -36,8 +34,6 @@ public class MainController {
 	@Autowired
 	private AdvertRepository advertRepository;
 
-	@Autowired
-	private RelSCRepository relscRepository;
 	
 	@GetMapping(path="/add")
 	public @ResponseBody String addNewUser(@RequestParam String login,
