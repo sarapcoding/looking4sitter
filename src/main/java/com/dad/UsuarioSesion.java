@@ -1,26 +1,26 @@
 package com.dad;
 
 public class UsuarioSesion {
-	private Usuarios usuario;
-	private Perfiles perfil;
+	private Usuario usuario;
+	private Perfil perfil;
 	
 	public UsuarioSesion() {}
 	
-	public UsuarioSesion(Usuarios usuario, Perfiles perfil) {
+	public UsuarioSesion(Usuario usuario, Perfil perfil) {
 		setUsuario(usuario);
 		setPerfil(perfil);
 	}
 	
-	public Usuarios getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Perfiles getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
-	public void setPerfil(Perfiles perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
 	

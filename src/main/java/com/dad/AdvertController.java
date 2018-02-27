@@ -17,18 +17,23 @@ public class AdvertController {
 	@Autowired
 	private AdvertRepository anuncioRepositorio;
 	
+	int num_pag = 0;
+	int num_elem = 1;
+	
 	@RequestMapping ("/encontrar+anuncio")
 	//public String encontrarAnuncio (Model model, @RequestParam String  ciudad, @RequestParam String fecha, @RequestParam String salario){
-	public String encontrarAnuncio (Model model, @RequestParam String fecha){
-		int num_pag = 0;
-		int num_elem = 4;
+	public String encontrarAnuncio (Model model, @RequestParam String fecha){ 
+		
+		
+		
 		//Page<Anuncios> coincidencias_ciudad = anuncioRepositorio.findByCiudad(ciudad,new PageRequest(num_pag, num_elem));
-		Page<Anuncios> coincidencias_fecha = anuncioRepositorio.findByFecha(fecha,new PageRequest(num_pag, num_elem));
+		Page<Anuncio> coincidencias_fecha = anuncioRepositorio.findByFecha(fecha,new PageRequest(num_pag, num_elem));
 		if (coincidencias_fecha.getTotalElements()==0){
 			model.addAttribute("fail", true);
 		} else {
 			model.addAttribute("encontrado", true);
 			model.addAttribute("anuncios",coincidencias_fecha);
+			model.addAttribute("numPag",num_pag);
 		}
 		//Page<Anuncios> coincidencias_salario = anuncioRepositorio.findByTarifa(salario,new PageRequest(num_pag, num_elem));
 		/*
@@ -67,18 +72,25 @@ public class AdvertController {
 		return "enviarAnuncio";
 		
 	}
+	
+	@RequestMapping ("/tablon-anuncios")
+	public String allAdverts (Model model) {
+		
+		Page<Anuncio> todos = anuncioRepositorio.findAll(new PageRequest(num_pag, 10));
+		model.addAttribute("encontrado", true);
+		model.addAttribute("anuncios",todos);
+		model.addAttribute("numPag",num_pag);
+		return "resultadoBusquedasAnuncios_template";
+	}
+	
+	
 	@RequestMapping ("/add+anuncio")
 	public String addAdvert (HttpServletRequest request, Model model, @RequestParam String asunto,
 			@RequestParam String fecha,	@RequestParam String cuerpo){
 		UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
-		Long idusuario = usuario_actual.getUsuario().getId();
-		//String login = usuario_actual.getUsuario().getLogin();
-		Anuncios anuncio = new Anuncios();
-		anuncio.setIdusuario(idusuario);
-		//anuncio.setNombre(login);
-		anuncio.setAsunto(asunto);
-		anuncio.setFecha(fecha);
-		anuncio.setCuerpo(cuerpo);
+		Usuario usuario = usuario_actual.getUsuario();
+		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,fecha);
+		//usuario.setAnuncio(anuncio);
 		anuncioRepositorio.save(anuncio);
 		return "successAdvert_template";
 	}

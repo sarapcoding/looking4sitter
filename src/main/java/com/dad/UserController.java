@@ -15,9 +15,7 @@ public class UserController {
 	private UserRepository usuarioRepositorio;
 	@Autowired
 	private ProfileRepository perfilRepositorio;
-	@Autowired
-	private RelUPRepository upRepositorio;
-	
+
 	/*
 	@PostMapping ("/verificacion+registro")
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
@@ -59,8 +57,8 @@ public class UserController {
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
 			@RequestParam String contrasena2,@RequestParam String email, @RequestParam String tipo ){
 		//"select Id from Usuarios where Login=usuario"
-		List<Usuarios> coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
-		List<Usuarios> coincidenciasEmail = usuarioRepositorio.findByEmail(email);
+		List<Usuario> coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
+		List<Usuario> coincidenciasEmail = usuarioRepositorio.findByEmail(email);
 		if (coincidenciasNombre.isEmpty()){
 			if (coincidenciasEmail.isEmpty()){
 				if (contrasena.equals(contrasena2)){
@@ -87,7 +85,8 @@ public class UserController {
 	public String redireccionRegistro(Model model,@RequestParam String login, @RequestParam String password,
 			@RequestParam String email, @RequestParam String tipo, @RequestParam String nombre, @RequestParam String provincia
 			, @RequestParam int tarifa, @RequestParam String descripcion){
-		Usuarios nuevoUsuario = new Usuarios();
+		Usuario nuevoUsuario = new Usuario();
+		Perfil perfil = perfilRepositorio.findOne(Long.parseLong(tipo));
 		// usuario,"Nombre",email,contrasena,"Provincia","Descrpcion"
 		nuevoUsuario.setLogin(login);
 		nuevoUsuario.setEmail(email);
@@ -96,15 +95,11 @@ public class UserController {
 		nuevoUsuario.setProvincia (provincia);
 		nuevoUsuario.setTarifa(tarifa);
 		nuevoUsuario.setDescripcion(descripcion);
-		
-		Usuarios usuario_guardado = new Usuarios();
+		nuevoUsuario.setPerfil(perfil);
+		Usuario usuario_guardado = new Usuario();
 		usuario_guardado = usuarioRepositorio.save(nuevoUsuario);
 		// Creación de la nueva relación entre un usuario y su perfil
-		Relusuariosperfiles nuevaRelacion = new Relusuariosperfiles();
-		nuevaRelacion.setIdperfil(Long.parseLong(tipo));
-		nuevaRelacion.setIdusuario(usuario_guardado.getId());
-		System.out.println(nuevaRelacion.toString());
-		upRepositorio.save(nuevaRelacion);
+		perfil.getUsuario().add(nuevoUsuario);
 		return "registroExitoso_template";
 	}
 }
