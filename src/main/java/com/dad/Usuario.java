@@ -42,6 +42,12 @@ public class Usuario {
 	@OneToMany(mappedBy="destino")
 	private List<Comentario> comentario_destinado;
 	
+	@OneToOne
+	private Agenda agenda;
+	
+	@ManyToOne
+	private List<Hora> hora;
+	
 	//private List<Mensaje> mensaje;
 		 
 	
