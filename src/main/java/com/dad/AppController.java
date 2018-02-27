@@ -47,27 +47,54 @@ public class AppController {
 		Usuario us2 = new Usuario("mia","Amelia","G","mia123","mia@email.com","Madrid",15,"lala",sitter);
 		Usuario us3 = new Usuario("flor","Flor","Blanca","flor123","flor@email.com","Barcelona",13,"po",sitter);
 		Usuario us4 = new Usuario("caracoles","Caracoles Center","","caracoles123","caracoles@email.com","Madrid",0,"tinky",centro);
+		Usuario us5 = new Usuario("kei","Kei","Wong","kei123","kei@email.com","Madrid",0,"Padre de un nene tranquilo",padre);
+		
 		
 		Perfil administrador_guardado=perfilRepositorio.save(administrador);
 		Perfil padre_guardado=perfilRepositorio.save(padre);
 		Perfil sitter_guardado=perfilRepositorio.save(sitter);
-		Perfil atarSitter_guardado=perfilRepositorio.save(starSitter);
+		Perfil starSitter_guardado=perfilRepositorio.save(starSitter);
 		Perfil centro_guardado=perfilRepositorio.save(centro);
 		
 		us1.setPerfil(padre_guardado);
 		us2.setPerfil(sitter_guardado);
 		us3.setPerfil(sitter_guardado);
 		us4.setPerfil(centro_guardado);
+		us5.setPerfil(padre_guardado);
+		
+		
 		
 		usuarioRepositorio.save(us1);
 		usuarioRepositorio.save(us2);
 		usuarioRepositorio.save(us3);
 		usuarioRepositorio.save(us4);
+		usuarioRepositorio.save(us5);
+		
+		
+		Anuncio an1 = new Anuncio(us1,"Niñer@ para el sábado","Busco a alguien que pueda cuidar mi crío de 3 a 5 este viernes","2018-03-02");
+		Anuncio an2 = new Anuncio(us5,"Busco persona","Tengo gemelos que necesitan ser vigilados","2018-03-02");
+		Anuncio an3 = new Anuncio(us1,"AAAH","Aaaah","2018-03-03");
+		Anuncio an4 = new Anuncio(us5,"Sábado por la noche","Busco persona responsable para cuidar de mi hijo de 6 años este viernes de 9 a 12 de la noche","2018-03-03");
+		
+		
+		anuncioRepositorio.save(an1);
+		anuncioRepositorio.save(an2);
+		anuncioRepositorio.save(an3);
+		anuncioRepositorio.save(an4);
+		
+		//usuarioRepositorio.
+		/*
+		us1.setAnuncio(an1_guardado);
+		us1.setAnuncio(an3_guardado);
+		us5.setAnuncio(an2_guardado);
+		us5.setAnuncio(an4_guardado);
 		
 		sitter.setUsuario(us2);
 		sitter.setUsuario(us3);
 		padre.setUsuario(us1);
+		padre.setUsuario(us5);
 		centro.setUsuario(us4);
+		*/
 		
 		
 	}
@@ -94,6 +121,12 @@ public class AppController {
 		if (usuario_encontrado.getPassword().equals(contrasena)) {
 			Perfil perfil = usuario_encontrado.getPerfil();
 			
+			UsuarioSesion usuario_anterior = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
+			
+			if (usuario_anterior != null) {
+				request.getSession().setAttribute("usuario_actual",null);
+			}
+			
 			UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
 			request.getSession().setAttribute("usuario_actual",usuario_actual);
 			String mynameis = usuario_actual.getUsuario().getNombre();
@@ -101,12 +134,13 @@ public class AppController {
 			model.addAttribute("mynameis", mynameis);
 			model.addAttribute("myprofileis", myprofileis);
 			
-			//UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession.getAttribute("usuario_actual");
+			//UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
 			
 			
 			if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("PADRE")) {
 				model.addAttribute("padre", true);
 			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("SITTER")) {
+				
 				model.addAttribute("sitter", true);
 			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("STAR SITTER")) {
 				model.addAttribute("star_sitter", true);
@@ -249,6 +283,10 @@ public class AppController {
 		
 	}
 	
-	
+	@RequestMapping ("/cerrar-sesion")
+	public String cerrarSesion (HttpServletRequest request,Model model) {
+		return "cerrarSesion_template";
+		
+	}
 	
 	}

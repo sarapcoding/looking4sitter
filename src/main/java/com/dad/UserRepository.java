@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
@@ -24,12 +23,12 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 	List<Usuario> findById(Long id);
 	
 	@Query(
-			value="select * from usuarios where Tarifa <= ?1",
+			value="select * from usuario where Tarifa <= ?1",
 			nativeQuery = true)
 	List<Usuario> findByTarifa(int tarifa);
 	
 	@Query(
-			value="select * from usuarios where Provincia like ?1 and Tarifa <= ?2",
+			value="select * from usuario where Provincia like ?1 and Tarifa <= ?2",
 			nativeQuery = true)
 	List<Usuario> findByProvinciaAndTarifa(String provincia,int tarifa);
 

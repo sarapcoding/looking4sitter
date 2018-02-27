@@ -55,6 +55,7 @@ public class Usuario {
 					String descrip,
 					Perfil perfil
 					) {
+		this.setLogin(login);
 		this.setNombre(nombre);
 		this.setApellido(apellido);
 		this.setPassword(password);
@@ -172,7 +173,7 @@ public class Usuario {
 
 	
 
-public Perfil getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
 

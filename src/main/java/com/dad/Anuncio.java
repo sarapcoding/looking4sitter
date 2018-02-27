@@ -18,20 +18,37 @@ public class Anuncio {
 	private String asunto;
 	private String cuerpo;
 	private String fecha; // DD-MM-YY
+	private String loginUsuario;
 	
 	
 	 
 	public Anuncio() {}
 
 	public Anuncio(Usuario user,String asunto, String cuerpo, String fecha) {
-		this.usuario=user;
-		this.asunto=asunto;
-		this.cuerpo=cuerpo;
-		this.fecha=fecha;
+		this.setUsuario(user);
+		this.setAsunto(asunto);
+		this.setCuerpo(asunto);
+		this.setFecha(fecha);
+		this.setLoginUsuario(user.getLogin());
 		
 	}
 
+	public Anuncio(String asunto, String cuerpo, String fecha) {
+		this.setUsuario(null);
+		this.setAsunto(asunto);
+		this.setCuerpo(asunto);
+		this.setFecha(fecha);
+		
+	}
 	
+
+	public String getLoginUsuario() {
+		return loginUsuario;
+	}
+
+	public void setLoginUsuario(String login_usuario) {
+		this.loginUsuario = login_usuario;
+	}
 
 	public String getAsunto() {
 		return asunto;
