@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,15 +18,13 @@ public class AdvertController {
 	@Autowired
 	private AdvertRepository anuncioRepositorio;
 	
-	int num_pag = 0;
 	int num_elem = 1;
 	
 	@RequestMapping ("/encontrar+anuncio")
 	//public String encontrarAnuncio (Model model, @RequestParam String  ciudad, @RequestParam String fecha, @RequestParam String salario){
-	public String encontrarAnuncio (Model model, @RequestParam String fecha){ 
+	public String encontrarAnuncio (Model model,@RequestParam String fecha, @RequestParam int num_pag){ 
 		
-		
-		
+		int sig_pag=num_pag+1;
 		//Page<Anuncios> coincidencias_ciudad = anuncioRepositorio.findByCiudad(ciudad,new PageRequest(num_pag, num_elem));
 		Page<Anuncio> coincidencias_fecha = anuncioRepositorio.findByFecha(fecha,new PageRequest(num_pag, num_elem));
 		if (coincidencias_fecha.getTotalElements()==0){
@@ -33,7 +32,8 @@ public class AdvertController {
 		} else {
 			model.addAttribute("encontrado", true);
 			model.addAttribute("anuncios",coincidencias_fecha);
-			model.addAttribute("numPag",num_pag);
+			model.addAttribute("numPag",sig_pag);
+			model.addAttribute("fechaBusqueda", fecha);
 		}
 		//Page<Anuncios> coincidencias_salario = anuncioRepositorio.findByTarifa(salario,new PageRequest(num_pag, num_elem));
 		/*
@@ -74,12 +74,13 @@ public class AdvertController {
 	}
 	
 	@RequestMapping ("/tablon-anuncios")
-	public String allAdverts (Model model) {
-		
-		Page<Anuncio> todos = anuncioRepositorio.findAll(new PageRequest(num_pag, 10));
+	public String allAdverts (Model model, @RequestParam int num_pag) {
+		int sig_pag=num_pag+1;
+		Page<Anuncio> todos = anuncioRepositorio.findAll(new PageRequest(num_pag, 2));
 		model.addAttribute("encontrado", true);
 		model.addAttribute("anuncios",todos);
-		model.addAttribute("numPag",num_pag);
+		model.addAttribute("numPag",0);
+		model.addAttribute("numPag", sig_pag);
 		return "resultadoBusquedasAnuncios_template";
 	}
 	

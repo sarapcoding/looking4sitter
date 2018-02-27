@@ -17,8 +17,13 @@
 	Asunto: {{asunto}}
 	<br>
 	{{/anuncios}}
-	
-	<input type="submit" value="Siguiente" onclick="window.location='../perfil-usuario';" />
+	<form>
+	{{#fechaBusqueda}}
+	<input type="hidden" name="fecha" value= {{fechaBusqueda}} />
+	{{/fechaBusqueda}}
+	<input type="hidden" name="num_pag" value= {{numPag}} />
+	<input type="submit" value="Siguiente"/>
+	</form>
 	
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 	
