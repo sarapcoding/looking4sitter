@@ -7,10 +7,8 @@ Looking4Sitter es una aplicación web en la cual los padres o guarderias podrán
 
 Nombre | Descripción (Las entidades cuentan con un Id único y autoincremental que se comporta como la Primary Key de su tabla específica)
 ------- | -------
-Usuario | Los usuarios cuentan con los siguientes atributos: login (string único de identificación), nombre, email, password, provincia, tarifa (para Sitters y Star Sitters) y descripción. Los usuarios vienen definidos por su relación con el tipo de Perfil con el que cuentan.
-Perfil | Cada perfil viene identificado con su nombre. Se cuenta con un Administrador, Padre, Sitter, Star Sitter y Centro. Cada perfil cuenta con una relación con varios usuarios que viene definida en la tabla de Relacion_Usuario_Perfil.
-Relacion_Usuario_Perfil | Cada registro de esta entidad define una relación entre un usuario y su tipo de perfil (ambas por Id).
-Relacion_Sitter_Centro | Se puede ver la relación entre un Star Sitter y un centro mediante la relación entre ambos tipos de usuario en esta tabla. Un centro puede contar con varios Sitters.
+Usuario | Los usuarios cuentan con los siguientes atributos: login (string único de identificación), nombre, email, password, provincia, tarifa (para Sitters y Star Sitters) perfil (objeto Perfil) y descripción, además de una serie de listas que las relaciona con otras entidades OneToMany. Los usuarios vienen definidos por su relación con el tipo de Perfil con el que cuentan.
+Perfil | Cada perfil viene identificado con su nombre. Se cuenta con un Administrador, Padre, Sitter, Star Sitter y Centro. Cada perfil cuenta con una relación con varios usuarios que viene definida en la lista de usuarios.
 Anuncio | Escrito por los padres y agregado al tablón de anuncios. Los niñeros pueden pinchar en el y acceder a los datos de contacto del padre
 Comentario | Comentario de los padres al niñero en el que se indica tambien la puntuación.
 Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensajes.
@@ -20,7 +18,7 @@ Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensaj
      alt="Diagrama UML"
      style="float: left; margin-right: 10px;" />
 ## Diagrama de entidades y su relación
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/diagrama_bbdd.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/diagramaer.png"
      alt="Diagrama entidades"
      style="float: left; margin-right: 10px;" />
 
