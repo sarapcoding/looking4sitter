@@ -14,7 +14,7 @@ Comentario | Comentario de los padres al niñero en el que se indica tambien la 
 Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensajes.
 
 ## Diagrama UML
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/diagramaUML.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/L4S_UML.jpg"
      alt="Diagrama UML"
      style="float: left; margin-right: 10px;" />
 ## Diagrama de entidades y su relación
@@ -24,57 +24,57 @@ Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensaj
 
 ## Capturas
 # Inicio
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/welcome.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/welcome.PNG"
      alt="Página de inicio"
      style="float: left; margin-right: 10px;" />
      
 # Inicio sesión
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/inicio_padre.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/inicio.PNG"
      alt="Inicio sesión"
      style="float: left; margin-right: 10px;" />
      
 # Perfiles
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/perfil_padre.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/perfilpadre.PNG"
      alt="Perfil padre"
      style="float: left; margin-right: 10px;" />
 
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/perfil_sitter.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/perfilsitter.PNG"
      alt="Perfil Sitter"
      style="float: left; margin-right: 10px;" />
 
 
 # Registro
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_1.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/registro1.PNG"
      alt="Registro"
      style="float: left; margin-right: 10px;" />
      
      
- <img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_2.PNG"
-     alt="Registro"
+ <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/registropadre.PNG"
+     alt="Registro Padre"
      style="float: left; margin-right: 10px;" />
      
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_3.PNG"
-     alt="Registro"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/registrositter.PNG"
+     alt="Registro Sitter"
      style="float: left; margin-right: 10px;" />
      
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/registro_4.PNG"
-     alt="Registro"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/registroexitoso.PNG"
+     alt="Registro Exitoso"
      style="float: left; margin-right: 10px;" />
 
 
 
 # Búsqueda de sitters
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_sitters.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/resultadobusqueda.PNG"
      alt="Búsqueda sitters"
      style="float: left; margin-right: 10px;" />
 
 # Búsqueda de anuncios
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/busqueda_anuncio.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/tablonanuncios.PNG"
      alt="Búsqueda anuncio"
      style="float: left; margin-right: 10px;" />
 
 # Creación de un anuncio
-<img src="https://github.com/sarapcoding/looking4sitter/blob/master/anuncio_creado.PNG"
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/publicaranuncio.PNG"
      alt="Creación anuncio"
      style="float: left; margin-right: 10px;" />
 
