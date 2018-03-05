@@ -15,6 +15,9 @@ public class Hora {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	//@OneToMany(mappedBy="misHoras")
+	//private Usuario sitter;
+	
 	private int tiempo;// [0..23]
 	private String fecha; //YYYY-MM-DD
 	private String notas;

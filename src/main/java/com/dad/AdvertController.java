@@ -77,10 +77,14 @@ public class AdvertController {
 	public String allAdverts (Model model, @RequestParam int num_pag) {
 		int sig_pag=num_pag+1;
 		Page<Anuncio> todos = anuncioRepositorio.findAll(new PageRequest(num_pag, 2));
+		int elementos = todos.getNumberOfElements();
 		model.addAttribute("encontrado", true);
 		model.addAttribute("anuncios",todos);
 		model.addAttribute("numPag",0);
 		model.addAttribute("numPag", sig_pag);
+		if (sig_pag >= elementos) {
+			model.addAttribute("final", true);
+		}
 		return "resultadoBusquedasAnuncios_template";
 	}
 	

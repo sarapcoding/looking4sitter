@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.domain.Page;
+
 @Entity
 public class Agenda {
 	@Id
@@ -22,9 +24,6 @@ public class Agenda {
 	private List<Hora> hora; // dias en la agenda
 	
 	public Agenda () {}
-
-	
-	
 	
 	public Long getId() {
 		return id;
@@ -41,7 +40,10 @@ public class Agenda {
 	public void setSitter(Usuario sitter) {
 		this.sitter = sitter;
 	}
+	
+	
 
+	
 	public List<Hora> getHora() {
 		return hora;
 	}
@@ -49,7 +51,7 @@ public class Agenda {
 	public void setHora(List<Hora> hora) {
 		this.hora = hora;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Agenda de "+this.sitter.getLogin();

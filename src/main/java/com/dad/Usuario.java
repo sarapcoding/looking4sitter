@@ -232,13 +232,6 @@ public class Usuario {
 	}
 
 
-
-	public void setComentario_escrito(Comentario comentario_escrito) {
-		this.comentario_escrito.add(comentario_escrito);
-	}
-
-
-
 	public List<Comentario> getComentario_destinado() {
 		return comentario_destinado;
 	}
@@ -249,6 +242,36 @@ public class Usuario {
 		this.comentario_destinado.add(comentario_destinado);
 	}
 
+
+
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
+	}
+
+
+	public List<Hora> getHora() {
+		return hora;
+	}
+
+
+	public void setHora(Hora hora) {
+		this.hora.add(hora);
+	}
+
+
+	public void setAnuncio(List<Anuncio> anuncio) {
+		this.anuncio = anuncio;
+	}
+
+
+	public void setComentario_escrito(Comentario comentario_escrito) {
+		this.comentario_escrito.add(comentario_escrito);
+	}
 
 
 	/*
