@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
@@ -285,6 +286,12 @@ public class AppController {
 	
 	@RequestMapping ("/cerrar-sesion")
 	public String cerrarSesion (HttpServletRequest request,Model model) {
+		try {
+			request.logout();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "cerrarSesion_template";
 		
 	}
