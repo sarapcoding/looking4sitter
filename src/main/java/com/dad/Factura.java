@@ -14,10 +14,12 @@ public class Factura {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	private Usuario padre;
+	/*
+	 *private Usuario padre;
 	private Usuario sitter;
 	private int tarifaHora;
 	private int numHoras;
-	private int fecha;
+	private int fecha; 
+	 * */
+	
 }

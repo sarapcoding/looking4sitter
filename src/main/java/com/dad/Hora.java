@@ -21,14 +21,15 @@ public class Hora {
 	private int tiempo;// [0..23]
 	private String fecha; //YYYY-MM-DD
 	private String notas;
+	// UNA SOLA VARIABLE PARA COMPROBAR SI ES UNA HORA LIBRE O ASIGNADA
 	private boolean asignada; // true=si, false=no
-	private boolean ocupada; // true=si, false=no
+	//private boolean ocupada; // true=si, false=no
 	private boolean libre; // true=si, false=no
 	
-	@OneToMany(mappedBy="hora")
+	@ManyToOne
 	private Agenda agenda;
 	
-	@OneToMany(mappedBy="hora")
+	@ManyToOne
 	private Usuario padre;
 	
 	public Hora() {}
@@ -40,7 +41,6 @@ public class Hora {
 		this.setTiempo(horaalta);
 		this.setLibre(true);
 		this.setAsignada(false);
-		this.setOcupada(false);
 	}
 	
 	public void horaAPadre(String fechaalta,int horaalta,Usuario padre) {
@@ -48,20 +48,10 @@ public class Hora {
 		this.setTiempo(horaalta);
 		this.setLibre(false);
 		this.setAsignada(true);
-		this.setOcupada(false);
 		this.setPadre(padre);
 		
 	}
 	
-	public void horaOcupada(String fechaalta,int horaalta) {
-		this.setFecha(fechaalta);
-		this.setTiempo(horaalta);
-		this.setLibre(false);
-		this.setAsignada(false);
-		this.setOcupada(true);
-		this.setPadre(padre);
-		
-	}
 	
 	
 	public Long getId() {
@@ -123,14 +113,6 @@ public class Hora {
 		this.asignada = asignada;
 	}
 
-	public boolean isOcupada() {
-		return ocupada;
-	}
-
-	public void setOcupada(boolean ocupada) {
-		this.ocupada = ocupada;
-	}
-
 	
 	public boolean isLibre() {
 		return libre;
@@ -145,8 +127,6 @@ public class Hora {
 		String mensaje = new String();
 		if(this.isAsignada()) {
 			mensaje = "Hora "+this.tiempo+" de la agenda de "+this.agenda.getSitter().getLogin()+" asignada al padre "+this.padre.getLogin();
-		} else if (this.isOcupada()) {
-			mensaje = "Hora "+this.tiempo+" de la agenda de "+this.agenda.getSitter().getLogin()+" ocupada";
 		} else if (this.isLibre()) {
 			mensaje = "Hora "+this.tiempo+" de la agenda de "+this.agenda.getSitter().getLogin()+" libre";
 		}

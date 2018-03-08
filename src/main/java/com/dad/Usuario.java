@@ -45,7 +45,7 @@ public class Usuario {
 	@OneToOne
 	private Agenda agenda;
 	
-	@ManyToOne
+	@OneToMany(mappedBy="padre")
 	private List<Hora> hora;
 	
 	//private List<Mensaje> mensaje;
