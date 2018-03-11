@@ -18,7 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		//Login
-		http.formLogin().loginPage("/inicio");
+		http.formLogin().loginPage("/inicio+sesion");
 		http.formLogin().usernameParameter("usuario");
 		http.formLogin().passwordParameter("contrasena");
 		http.formLogin().defaultSuccessUrl("/inicio+sesion");

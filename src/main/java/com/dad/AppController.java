@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -105,13 +107,20 @@ public class AppController {
 	public String arranque (Model model){
 		return "welcome_template";
 	}
+	
 	@RequestMapping ("/inicio")
 	public String iniciarSesion (Model model){
 		return "inicioSesion_template";
 	}
-	@PostMapping ("/inicio+sesion")
-	public String verificacionInicioSesion (HttpServletRequest request,Model model, @RequestParam String usuario, @RequestParam String contrasena){
-		List<Usuario> list_u = usuarioRepositorio.findByLogin(usuario);
+	
+	@RequestMapping ("/home")
+	public String home(){
+		return "home_template";
+	}
+	@GetMapping ("/inicio+sesion/{usuario}")
+	//(method = RequestMethod.GET, value = "/inicio+sesion/{usuario}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String verificacionInicioSesion (/*HttpServletRequest request,*/Model model, @PathVariable String usuario, @PathVariable String contrasena){
+		/*List<Usuario> list_u = usuarioRepositorio.findByLogin(usuario);
 		if (list_u.isEmpty()) {
 			// Usuario no encontrado
 			model.addAttribute("correcto",true);
@@ -130,15 +139,16 @@ public class AppController {
 			
 			UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
 			request.getSession().setAttribute("usuario_actual",usuario_actual);
-			String mynameis = usuario_actual.getUsuario().getNombre();
-			String myprofileis = usuario_actual.getPerfil().getNombre();
-			model.addAttribute("mynameis", mynameis);
-			model.addAttribute("myprofileis", myprofileis);
+			Usuario usuario_actual = list_u.get(0);
+			String mynameis = usuario_actual.getNombre();
+			String myprofileis = usuario_actual.getPerfil().getNombre();*/
+			model.addAttribute("mynameis", "Mia");
+			model.addAttribute("myprofileis", "SITTER");
 			
 			//UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
 			
 			
-			if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("PADRE")) {
+			/*if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("PADRE")) {
 				model.addAttribute("padre", true);
 			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("SITTER")) {
 				
@@ -147,13 +157,13 @@ public class AppController {
 				model.addAttribute("star_sitter", true);
 			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("CENTRO")) {
 				model.addAttribute("centro", true);
-			}
+			}*/
 			
 			
 			return "boardUser_template";
-		}
-		model.addAttribute("correcto",true);
-		return "inicioSesion_template";
+		//}
+		//model.addAttribute("correcto",true);
+		//return "inicioSesion_template";
 	}
 	
 	@RequestMapping ("/prueba-sesion")
