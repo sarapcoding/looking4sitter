@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
@@ -14,6 +13,8 @@ import com.dad.Perfil;
 import com.dad.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dad.SecurityConfiguration;
 
 @Controller 
 public class AppController {
@@ -103,81 +105,48 @@ public class AppController {
 	}
 	
 	
-	@RequestMapping ("/")
+	@GetMapping ("/")
 	public String arranque (Model model){
 		return "welcome_template";
 	}
-	
-	@RequestMapping ("/inicio")
-	public String iniciarSesion (Model model){
+	@GetMapping ("/inicio")
+	public String iniciarSesion (Model model, HttpServletRequest request){
+
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		return "inicioSesion_template";
 	}
 	
-	@RequestMapping ("/home")
-	public String home(){
-		return "home_template";
-	}
-	@GetMapping ("/inicio+sesion/{usuario}")
-	//(method = RequestMethod.GET, value = "/inicio+sesion/{usuario}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String verificacionInicioSesion (/*HttpServletRequest request,*/Model model, @PathVariable String usuario, @PathVariable String contrasena){
-		/*List<Usuario> list_u = usuarioRepositorio.findByLogin(usuario);
-		if (list_u.isEmpty()) {
-			// Usuario no encontrado
-			model.addAttribute("correcto",true);
-			return "inicioSesion_template";
+	@GetMapping ("/inicio+sesion")
+	public String verificacionInicioSesion (Model model){
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
+		Usuario user = list_user.get(0);
+		
+		String mynameis = user.getNombre();
+		String myprofileis = user.getPerfil().getNombre();
+		model.addAttribute("mynameis", mynameis);
+		model.addAttribute("myprofileis", myprofileis);
+
+		if (myprofileis.toUpperCase().equals("PADRE")) {
+			model.addAttribute("padre", true);
+		} else if (myprofileis.toUpperCase().equals("SITTER")) {
+			
+			model.addAttribute("sitter", true);
+		} else if (myprofileis.toUpperCase().equals("STAR SITTER")) {
+			model.addAttribute("star_sitter", true);
+		} else if (myprofileis.toUpperCase().equals("CENTRO")) {
+			model.addAttribute("centro", true);
 		}
-		Usuario usuario_encontrado = list_u.get(0);
-		// Comparacion contraseña
-		if (usuario_encontrado.getPassword().equals(contrasena)) {
-			Perfil perfil = usuario_encontrado.getPerfil();
-			
-			UsuarioSesion usuario_anterior = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
-			
-			if (usuario_anterior != null) {
-				request.getSession().setAttribute("usuario_actual",null);
-			}
-			
-			UsuarioSesion usuario_actual = new UsuarioSesion(usuario_encontrado,perfil);
-			request.getSession().setAttribute("usuario_actual",usuario_actual);
-			Usuario usuario_actual = list_u.get(0);
-			String mynameis = usuario_actual.getNombre();
-			String myprofileis = usuario_actual.getPerfil().getNombre();*/
-			model.addAttribute("mynameis", "Mia");
-			model.addAttribute("myprofileis", "SITTER");
-			
-			//UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
-			
-			
-			/*if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("PADRE")) {
-				model.addAttribute("padre", true);
-			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("SITTER")) {
-				
-				model.addAttribute("sitter", true);
-			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("STAR SITTER")) {
-				model.addAttribute("star_sitter", true);
-			} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("CENTRO")) {
-				model.addAttribute("centro", true);
-			}*/
-			
-			
-			return "boardUser_template";
-		//}
-		//model.addAttribute("correcto",true);
-		//return "inicioSesion_template";
+		return "boardUser_template";
 	}
 	
-	@RequestMapping ("/prueba-sesion")
-	public String pruebaSesion (HttpServletRequest request, Model model) {
-		UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
-		if (usuario_actual != null) {
-			String nombre = usuario_actual.getUsuario().getNombre();
-			String perfil = usuario_actual.getPerfil().getNombre();
-			model.addAttribute("nombreusuario", nombre);
-			model.addAttribute("perfilusuario", perfil);
-			return "boardUser_template";
-		}
+	@GetMapping ("/inicio-failed")
+	public String iniciarSesionFail (Model model) {
+		model.addAttribute("correcto",true);
 		return "inicioSesion_template";
 	}
+	
 	
 
 	@RequestMapping ("/registro")
@@ -192,13 +161,7 @@ public class AppController {
 		return "continuacionRegistro_template";
 	}	
 		
-	/*
-	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="No such order")	
-	@ExceptionHandler(OrderNotFoundException.class)
-	public String errorPagina() {
-		return "error_pagina";
-	}
-	*/
+	
 	
 	@RequestMapping ("/entrar")
 	public String entrarInvitado (Model model){
@@ -223,10 +186,7 @@ public class AppController {
 	public String busquedaAvanzada(Model model,
 			@RequestParam String provincia,
 			@RequestParam String tarifa_max) {
-		/*
-		String prov_q = new String();
-		String tar_q = new String();
-		*/
+		
 		int tarifa_h;
 		List<Usuario> resultado = new ArrayList();
 		List<Usuario> sitters = new ArrayList();
@@ -272,36 +232,34 @@ public class AppController {
 	
 	
 	
-	@RequestMapping ("/perfil-usuario")
-	public String perfilUsuario (HttpServletRequest request,Model model){
-		UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
-		String mynameis = usuario_actual.getUsuario().getNombre();
-		String myprofileis = usuario_actual.getPerfil().getNombre();
+	@GetMapping ("/perfil-usuario")
+	public String perfilUsuario (Model model){
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
+		Usuario user = list_user.get(0);
+		
+		String mynameis = user.getNombre();
+		String myprofileis = user.getPerfil().getNombre();
 		model.addAttribute("mynameis", mynameis);
 		model.addAttribute("myprofileis", myprofileis);
-		
-		if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("PADRE")) {
+
+		if (myprofileis.toUpperCase().equals("PADRE")) {
 			model.addAttribute("padre", true);
-		} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("SITTER")) {
+		} else if (myprofileis.toUpperCase().equals("SITTER")) {
+			
 			model.addAttribute("sitter", true);
-		} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("STAR SITTER")) {
+		} else if (myprofileis.toUpperCase().equals("STAR SITTER")) {
 			model.addAttribute("star_sitter", true);
-		} else if (usuario_actual.getPerfil().getNombre().toUpperCase().equals("CENTRO")) {
+		} else if (myprofileis.toUpperCase().equals("CENTRO")) {
 			model.addAttribute("centro", true);
 		}
-		
 		return "boardUser_template";
+		
 		
 	}
 	
 	@RequestMapping ("/cerrar-sesion")
 	public String cerrarSesion (HttpServletRequest request,Model model) {
-		try {
-			request.logout();
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return "cerrarSesion_template";
 		
 	}

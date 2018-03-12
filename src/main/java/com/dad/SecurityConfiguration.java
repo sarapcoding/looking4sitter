@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -13,6 +14,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//Publico
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/inicio").permitAll();
+		http.authorizeRequests().antMatchers("/inicio-failed").permitAll();
 		
 		//Privado
 		http.authorizeRequests().anyRequest().authenticated();
@@ -22,12 +24,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.formLogin().usernameParameter("usuario");
 		http.formLogin().passwordParameter("contrasena");
 		http.formLogin().defaultSuccessUrl("/inicio+sesion");
-		http.formLogin().failureUrl("/");
+		http.formLogin().failureUrl("/inicio-failed");
 		
 		
 		// Logout
 		http.logout().logoutUrl("/cerrar-sesion");
 		http.logout().logoutSuccessUrl("/");
+		
 		// CSRF deshabilitado
 		http.csrf().disable();
 	}
@@ -35,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure (AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("mia").password("mia123").roles("USER");
+		auth.inMemoryAuthentication().withUser("kei").password("kei123").roles("USER");
 		
 	}
 }
