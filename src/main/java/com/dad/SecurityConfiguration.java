@@ -1,5 +1,6 @@
 package com.dad;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	/*@Autowired
+	public UserRepositoryAuthenticationProvider authenticationProvider;*/
 	@Override
 	protected void configure (HttpSecurity http) throws Exception{
 		//Publico
@@ -32,13 +35,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.logout().logoutSuccessUrl("/");
 		
 		// CSRF deshabilitado
-		http.csrf().disable();
+//		http.csrf().disable();
 	}
 	
 	@Override
 	protected void configure (AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("mia").password("mia123").roles("USER");
 		auth.inMemoryAuthentication().withUser("kei").password("kei123").roles("USER");
-		
+		//auth.authenticationProvider(authenticationProvider);
 	}
 }

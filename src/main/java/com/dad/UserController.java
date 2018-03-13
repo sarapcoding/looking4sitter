@@ -90,7 +90,7 @@ public class UserController {
 		// usuario,"Nombre",email,contrasena,"Provincia","Descrpcion"
 		nuevoUsuario.setLogin(login);
 		nuevoUsuario.setEmail(email);
-		nuevoUsuario.setPassword(password);
+		nuevoUsuario.setPasswordHash(password);
 		nuevoUsuario.setNombre(nombre);
 		nuevoUsuario.setProvincia (provincia);
 		nuevoUsuario.setTarifa(tarifa);

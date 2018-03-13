@@ -2,23 +2,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
 <title>Perfil de {{myprofileis}}</title>
 </head>
 <body>
-<h1>Página principal de {{mynameis}}</h1>
+
+<h1>Página principal</h1>
+<h2>{{mynameis}}</h2>
 
 {{#padre}}
 
-	<h2>Búsqueda avanzada de sitters</h2>
+	<h3>Búsqueda avanzada de sitters</h3>
 	<form action="busqueda-avanzada-sitters" method="post">
 		<p>Provincia: </p><input type='text' name='provincia' />
 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
-		<input type='submit' value='Buscar' />
+		<div><input type='submit' value='Buscar' /></div>
+		
 	</form>
 	
-	<h2>Publicar anuncio</h2>
+	<h3>Publicar anuncio</h3>
 	<form action="publicar+anuncio">
-		<input type='submit' value='Publicar anuncio' />
+		<div><input type='submit' value='Publicar anuncio' /></div>
 	</form>
 	
 		
@@ -26,6 +30,10 @@
 {{/padre}}
 
 {{#sitter}}
+<h2>Mi agenda</h2>
+	<h3>Ver mi agenda</h3>
+	<input type="submit" value="Mis horas" onclick="window.location='../ver-mi-agenda';" />
+	<!-- <h3>Buscar en mi agenda</h3> -->
 <h2>Tablón de anuncios</h2>
 	<h3>Todos los anuncios</h3>
 	<!-- se muestran todos los anuncios -->
@@ -60,8 +68,10 @@
 		<input type='submit' value='Buscar' />
 	</form>
 {{/centro}}
-
-<input type="submit" value="Cerrar sesión" onclick="window.location='../cerrar-sesion';" />
+	<form action="/cerrar-sesion">
+		
+		<input type="submit" value="Cerrar sesión" />
+	</form>
 
 </body>
 </html>

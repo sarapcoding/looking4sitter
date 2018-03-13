@@ -21,11 +21,14 @@ public class Usuario {
 	private String login;
 	private String nombre;
 	private String apellido;
-	private String password;
+	private String passwordHash;
 	private String email;
 	private String provincia;
 	private int tarifa;
 	private String descripcion;
+	
+	//@ElementCollection (fetch= FetchType.EAGER)
+	//private List<String> roles;
 	
 	@ManyToOne
 	private Perfil perfil;
@@ -64,7 +67,7 @@ public class Usuario {
 		this.setLogin(login);
 		this.setNombre(nombre);
 		this.setApellido(apellido);
-		this.setPassword(password);
+		this.setPasswordHash(password);
 		this.setEmail(email);
 		this.setProvincia(provincia);
 		this.setTarifa(tarifa);
@@ -119,14 +122,14 @@ public class Usuario {
 
 
 
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
 
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordHash(String password) {
+		this.passwordHash = password;
 	}
 
 

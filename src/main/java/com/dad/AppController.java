@@ -110,10 +110,8 @@ public class AppController {
 		return "welcome_template";
 	}
 	@GetMapping ("/inicio")
-	public String iniciarSesion (Model model, HttpServletRequest request){
+	public String iniciarSesion (Model model){
 
-		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		model.addAttribute("token", token.getToken());
 		return "inicioSesion_template";
 	}
 	
