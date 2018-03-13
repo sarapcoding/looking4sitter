@@ -255,7 +255,7 @@ public class AppController {
 	}
 	
 	@RequestMapping ("/cerrar-sesion")
-	public String cerrarSesion (HttpServletRequest request,Model model) {
+	public String cerrarSesion (Model model) {
 		return "cerrarSesion_template";
 		
 	}

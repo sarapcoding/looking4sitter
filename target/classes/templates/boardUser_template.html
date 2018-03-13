@@ -13,17 +13,19 @@
 {{#padre}}
 
 	<h3>Búsqueda avanzada de sitters</h3>
+	<div>
 	<form action="busqueda-avanzada-sitters" method="post">
 		<p>Provincia: </p><input type='text' name='provincia' />
 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
-		<div><input type='submit' value='Buscar' /></div>
+		<a href="" onclick="submit()" class="botonguay"  ><span>Buscar</span></a>
 		
-	</form>
+	</form></div>
 	
 	<h3>Publicar anuncio</h3>
-	<form action="publicar+anuncio">
-		<div><input type='submit' value='Publicar anuncio' /></div>
-	</form>
+	<div>
+	<form action="publicar+anuncio" method="post" >
+		<a href="" onclick="submit()" class="botonguay"  ><span>Publicar anuncio</span></a>
+	</form></div>
 	
 		
 		
@@ -32,28 +34,27 @@
 {{#sitter}}
 <h2>Mi agenda</h2>
 	<h3>Ver mi agenda</h3>
-	<input type="submit" value="Mis horas" onclick="window.location='../ver-mi-agenda';" />
+	<div><a href="../ver-mi-agenda" onclick="submit()" class="botonguay"  ><span>Mis horas</span></a></div>
 	<!-- <h3>Buscar en mi agenda</h3> -->
 <h2>Tablón de anuncios</h2>
 	<h3>Todos los anuncios</h3>
 	<!-- se muestran todos los anuncios -->
+	<div>
 	<form action= "tablon-anuncios">
 		<input type="hidden" name="num_pag" value=0 />
-		<input type="submit" value="Ver tablón de anuncios"  />
-	</form>
+		<a href="" onclick="submit()" class="botonguay"  ><span>Ver tablón de anuncios</span></a>
+	</form></div>
 	<h3>Búsqueda de anuncio</h3>
 	<!--  <form action="publicar+anuncio"><input type='submit' value='Publicar anuncio' /></form> -->
 
 	<p>Filtrar Anuncios</p>
+	<div>
 	<form action="encontrar+anuncio">
-		<!-- <p>Ciudad :</p><input type="search" name='ciudad' /> -->
 		<p>Fecha de inicio:</p><input type="date" name="fecha" />
-		<!-- <p>Salario minimo:</p><input type="number" name="salario"/> -->
 		<input type="hidden" name="num_pag" value=0 />
-		<input type='submit' value='Buscar' />
+		<a href="" onclick="submit()" class="botonguay"  ><span>Buscar</span></a>
 	
-	
-	</form>
+	</form></div>
 	
 {{/sitter}}
 
@@ -68,8 +69,9 @@
 		<input type='submit' value='Buscar' />
 	</form>
 {{/centro}}
-
-<input type="submit" value="Cerrar sesión" onclick="window.location='../cerrar-sesion';" />
+<div>
+<a href="../cerrar-sesion" class="botonguay"  ><span>Cerrar sesión</span></a>
+</div>
 
 </body>
 </html>
