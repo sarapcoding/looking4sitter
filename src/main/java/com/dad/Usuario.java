@@ -1,15 +1,20 @@
 package com.dad;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Usuario {
@@ -27,12 +32,14 @@ public class Usuario {
 	private int tarifa;
 	private String descripcion;
 	
-	//@ElementCollection (fetch= FetchType.EAGER)
-	//private List<String> roles;
+	@ElementCollection (fetch= FetchType.EAGER)
+	private List<String> roles;
 	
-	@ManyToOne
+	
+
+	/*@ManyToOne
 	private Perfil perfil;
-	
+	*/
 	@OneToMany(mappedBy="usuario")
 	private List<Anuncio> anuncio;
 	
@@ -62,17 +69,17 @@ public class Usuario {
 					String provincia,
 					int tarifa,
 					String descrip,
-					Perfil perfil
+					String... roles
 					) {
 		this.setLogin(login);
 		this.setNombre(nombre);
 		this.setApellido(apellido);
-		this.setPasswordHash(password);
+		this.setPasswordHash(new BCryptPasswordEncoder().encode(password));
 		this.setEmail(email);
 		this.setProvincia(provincia);
 		this.setTarifa(tarifa);
 		this.setDescripcion(descrip);
-		this.setPerfil(perfil);
+		this.roles = new ArrayList<>(Arrays.asList(roles));
 		this.anuncio = new ArrayList<>();
 		this.comentario_destinado = new ArrayList<>();
 		this.comentario_escrito= new ArrayList<>();
@@ -182,7 +189,7 @@ public class Usuario {
 
 	
 
-	public Perfil getPerfil() {
+	/*public Perfil getPerfil() {
 		return perfil;
 	}
 
@@ -190,7 +197,7 @@ public class Usuario {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
-	}
+	}*/
 
 
 
@@ -276,16 +283,17 @@ public class Usuario {
 		this.comentario_escrito.add(comentario_escrito);
 	}
 
+	public List<String> getRoles() {
+		return roles;
+	}
 
-	/*
-	@Override
-	public String toString() {
-		return "Usuario [Login=" + this.login +", Nombre=" + this.nombre +", Provincia="+this.provincia +"]";
+	public void setRol (String rol){
+		this.roles.add(rol);
 	}
-*/
-	@Override
-	public String toString() {
-		return "Login=" + this.login +" - Nombre=" + this.nombre +" - Provincia="+this.provincia +" - Tarifa="+this.tarifa;
+	
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
+
 	
 }

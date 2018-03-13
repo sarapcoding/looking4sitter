@@ -39,7 +39,7 @@ public class AppController {
 	@Autowired
 	private RemarkRepository comentarioRepositorio;
 
-	@PostConstruct
+/*	@PostConstruct
 	public void init() {
 		// carga de datos al arrancar la aplicación
 		Perfil administrador = new Perfil("administrador");
@@ -99,10 +99,10 @@ public class AppController {
 		padre.setUsuario(us1);
 		padre.setUsuario(us5);
 		centro.setUsuario(us4);
-		*/
 		
 		
-	}
+		
+	}*/
 	
 	
 	@GetMapping ("/")
@@ -116,26 +116,21 @@ public class AppController {
 	}
 	
 	@GetMapping ("/inicio+sesion")
-	public String verificacionInicioSesion (Model model){
+	public String verificacionInicioSesion (Model model, HttpServletRequest request){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
 		Usuario user = list_user.get(0);
 		
 		String mynameis = user.getNombre();
-		String myprofileis = user.getPerfil().getNombre();
+		String myprofileis = user.getRoles().get(0);
 		model.addAttribute("mynameis", mynameis);
 		model.addAttribute("myprofileis", myprofileis);
 
-		if (myprofileis.toUpperCase().equals("PADRE")) {
-			model.addAttribute("padre", true);
-		} else if (myprofileis.toUpperCase().equals("SITTER")) {
-			
-			model.addAttribute("sitter", true);
-		} else if (myprofileis.toUpperCase().equals("STAR SITTER")) {
-			model.addAttribute("star_sitter", true);
-		} else if (myprofileis.toUpperCase().equals("CENTRO")) {
-			model.addAttribute("centro", true);
-		}
+		model.addAttribute("padre", request.isUserInRole("ROLE_padre"));
+		model.addAttribute("sitter", request.isUserInRole("ROLE_sitter"));
+		model.addAttribute("star_sitter", request.isUserInRole("ROLE_starSitter"));
+		model.addAttribute("centro", request.isUserInRole("ROLE_centro"));
+		
 		return "boardUser_template";
 	}
 	

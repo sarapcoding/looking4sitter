@@ -86,7 +86,7 @@ public class UserController {
 			@RequestParam String email, @RequestParam String tipo, @RequestParam String nombre, @RequestParam String provincia
 			, @RequestParam int tarifa, @RequestParam String descripcion){
 		Usuario nuevoUsuario = new Usuario();
-		Perfil perfil = perfilRepositorio.findOne(Long.parseLong(tipo));
+		//String perfil = perfilRepositorio.findOne(Long.parseLong(tipo));
 		// usuario,"Nombre",email,contrasena,"Provincia","Descrpcion"
 		nuevoUsuario.setLogin(login);
 		nuevoUsuario.setEmail(email);
@@ -95,11 +95,11 @@ public class UserController {
 		nuevoUsuario.setProvincia (provincia);
 		nuevoUsuario.setTarifa(tarifa);
 		nuevoUsuario.setDescripcion(descripcion);
-		nuevoUsuario.setPerfil(perfil);
+		nuevoUsuario.setRol(tipo);
 		Usuario usuario_guardado = new Usuario();
 		usuario_guardado = usuarioRepositorio.save(nuevoUsuario);
 		// Creación de la nueva relación entre un usuario y su perfil
-		perfil.getUsuario().add(nuevoUsuario);
+		//perfil.getUsuario().add(nuevoUsuario);
 		return "registroExitoso_template";
 	}
 }
