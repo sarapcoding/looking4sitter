@@ -1,4 +1,4 @@
-package hello;
+package interactivecomments;
 
 public class Greeting {
 	private String content;
