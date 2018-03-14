@@ -173,8 +173,11 @@ public class AppController {
 		
 	}
 	
+	// MODIFICAR yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!!!!!!!!!!!!!!!!1
 	
-	// MODIFICAR
+	/*
+	
+	
 	@RequestMapping("/busqueda-avanzada-sitters")
 	public String busquedaAvanzada(Model model,
 			@RequestParam String provincia,
@@ -222,9 +225,9 @@ public class AppController {
 		}
 		return "resultadoBusquedasSitters_template";
 	}
+	*/
 	
-	
-	
+	/*
 	@GetMapping ("/perfil-usuario")
 	public String perfilUsuario (Model model){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -249,6 +252,25 @@ public class AppController {
 		return "boardUser_template";
 		
 		
+	}
+	*/
+	@GetMapping ("/perfil-usuario")
+	public String perfilUsuario (Model model, HttpServletRequest request){
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
+		Usuario user = list_user.get(0);
+		
+		String mynameis = user.getNombre();
+		String myprofileis = user.getRoles().get(0);
+		model.addAttribute("mynameis", mynameis);
+		model.addAttribute("myprofileis", myprofileis);
+
+		model.addAttribute("padre", request.isUserInRole("ROLE_padre"));
+		model.addAttribute("sitter", request.isUserInRole("ROLE_sitter"));
+		model.addAttribute("star_sitter", request.isUserInRole("ROLE_starSitter"));
+		model.addAttribute("centro", request.isUserInRole("ROLE_centro"));
+		
+		return "boardUser_template";
 	}
 	
 	@RequestMapping ("/cerrar-sesion")
