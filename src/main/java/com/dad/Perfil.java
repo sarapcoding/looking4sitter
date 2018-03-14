@@ -15,10 +15,10 @@ public class Perfil {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nombre;
-	
+	/*
 	@OneToMany(mappedBy="perfil")
 	private List<Usuario> usuario;
-	
+	*/
 	/*
 	 * Los perfiles existentes son:
 	 * Admin
@@ -28,12 +28,12 @@ public class Perfil {
 	 * Centro
 	 * */
 	public Perfil() {
-		this.usuario = new ArrayList<>();
+		//this.usuario = new ArrayList<>();
 	}
 	
 	public Perfil(String nombre) {
 		this.setNombre(nombre);
-		this.usuario = new ArrayList<>();
+		//this.usuario = new ArrayList<>();
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ public class Perfil {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+/*
 	public List<Usuario> getUsuario() {
 		return usuario;
 	}
@@ -60,7 +60,7 @@ public class Perfil {
 	public void setUsuario(Usuario usuario) {
 		this.usuario.add(usuario);
 	}
-	
+	*/
 	
 	
 
