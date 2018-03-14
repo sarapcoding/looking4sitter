@@ -34,7 +34,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	 * conectarse a /gs-guide-websocket y emplea el mejor transporte disponible
 	 * */
 	public void registerStompEndPoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/gs-guide-websocket").withSockJS();
+		//registry.addEndpoint("/gs-guide-websocket/info?t=1521063553304").setAllowedOrigins("*").withSockJS();
+		registry.addEndpoint("/gs-guide-websocket").setAllowedOrigins("*").withSockJS();
 	}
 
 }

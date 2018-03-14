@@ -18,9 +18,15 @@ function connect() {
 	stompClient.connect({}, function (frame){
 		setConnected(true);
 		console.log('Connected: '+frame);
+		stompClient.subscribe('/topic/notifications',function(notifications){
+			alert(notifications);
+		});
+		getNotifications();
 		stompClient.subscribe('/topic/greetings',function (greeting){
 			showGreeting(JSON.parse(greeting.body).content);
 		});
+	}, function(error){
+		alert(error);
 	});
 }
 
