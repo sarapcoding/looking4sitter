@@ -1,4 +1,4 @@
-package security;
+package com.dad;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure (HttpSecurity http) throws Exception{
 		//Publico
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/hello").permitAll();
-		http.authorizeRequests().antMatchers("/gs-guide-websocket").permitAll();
-		http.authorizeRequests().antMatchers("/gs-guide-websocket/*").permitAll();
-		http.authorizeRequests().antMatchers("/gs-guide-websocket/info").permitAll();
-		http.authorizeRequests().antMatchers("/gs-guide-websocket/info*").permitAll();
-		http.authorizeRequests().antMatchers("/info").permitAll();
+		http.authorizeRequests().antMatchers("/holahola").permitAll();
 		http.authorizeRequests().antMatchers("/verificacion+registro").permitAll();
 		http.authorizeRequests().antMatchers("/continuacion+registro").permitAll();
 		http.authorizeRequests().antMatchers("/inicio").permitAll();

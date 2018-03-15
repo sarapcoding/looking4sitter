@@ -61,7 +61,7 @@ public class Usuario {
 	//private List<Mensaje> mensaje;
 		 
 	
-	protected Usuario(String login,
+	public Usuario(String login,
 					String nombre,
 					String apellido,
 					String password,

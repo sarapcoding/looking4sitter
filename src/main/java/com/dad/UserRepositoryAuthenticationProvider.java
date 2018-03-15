@@ -1,4 +1,4 @@
-package security;
+package com.dad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import com.dad.UserRepository;
-import com.dad.Usuario;
 
 @Component
 public class UserRepositoryAuthenticationProvider implements AuthenticationProvider{

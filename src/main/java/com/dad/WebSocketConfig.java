@@ -1,4 +1,4 @@
-package interactivecomments;
+package com.dad;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -8,7 +8,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker //habilita el manejo de mensajes de WebSocket apoyado por el broker de mensajes
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+public abstract class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	
 	/* Configura el broker que tiene WebSocketMessageBrokerConfigurer
 	 * por defecto

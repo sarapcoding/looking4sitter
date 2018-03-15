@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
 import com.dad.Usuario;
-
-import security.SecurityConfiguration;
-
 import com.dad.Perfil;
 import com.dad.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,10 +153,9 @@ public class AppController {
 	}	
 		
 	
-	
-	@RequestMapping ("/entrar")
-	public String entrarInvitado (Model model){
-		return "principal_template";
+	@RequestMapping("/holahola")
+	public String chatea(Model model) {
+		return "index_temp";
 	}
 	
 	

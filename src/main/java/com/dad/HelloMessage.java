@@ -1,4 +1,4 @@
-package interactivecomments;
+package com.dad;
 
 public class HelloMessage {
 	private String name;
