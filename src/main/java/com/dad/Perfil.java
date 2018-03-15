@@ -1,4 +1,4 @@
-package com.dad;
+/*package com.dad;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Perfil {
 	 * Sitter
 	 * Star Sitter
 	 * Centro
-	 * */
+	 * *
 	public Perfil() {
 		this.usuario = new ArrayList<>();
 	}
@@ -64,4 +64,4 @@ public class Perfil {
 	
 	
 
-}
+}*/

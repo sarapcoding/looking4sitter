@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-	@Autowired
-	private ProfileRepository perfilRepositorio;
+	/*@Autowired
+	private ProfileRepository perfilRepositorio;*/
 
 	/*
 	@PostMapping ("/verificacion+registro")
@@ -57,9 +57,9 @@ public class UserController {
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
 			@RequestParam String contrasena2,@RequestParam String email, @RequestParam String tipo ){
 		//"select Id from Usuarios where Login=usuario"
-		List<Usuario> coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
+		Usuario coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
 		List<Usuario> coincidenciasEmail = usuarioRepositorio.findByEmail(email);
-		if (coincidenciasNombre.isEmpty()){
+		if (coincidenciasNombre == null){
 			if (coincidenciasEmail.isEmpty()){
 				if (contrasena.equals(contrasena2)){
 					

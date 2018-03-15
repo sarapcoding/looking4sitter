@@ -23,8 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class CenterController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-	@Autowired
-	private ProfileRepository perfilRepositorio;
+	/*@Autowired
+	private ProfileRepository perfilRepositorio;*/
 	
 	
 	

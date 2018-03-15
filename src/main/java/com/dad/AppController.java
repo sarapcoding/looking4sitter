@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
 import com.dad.Usuario;
-import com.dad.Perfil;
-import com.dad.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,8 +30,8 @@ import com.dad.SecurityConfiguration;
 public class AppController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-	@Autowired
-	private ProfileRepository perfilRepositorio;
+	/*@Autowired
+	private ProfileRepository perfilRepositorio;*/
 	@Autowired
 	private AdvertRepository anuncioRepositorio;
 	@Autowired
@@ -118,8 +116,7 @@ public class AppController {
 	@GetMapping ("/inicio+sesion")
 	public String verificacionInicioSesion (Model model, HttpServletRequest request){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
-		Usuario user = list_user.get(0);
+		Usuario user = usuarioRepositorio.findByLogin(username);
 		
 		String mynameis = user.getNombre();
 		String myprofileis = user.getRoles().get(0);
@@ -203,7 +200,7 @@ public class AppController {
 		if (!sitters.isEmpty()) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
 			// Sacamos los sitters
-			List<Perfil> list_p = perfilRepositorio.findByNombre("Sitter");
+			 = perfilRepositorio.findByNombre("Sitter");
 			Perfil p = list_p.get(0);
 			for (Usuario u : sitters) {
 				if (u.getPerfil().equals(p)) {
