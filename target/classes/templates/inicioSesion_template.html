@@ -5,13 +5,14 @@
 <title>Iniciar Sesión</title>
 </head>
 <body>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
 	{{#correcto}}
 	 <p>¡Verificacion incorrecta! Por favor, intentelo de nuevo</p>
 	{{/correcto}}
 
- 	<form action="inicio+sesion" method="post">
-		<p>Usuario :</p><input type='text' name='usuario' />
-		<p>Password :</p><input type='password' name='contrasena' />
+ 	<form action="inicio" method="post">
+		<p>Usuario </p><input type='text' name='user' />
+		<p>Password </p><input type='password' name='pass' />
 		<input type='submit' value='Iniciar' />
 		<input type="hidden"  name="_csrf" value="{{token}}"/>
 	</form>

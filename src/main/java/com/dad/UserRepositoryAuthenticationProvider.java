@@ -21,17 +21,19 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 	private UserRepository usuarioRepositorio;
 	
 	//@Override
+	/*
 	public Authentication autenticate(Authentication auth) throws AuthenticationException{
-		Usuario usuario = (Usuario) usuarioRepositorio.findByLogin(auth.getName());
-		
-		if (usuario==null) {
+		List<Usuario> list_usuario = usuarioRepositorio.findByLogin(auth.getName());
+		if (list_usuario.isEmpty()) {
 			throw new BadCredentialsException("User not found");
 		}
+		Usuario usuario = list_usuario.get(0);
 		
 		String password = (String) auth.getCredentials();
 		if(!new BCryptPasswordEncoder().matches(password, usuario.getPasswordHash())) {
 			throw new BadCredentialsException("Wrong password");
 		}
+		
 		
 		List<GrantedAuthority> roles = new ArrayList<>();
 		for (String role : usuario.getRoles()) {
@@ -40,16 +42,35 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		
 		return new UsernamePasswordAuthenticationToken(usuario.getLogin(), password, roles);
 	}
+	*/
 
 	@Override
-	public Authentication authenticate(Authentication arg0) throws AuthenticationException {
-		// TODO Auto-generated method stub
-		return null;
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		List<Usuario> list_usuario = usuarioRepositorio.findByLogin(authentication.getName());
+		if (list_usuario.isEmpty()) {
+			throw new BadCredentialsException("User not found");
+		}
+		Usuario usuario = list_usuario.get(0);
+		
+		String password = (String) authentication.getCredentials();
+		if(!new BCryptPasswordEncoder().matches(password, usuario.getPasswordHash())) {
+			throw new BadCredentialsException("Wrong password");
+		}
+		
+		
+		List<GrantedAuthority> roles = new ArrayList<>();
+		for (String role : usuario.getRoles()) {
+			roles.add(new SimpleGrantedAuthority(role));
+		}
+		
+		return (Authentication) new UsernamePasswordAuthenticationToken(usuario.getLogin(), password, roles);
 	}
 
 	@Override
-	public boolean supports(Class<?> arg0) {
+	public boolean supports(Class<?> authentication) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 }

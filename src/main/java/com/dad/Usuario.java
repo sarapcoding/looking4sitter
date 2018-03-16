@@ -74,7 +74,9 @@ public class Usuario {
 		this.setLogin(login);
 		this.setNombre(nombre);
 		this.setApellido(apellido);
-		this.setPasswordHash(new BCryptPasswordEncoder().encode(password));
+		// ya se hace la codificación hash en el propio setter de password
+		//this.setPasswordHash(new BCryptPasswordEncoder().encode(password));
+		this.setPasswordHash(password);
 		this.setEmail(email);
 		this.setProvincia(provincia);
 		this.setTarifa(tarifa);
@@ -136,7 +138,7 @@ public class Usuario {
 
 
 	public void setPasswordHash(String password) {
-		this.passwordHash = password;
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 	}
 
 

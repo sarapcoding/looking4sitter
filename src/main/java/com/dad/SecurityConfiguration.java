@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 
 
 @Configuration
@@ -14,13 +13,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public UserRepositoryAuthenticationProvider authenticationProvider;
 	
-	
-	
 	@Override
 	protected void configure (HttpSecurity http) throws Exception{
 		//Publico
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/holahola").permitAll();
+		http.authorizeRequests().antMatchers("/gs-guide-websocket").permitAll();
+		http.authorizeRequests().antMatchers("/registro").permitAll();
 		http.authorizeRequests().antMatchers("/verificacion+registro").permitAll();
 		http.authorizeRequests().antMatchers("/continuacion+registro").permitAll();
 		http.authorizeRequests().antMatchers("/inicio").permitAll();
@@ -30,9 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		//Login
-		http.formLogin().loginPage("/inicio+sesion");
-		http.formLogin().usernameParameter("usuario");
-		http.formLogin().passwordParameter("contrasena");
+		http.formLogin().loginPage("/inicio");
+		http.formLogin().usernameParameter("user");
+		http.formLogin().passwordParameter("pass");
 		http.formLogin().defaultSuccessUrl("/inicio+sesion");
 		http.formLogin().failureUrl("/inicio-failed");
 		
