@@ -1,7 +1,11 @@
 package com.dad;
 
+import com.dad.UserRepositoryAuthenticationProvider;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -44,10 +48,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		http.csrf().disable();
 	}
 	
+	@Autowired
 	@Override
 	protected void configure (AuthenticationManagerBuilder auth) throws Exception {
 		//auth.inMemoryAuthentication().withUser("mia").password("mia123").roles("USER");
 		//auth.inMemoryAuthentication().withUser("kei").password("kei123").roles("USER");
+		System.out.println("-- SECURITY CONFIGURATION: sssss --");
+		
 		auth.authenticationProvider(authenticationProvider);
+		
+		System.out.println("-- SECURITY CONFIGURATION: finalisao --");
 	}
+	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception{
+		return super.authenticationManagerBean();
+	}
+	 
 }

@@ -1,5 +1,8 @@
 package com.dad;
 
+import com.dad.SecurityConfiguration;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +49,7 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		System.out.println("-- VAMOS A VERIFICAR ESTE USUARIO authentication provider --");
 		List<Usuario> list_usuario = usuarioRepositorio.findByLogin(authentication.getName());
 		if (list_usuario.isEmpty()) {
 			throw new BadCredentialsException("User not found");
@@ -68,8 +72,7 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		// TODO Auto-generated method stub
-		return false;
+		return authentication.equals(UsernamePasswordAuthenticationToken.class);
 	}
 
 	
