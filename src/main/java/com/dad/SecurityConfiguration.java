@@ -21,8 +21,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure (HttpSecurity http) throws Exception{
 		//Publico
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/holahola").permitAll();
-		http.authorizeRequests().antMatchers("/gs-guide-websocket").permitAll();
+		//http.authorizeRequests().antMatchers("/holahola").permitAll();
+		//http.authorizeRequests().antMatchers("/gs-guide-websocket").permitAll();
 		http.authorizeRequests().antMatchers("/registro").permitAll();
 		http.authorizeRequests().antMatchers("/verificacion+registro").permitAll();
 		http.authorizeRequests().antMatchers("/continuacion+registro").permitAll();

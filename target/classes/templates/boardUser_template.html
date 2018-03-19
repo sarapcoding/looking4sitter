@@ -11,19 +11,24 @@
 <h2>{{mynameis}}</h2>
 
 {{#padre}}
-
+	<div>
 	<h3>Búsqueda avanzada de sitters</h3>
 	<form action="busqueda-avanzada-sitters" method="post">
 		<p>Provincia: </p><input type='text' name='provincia' />
 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
-		<div><input type='submit' value='Buscar' /></div>
-		
+		<br>
+		<br>
+		<input type='submit' value='Buscar' />
 	</form>
-	
+	</div>
+	<br>
+	<div>
 	<h3>Publicar anuncio</h3>
 	<form action="publicar+anuncio">
-		<div><input type='submit' value='Publicar anuncio' /></div>
+		<input type='submit' value='Publicar anuncio' />
 	</form>
+	</div>
+	<br>
 		
 {{/padre}}
 
@@ -49,8 +54,6 @@
 		<!-- <p>Salario minimo:</p><input type="number" name="salario"/> -->
 		<input type="hidden" name="num_pag" value=0 />
 		<input type='submit' value='Buscar' />
-	
-	
 	</form>
 	
 {{/sitter}}
@@ -68,11 +71,13 @@
 	</form>
 {{/centro}}
 
-	<h2>¡Chat interactivo!</h2>
+	<div>
+	<h3>¡Chat interactivo!</h3>
 		<p>Prueba nuestro chat interactivo, comunícate con la comunidad, aporta tus ideas, ¡y mucho más!</p>
-			<form action="holahola">
+			<form action="chat-interno">
 				<input type="submit" value='Chat interactivo' />	
 			</form>
+	</div>
 	
 	<br>
 	

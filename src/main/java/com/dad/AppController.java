@@ -158,6 +158,11 @@ public class AppController {
 		return "index_temp";
 	}
 	
+	@RequestMapping("/chat-interno")
+	public String chatInterno(Model model) {
+		return "chat_interno";
+	}
+	
 	
 	private Usuario giveMeUser(List<Usuario> list, Long id) {
 		for (Usuario x : list) {
