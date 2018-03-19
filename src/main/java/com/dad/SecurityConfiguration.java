@@ -53,11 +53,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure (AuthenticationManagerBuilder auth) throws Exception {
 		//auth.inMemoryAuthentication().withUser("mia").password("mia123").roles("USER");
 		//auth.inMemoryAuthentication().withUser("kei").password("kei123").roles("USER");
-		System.out.println("-- SECURITY CONFIGURATION: sssss --");
 		
 		auth.authenticationProvider(authenticationProvider);
 		
-		System.out.println("-- SECURITY CONFIGURATION: finalisao --");
 	}
 	
 	@Bean

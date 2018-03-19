@@ -17,9 +17,6 @@ public class DatabaseUsersLoader {
 	private void initDatabase(){
 	//Copiar el initi de AppController. Necesario cambiar la estructura de los controladores para adaptar los rolesde usuario
 		
-//		usuarioRepositorio.save(new Usuario("mia","Amelia","G","mia123","mia@email.com","Madrid",15,"lala","ROLE_sitter"));
-//		usuarioRepositorio.save(new Usuario("kei","Kei","Wong","kei123","kei@email.com","Madrid",0,"Padre de un nene tranquilo","ROLE_padre"));
-//		
 		
 		Usuario us1 = new Usuario("padrede2","Antonio","García","padrede2123","padrede2@email.com","Madrid",0,"feliz","ROLE_padre");
 		Usuario us2 = new Usuario("mia","Amelia","G","mia123","mia@email.com","Madrid",15,"lala","ROLE_sitter");

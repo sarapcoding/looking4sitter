@@ -22,34 +22,10 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 
 	@Autowired
 	private UserRepository usuarioRepositorio;
-	
-	//@Override
-	/*
-	public Authentication autenticate(Authentication auth) throws AuthenticationException{
-		List<Usuario> list_usuario = usuarioRepositorio.findByLogin(auth.getName());
-		if (list_usuario.isEmpty()) {
-			throw new BadCredentialsException("User not found");
-		}
-		Usuario usuario = list_usuario.get(0);
-		
-		String password = (String) auth.getCredentials();
-		if(!new BCryptPasswordEncoder().matches(password, usuario.getPasswordHash())) {
-			throw new BadCredentialsException("Wrong password");
-		}
-		
-		
-		List<GrantedAuthority> roles = new ArrayList<>();
-		for (String role : usuario.getRoles()) {
-			roles.add(new SimpleGrantedAuthority(role));
-		}
-		
-		return new UsernamePasswordAuthenticationToken(usuario.getLogin(), password, roles);
-	}
-	*/
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		System.out.println("-- VAMOS A VERIFICAR ESTE USUARIO authentication provider --");
+		// System.out.println("-- VAMOS A VERIFICAR ESTE USUARIO authentication provider --");
 		List<Usuario> list_usuario = usuarioRepositorio.findByLogin(authentication.getName());
 		if (list_usuario.isEmpty()) {
 			throw new BadCredentialsException("User not found");
