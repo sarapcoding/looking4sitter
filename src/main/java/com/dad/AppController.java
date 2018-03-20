@@ -200,10 +200,10 @@ public class AppController {
 		if (!sitters.isEmpty()) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
 			// Sacamos los sitters
-			 = perfilRepositorio.findByNombre("Sitter");
-			Perfil p = list_p.get(0);
+			
+			 
 			for (Usuario u : sitters) {
-				if (u.getPerfil().equals(p)) {
+				if (u.getRoles().contains("ROLE_sitter")){
 					resultado.add(u);
 				}
 			}
@@ -225,23 +225,29 @@ public class AppController {
 	@GetMapping ("/perfil-usuario")
 	public String perfilUsuario (Model model){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
-		Usuario user = list_user.get(0);
+	
+		Usuario user = usuarioRepositorio.findByLogin(username);
 		
 		String mynameis = user.getNombre();
-		String myprofileis = user.getPerfil().getNombre();
+		List<String> myrolesare = user.getRoles();
 		model.addAttribute("mynameis", mynameis);
-		model.addAttribute("myprofileis", myprofileis);
+		
 
-		if (myprofileis.toUpperCase().equals("PADRE")) {
+		if (myrolesare.contains("ROLE_padre")) {
 			model.addAttribute("padre", true);
-		} else if (myprofileis.toUpperCase().equals("SITTER")) {
+			model.addAttribute("myprofileis", "PADRE");
 			
+		} else if (myrolesare.contains("ROLE_sitter")) {
 			model.addAttribute("sitter", true);
-		} else if (myprofileis.toUpperCase().equals("STAR SITTER")) {
+			model.addAttribute("myprofileis","SITTER" );
+			
+		} else if (myrolesare.contains("ROLE_starsitter")) {
 			model.addAttribute("star_sitter", true);
-		} else if (myprofileis.toUpperCase().equals("CENTRO")) {
+			model.addAttribute("myprofileis","STAR SITTER" );
+		
+		} else if (myrolesare.contains("ROLE_centro")) {
 			model.addAttribute("centro", true);
+			model.addAttribute("myprofileis","CENTRO" );
 		}
 		return "boardUser_template";
 		

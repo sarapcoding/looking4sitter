@@ -17,7 +17,8 @@ import com.dad.Usuario;
 public interface UserRepository extends JpaRepository<Usuario,Long>{
 
 	Usuario findByLogin(String login);
-	List<Usuario> findByEmail (String email);
+	Usuario findByEmail (String email);
+	List<Usuario> findByRol (String rol);
 	List<Usuario> findByProvincia(String provincia);
 	List<Usuario> findByProvinciaIsLike(String provincia);
 	List<Usuario> findById(Long id);
