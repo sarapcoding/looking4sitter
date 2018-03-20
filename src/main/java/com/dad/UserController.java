@@ -13,54 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-	@Autowired
-	private ProfileRepository perfilRepositorio;
 
-	/*
-	@PostMapping ("/verificacion+registro")
-	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
-			@RequestParam String contrasena2,@RequestParam String email, @RequestParam String tipo ){
-		//"select Id from Usuarios where Login=usuario"
-		List<Usuarios> coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
-		List<Usuarios> coincidenciasEmail = usuarioRepositorio.findByEmail(email);
-		if (coincidenciasNombre.isEmpty()){
-			if (coincidenciasEmail.isEmpty()){
-				if (contrasena.equals(contrasena2)){
-					Usuarios nuevoUsuario = new Usuarios();
-					// usuario,"Nombre",email,contrasena,"Provincia","Descrpcion"
-					nuevoUsuario.setLogin(usuario);
-					nuevoUsuario.setEmail(email);
-					nuevoUsuario.setPassword(contrasena);
-					Usuarios usuario_guardado = new Usuarios();
-					usuario_guardado = usuarioRepositorio.save(nuevoUsuario);
-					// Creación de la nueva relación entre un usuario y su perfil
-					Relusuariosperfiles nuevaRelacion = new Relusuariosperfiles();
-					nuevaRelacion.setIdperfil(Long.parseLong(tipo));
-					nuevaRelacion.setIdusuario(usuario_guardado.getId());
-					System.out.println(nuevaRelacion.toString());
-					upRepositorio.save(nuevaRelacion);
-					model.addAttribute("nombre_provisional",usuario);
-					return "registroExitoso_template";
-				}
-				model.addAttribute("password",true);
-				return "registro_template";
-			}
-			model.addAttribute("correo",true);
-			return "registro_template";
-		}
-		model.addAttribute("nombre",true);
-		return "registro_template";
-	}	
-	*/
 	
 	@PostMapping ("/verificacion+registro")
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
 			@RequestParam String contrasena2,@RequestParam String email, @RequestParam String tipo ){
 		//"select Id from Usuarios where Login=usuario"
-		List<Usuario> coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
-		List<Usuario> coincidenciasEmail = usuarioRepositorio.findByEmail(email);
-		if (coincidenciasNombre.isEmpty()){
-			if (coincidenciasEmail.isEmpty()){
+		Usuario coincidenciasNombre = usuarioRepositorio.findByLogin(usuario);
+		Usuario coincidenciasEmail = usuarioRepositorio.findByEmail(email);
+		if (coincidenciasNombre == null){
+			if (coincidenciasEmail==null){
 				if (contrasena.equals(contrasena2)){
 					
 					model.addAttribute("nombre_provisional",usuario);

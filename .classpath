@@ -27,23 +27,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/sara/.m2/repository/org/springframework/spring-websocket/4.3.14.RELEASE/spring-websocket-4.3.14.RELEASE.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.springframework"/>
-			<attribute name="maven.artifactId" value="spring-websocket"/>
-			<attribute name="maven.version" value="4.3.14.RELEASE"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/sara/.m2/repository/org/springframework/spring-messaging/4.3.14.RELEASE/spring-messaging-4.3.14.RELEASE.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.springframework"/>
-			<attribute name="maven.artifactId" value="spring-messaging"/>
-			<attribute name="maven.version" value="4.3.14.RELEASE"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/thewr/Downloads/spring-messaging-4.3.14.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thewr/Downloads/spring-websocket-4.3.14.RELEASE.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

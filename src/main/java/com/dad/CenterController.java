@@ -6,8 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.dad.AppController;
 import com.dad.UserRepository;
 import com.dad.Usuario;
-import com.dad.Perfil;
-import com.dad.ProfileRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -23,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class CenterController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-	@Autowired
-	private ProfileRepository perfilRepositorio;
+//	@Autowired
+//	private ProfileRepository perfilRepositorio;
 	
 	
 	

@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
 import com.dad.Usuario;
-import com.dad.Perfil;
-import com.dad.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,8 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class AppController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-	@Autowired
-	private ProfileRepository perfilRepositorio;
+//	@Autowired
+//	private ProfileRepository perfilRepositorio;
 	@Autowired
 	private AdvertRepository anuncioRepositorio;
 	@Autowired
@@ -116,8 +114,7 @@ public class AppController {
 	@GetMapping ("/inicio+sesion")
 	public String verificacionInicioSesion (Model model, HttpServletRequest request){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
-		Usuario user = list_user.get(0);
+		Usuario user = usuarioRepositorio.findByLogin(username);
 		
 		String mynameis = user.getNombre();
 		String myprofileis = user.getRoles().get(0);
@@ -153,14 +150,10 @@ public class AppController {
 	}	
 		
 	
-	@RequestMapping("/holahola")
-	public String chatea(Model model) {
-		return "index_temp";
-	}
 	
-	@RequestMapping("/chat-interno")
-	public String chatInterno(Model model) {
-		return "chat_interno";
+	@RequestMapping ("/entrar")
+	public String entrarInvitado (Model model){
+		return "principal_template";
 	}
 	
 	
@@ -175,11 +168,8 @@ public class AppController {
 		
 	}
 	
-	// MODIFICAR yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!!!!!!!!!!!!!!!!1
 	
-	/*
-	
-	
+	// MODIFICAR
 	@RequestMapping("/busqueda-avanzada-sitters")
 	public String busquedaAvanzada(Model model,
 			@RequestParam String provincia,
@@ -208,10 +198,10 @@ public class AppController {
 		if (!sitters.isEmpty()) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
 			// Sacamos los sitters
-			List<Perfil> list_p = perfilRepositorio.findByNombre("Sitter");
-			Perfil p = list_p.get(0);
+			
+			 
 			for (Usuario u : sitters) {
-				if (u.getPerfil().equals(p)) {
+				if (u.getRoles().contains("ROLE_sitter")){
 					resultado.add(u);
 				}
 			}
@@ -227,52 +217,39 @@ public class AppController {
 		}
 		return "resultadoBusquedasSitters_template";
 	}
-	*/
 	
-	/*
+	
+	
 	@GetMapping ("/perfil-usuario")
 	public String perfilUsuario (Model model){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
-		Usuario user = list_user.get(0);
+	
+		Usuario user = usuarioRepositorio.findByLogin(username);
 		
 		String mynameis = user.getNombre();
-		String myprofileis = user.getPerfil().getNombre();
+		List<String> myrolesare = user.getRoles();
 		model.addAttribute("mynameis", mynameis);
-		model.addAttribute("myprofileis", myprofileis);
+		
 
-		if (myprofileis.toUpperCase().equals("PADRE")) {
+		if (myrolesare.contains("ROLE_padre")) {
 			model.addAttribute("padre", true);
-		} else if (myprofileis.toUpperCase().equals("SITTER")) {
+			model.addAttribute("myprofileis", "PADRE");
 			
+		} else if (myrolesare.contains("ROLE_sitter")) {
 			model.addAttribute("sitter", true);
-		} else if (myprofileis.toUpperCase().equals("STAR SITTER")) {
+			model.addAttribute("myprofileis","SITTER" );
+			
+		} else if (myrolesare.contains("ROLE_starsitter")) {
 			model.addAttribute("star_sitter", true);
-		} else if (myprofileis.toUpperCase().equals("CENTRO")) {
+			model.addAttribute("myprofileis","STAR SITTER" );
+		
+		} else if (myrolesare.contains("ROLE_centro")) {
 			model.addAttribute("centro", true);
+			model.addAttribute("myprofileis","CENTRO" );
 		}
 		return "boardUser_template";
 		
 		
-	}
-	*/
-	@GetMapping ("/perfil-usuario")
-	public String perfilUsuario (Model model, HttpServletRequest request){
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<Usuario> list_user = usuarioRepositorio.findByLogin(username);
-		Usuario user = list_user.get(0);
-		
-		String mynameis = user.getNombre();
-		String myprofileis = user.getRoles().get(0);
-		model.addAttribute("mynameis", mynameis);
-		model.addAttribute("myprofileis", myprofileis);
-
-		model.addAttribute("padre", request.isUserInRole("ROLE_padre"));
-		model.addAttribute("sitter", request.isUserInRole("ROLE_sitter"));
-		model.addAttribute("star_sitter", request.isUserInRole("ROLE_starSitter"));
-		model.addAttribute("centro", request.isUserInRole("ROLE_centro"));
-		
-		return "boardUser_template";
 	}
 	
 	@RequestMapping ("/cerrar-sesion")
@@ -281,4 +258,4 @@ public class AppController {
 		
 	}
 	
-	}
+}
