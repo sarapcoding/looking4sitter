@@ -5,6 +5,7 @@ import com.dad.UserRepositoryAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure (HttpSecurity http) throws Exception{
 		//Publico
 		http.authorizeRequests().antMatchers("/").permitAll();
-		//http.authorizeRequests().antMatchers("/holahola").permitAll();
+		http.authorizeRequests().antMatchers("/greeting").permitAll();
 		//http.authorizeRequests().antMatchers("/gs-guide-websocket").permitAll();
 		http.authorizeRequests().antMatchers("/registro").permitAll();
 		http.authorizeRequests().antMatchers("/verificacion+registro").permitAll();
@@ -46,6 +47,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		// CSRF deshabilitado
 //		http.csrf().disable();
+//		http
+//        .csrf()
+//            // ignore our stomp endpoints since they are protected using Stomp headers
+//            .ignoringAntMatchers("/gs-guide-websocket")
+//            .and()
+//        .headers()
+//            // allow same origin to frame our site to support iframe SockJS
+//            .frameOptions().sameOrigin()
+//            .and()
+//        .authorizeRequests();
 	}
 	
 	@Autowired
@@ -57,6 +68,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authenticationProvider);
 		
 	}
+	
+	
 	
 	@Bean
 	@Override
