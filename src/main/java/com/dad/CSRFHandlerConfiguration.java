@@ -23,7 +23,31 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
     public void postHandle(final HttpServletRequest request, final HttpServletResponse response,final Object handler, final ModelAndView modelAndView) throws Exception {
-		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
-    	modelAndView.addObject("token", token.getToken());    	
+		//if request.getRequestURI() gs-blablabla no hacer esto
+		// opción 2: no hacer esto automáticamente, añadir esto a cada método del controlador
+		//str1.toLowerCase().contains(str2.toLowerCase())
+		/*
+		String myUri = request.getRequestURI(); // /bla-bla-bla
+		String myUrl = request.getRequestURL().toString(); // https://localhost:8443/bla-bla-bla
+		System.out.println("myUri ["+myUri+"]");
+		System.out.println("myUrl ["+myUrl+"]");
+		
+		String myAuthType = request.getAuthType();
+		String myContentType = request.getContentType();
+		String myContextPath = request.getContextPath();
+		
+		System.out.println("myAuthType ["+myAuthType+"]");
+		System.out.println("myContentType ["+myContentType+"]");
+		System.out.println("myContextPath ["+myContextPath+"]");	
+		String myMethod = request.getMethod();
+		System.out.println("myMethod ["+myMethod+"]");
+		*/
+		
+		if (!request.getRequestURI().contains("chat-interno")) {
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
+	    	modelAndView.addObject("token", token.getToken());   
+		}
+  
+		 	
     }
 }

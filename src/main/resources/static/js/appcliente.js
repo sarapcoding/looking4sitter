@@ -1,4 +1,6 @@
 var stompClient = null;
+var headerName = "${_csrf.headerName}";
+var token = "${_csrf.token}";
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -15,13 +17,26 @@ function setConnected(connected) {
 function connect() {
     var socket = new SockJS('/gs-guide-websocket');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+    $.ajax({url: "/csrf", success: function(result){
+    	debugger;
+    	var obj = jQuery.parseJSON(result);
+        headerName = obj.headerName;
+        token = obj.token;
+        var headers = {};
+        headers[headerName] = token;
+        stompClient.connect(headers, function (frame) {
+        	debugger;
+            setConnected(true);
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/greetings', function (greeting) {
+                showGreeting(JSON.parse(greeting.body).content);
+            });
         });
-    });
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+        alert(thrownError);
+    }});
+ 
 }
 
 function disconnect() {
