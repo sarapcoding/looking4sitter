@@ -43,7 +43,7 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("myMethod ["+myMethod+"]");
 		*/
 		
-		if (!request.getRequestURI().contains("chat-interno")) {
+		if (!request.getRequestURI().contains("greeting")) {
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
 	    	modelAndView.addObject("token", token.getToken());   
 		}

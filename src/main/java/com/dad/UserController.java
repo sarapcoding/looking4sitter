@@ -14,6 +14,11 @@ public class UserController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
 
+	@Autowired
+	private AgendaRepository agendaRepositry;
+	
+	@Autowired
+	private HoraRepository horaRepository;
 	
 	@PostMapping ("/verificacion+registro")
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
@@ -64,4 +69,11 @@ public class UserController {
 		//perfil.getUsuario().add(nuevoUsuario);
 		return "registroExitoso_template";
 	}
+	
+	@RequestMapping("/perfil-sitter")
+	public String checkSitterProfile() {
+		return "perfilSitter_template";
+	}
+	
+	
 }
