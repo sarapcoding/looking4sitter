@@ -33,7 +33,7 @@ public class Usuario {
 	private String descripcion;
 	
 	@ElementCollection (fetch= FetchType.EAGER)
-	private List<String> roles;
+	private String rol;
 	
 	
 
@@ -69,7 +69,7 @@ public class Usuario {
 					String provincia,
 					int tarifa,
 					String descrip,
-					String... roles
+					String rol
 					) {
 		this.setLogin(login);
 		this.setNombre(nombre);
@@ -81,7 +81,7 @@ public class Usuario {
 		this.setProvincia(provincia);
 		this.setTarifa(tarifa);
 		this.setDescripcion(descrip);
-		this.roles = new ArrayList<>(Arrays.asList(roles));
+		this.setRol(rol);
 		this.anuncio = new ArrayList<>();
 		this.comentario_destinado = new ArrayList<>();
 		this.comentario_escrito= new ArrayList<>();
@@ -285,16 +285,12 @@ public class Usuario {
 		this.comentario_escrito.add(comentario_escrito);
 	}
 
-	public List<String> getRoles() {
-		return roles;
+	public String getRol() {
+		return rol;
 	}
 
 	public void setRol (String rol){
-		this.roles.add(rol);
-	}
-	
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
+		this.rol=rol;
 	}
 
 	

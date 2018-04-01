@@ -4,34 +4,23 @@ package com.dad;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.dad.UserRepository;
 import com.dad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller 
 public class AppController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-	@Autowired
-	private AdvertRepository anuncioRepositorio;
-	@Autowired
-	private RemarkRepository comentarioRepositorio;
 	
 	
 	@GetMapping ("/")
@@ -50,7 +39,7 @@ public class AppController {
 		Usuario user = usuarioRepositorio.findByLogin(username);
 		
 		String mynameis = user.getNombre();
-		String myprofileis = user.getRoles().get(0);
+		String myprofileis = user.getRol();
 		model.addAttribute("mynameis", mynameis);
 		model.addAttribute("myprofileis", myprofileis);
 
@@ -89,20 +78,7 @@ public class AppController {
 		return "principal_template";
 	}
 	
-	
-	private Usuario giveMeUser(List<Usuario> list, Long id) {
-		for (Usuario x : list) {
-			if(id.equals(x.getId())){
-				list.remove(x);
-				return x;
-			}
-		}
-		return null;
-		
-	}
-	
-	
-	// MODIFICAR
+
 	@RequestMapping("/busqueda-avanzada-sitters")
 	public String busquedaAvanzada(Model model,
 			@RequestParam String provincia,
@@ -117,33 +93,22 @@ public class AppController {
 				sitters = (List<Usuario>) usuarioRepositorio.findAll();
 			} else {
 				tarifa_h = Integer.parseInt(tarifa_max);
-				sitters = usuarioRepositorio.findByTarifa(tarifa_h);
+				sitters = usuarioRepositorio.findByTarifaAndRol(tarifa_h,"ROLE_sitter");
 			}
 		} else { // si tengo provincia
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
 				sitters = usuarioRepositorio.findByProvinciaIsLike(provincia);
 			} else { // si no
 				tarifa_h = Integer.parseInt(tarifa_max);
-				sitters = usuarioRepositorio.findByProvinciaAndTarifa(provincia, tarifa_h);
+				sitters = usuarioRepositorio.findByProvinciaAndTarifaAndRol(provincia, tarifa_h,"ROLE_sitter");
 			}
 		}
 		
 		if (!sitters.isEmpty()) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
-			// Sacamos los sitters
+			// Enviamos los sitters resultantes
 			
-			 
-			for (Usuario u : sitters) {
-				if (u.getRoles().contains("ROLE_sitter")){
-					resultado.add(u);
-				}
-			}
-			
-			if (resultado.isEmpty()) { // no hay sitters
-				model.addAttribute("vacio",true);
-				return "resultadoBusquedasSitters_template";
-			}
-			model.addAttribute("resultadofinal",resultado);
+			model.addAttribute("resultadofinal",sitters);
 			
 		} else {// no hay resultados
 			model.addAttribute("vacio",true);
@@ -160,23 +125,23 @@ public class AppController {
 		Usuario user = usuarioRepositorio.findByLogin(username);
 		
 		String mynameis = user.getNombre();
-		List<String> myrolesare = user.getRoles();
+		String myrolis = user.getRol();
 		model.addAttribute("mynameis", mynameis);
 		
 
-		if (myrolesare.contains("ROLE_padre")) {
+		if (myrolis.contains("ROLE_padre")) {
 			model.addAttribute("padre", true);
 			model.addAttribute("myprofileis", "PADRE");
 			
-		} else if (myrolesare.contains("ROLE_sitter")) {
+		} else if (myrolis.contains("ROLE_sitter")) {
 			model.addAttribute("sitter", true);
 			model.addAttribute("myprofileis","SITTER" );
 			
-		} else if (myrolesare.contains("ROLE_starsitter")) {
+		} else if (myrolis.contains("ROLE_starsitter")) {
 			model.addAttribute("star_sitter", true);
 			model.addAttribute("myprofileis","STAR SITTER" );
 		
-		} else if (myrolesare.contains("ROLE_centro")) {
+		} else if (myrolis.contains("ROLE_centro")) {
 			model.addAttribute("centro", true);
 			model.addAttribute("myprofileis","CENTRO" );
 		}
