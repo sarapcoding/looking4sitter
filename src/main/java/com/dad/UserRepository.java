@@ -24,14 +24,23 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 	Usuario findById(Long id);
 	
 	@Query(
-			value="select * from usuario where Tarifa <= ?1",
+			value="select * from usuario where tarifa <= ?1",
 			nativeQuery = true)
 	List<Usuario> findByTarifa(int tarifa);
 	
 	@Query(
-			value="select * from usuario where Provincia like ?1 and Tarifa <= ?2",
+			value="select * from usuario where provincia like ?1 and tarifa <= ?2",
 			nativeQuery = true)
 	List<Usuario> findByProvinciaAndTarifa(String provincia,int tarifa);
+	
+	/* búsqueda específica de sitters */
+	
+	// todos los sitters
+	
+//	@Query(
+//			value="select * from usuario where roles in ?1",
+//			nativeQuery = true)
+//	List<Usuario> findByRoles(List<String> roles);
 }
 
 
