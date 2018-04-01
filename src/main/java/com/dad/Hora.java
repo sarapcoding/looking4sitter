@@ -30,7 +30,16 @@ public class Hora {
 	@ManyToOne
 	private Usuario padre;
 	
-	public Hora() {}
+	// padre que ha solicitado la hora
+	private String padreSolicita;
+	
+	public Hora() {
+		this.setNotas("");
+		this.setFecha("");
+		this.setTiempo(0);
+		this.setLibre(true);// por defecto las horas de alta son libres
+		
+	}
 	
 	public void horaLibre(String fechaalta,int horaalta) {
 		this.setFecha(fechaalta);

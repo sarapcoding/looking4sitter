@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 	List<Usuario> findByRoles(String rol);
 	List<Usuario> findByProvincia(String provincia);
 	List<Usuario> findByProvinciaIsLike(String provincia);
-	List<Usuario> findById(Long id);
+	Usuario findById(Long id);
 	
 	@Query(
 			value="select * from usuario where Tarifa <= ?1",
