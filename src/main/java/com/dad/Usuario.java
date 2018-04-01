@@ -32,7 +32,7 @@ public class Usuario {
 	private int tarifa;
 	private String descripcion;
 	
-	@ElementCollection (fetch= FetchType.EAGER)
+	//@ElementCollection (fetch= FetchType.EAGER)
 	private String rol;
 	
 	

@@ -27,7 +27,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/thewr/Downloads/spring-messaging-4.3.14.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/thewr/Downloads/spring-websocket-4.3.14.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alejandro/Documents/Uni/jar_files/spring-messaging-5.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alejandro/Documents/Uni/jar_files/spring-websocket-5.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alejandro/Documents/Uni/jar_files/spring-websocket-4.3.14.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alejandro/Documents/Uni/jar_files/spring-messaging-4.3.14.RELEASE.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

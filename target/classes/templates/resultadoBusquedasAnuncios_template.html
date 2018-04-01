@@ -15,6 +15,7 @@
 	Fecha:{{fecha}}
 	Usuario: {{loginUsuario}}
 	Asunto: {{asunto}}
+	<a href= "/anuncio/{{id}}">Anuncio completo</a>
 	<br>
 	{{/anuncios}}
 	<form>
@@ -36,10 +37,10 @@
 {{/fail}}
 
 
-{{/final}}
+{{#final}}
 	<h2>¡No hay mas resultados!</h2>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 	
-{{#final}}
+{{/final}}
 </body>
 </html>
