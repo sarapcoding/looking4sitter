@@ -97,7 +97,7 @@ public class AppController {
 			}
 		} else { // si tengo provincia
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-				sitters = usuarioRepositorio.findByProvinciaIsLike(provincia);
+				sitters = usuarioRepositorio.findByProvinciaAndRol(provincia,"ROLE_sitter");
 			} else { // si no
 				tarifa_h = Integer.parseInt(tarifa_max);
 				sitters = usuarioRepositorio.findByProvinciaAndTarifaAndRol(provincia, tarifa_h,"ROLE_sitter");
@@ -108,7 +108,15 @@ public class AppController {
 			model.addAttribute("encontrado",true);
 			// Enviamos los sitters resultantes
 			
-			model.addAttribute("resultadofinal",sitters);
+			resultado = new ArrayList<>();
+			// filtramos los sitters
+			for (Usuario u : sitters) {
+				if(u.getRol().equals("ROLE_sitter")) {
+					resultado.add(u);
+				}
+			}
+			
+			model.addAttribute("resultadofinal",resultado);
 			
 		} else {// no hay resultados
 			model.addAttribute("vacio",true);
@@ -126,6 +134,7 @@ public class AppController {
 		
 		String mynameis = user.getNombre();
 		String myrolis = user.getRol();
+		
 		model.addAttribute("mynameis", mynameis);
 		
 

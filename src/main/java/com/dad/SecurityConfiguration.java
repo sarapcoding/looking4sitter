@@ -23,7 +23,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//Publico
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/greeting").permitAll();
-		//http.authorizeRequests().antMatchers("/gs-guide-websocket").permitAll();
 		http.authorizeRequests().antMatchers("/registro").permitAll();
 		http.authorizeRequests().antMatchers("/verificacion+registro").permitAll();
 		http.authorizeRequests().antMatchers("/continuacion+registro").permitAll();

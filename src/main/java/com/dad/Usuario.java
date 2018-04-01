@@ -32,7 +32,7 @@ public class Usuario {
 	private int tarifa;
 	private String descripcion;
 	
-	@ElementCollection (fetch= FetchType.EAGER)
+	//@ElementCollection (fetch= FetchType.EAGER)
 	private String rol;
 	
 	
@@ -285,12 +285,24 @@ public class Usuario {
 		this.comentario_escrito.add(comentario_escrito);
 	}
 
+
 	public String getRol() {
 		return rol;
 	}
 
-	public void setRol (String rol){
-		this.rol=rol;
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+
+	@Override
+	public String toString() {
+		//String out = new Scanner(new URL("http://www.google.com").openStream(), "UTF-8").useDelimiter("\\A").next();
+		if (this.getRol().equals("ROLE_sitter")) {
+			return "Login:"+this.login+" - Nombre:"+this.nombre+" - Tarifa: "+this.tarifa+" - Provincia: "+this.provincia;
+		}
+		return "Login:"+this.login+" - Nombre:"+this.nombre+" - Provincia: "+this.provincia;
 	}
 
 	
