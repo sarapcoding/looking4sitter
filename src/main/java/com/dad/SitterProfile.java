@@ -1,19 +1,28 @@
 package com.dad;
 
-public class SitterProfile {
-	private final long id;
-    private final String sitterurl;
+import java.io.IOException;
 
-    public SitterProfile(long id, String sitterurl) {
-        this.id = id;
-        this.sitterurl = sitterurl;
-    }
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 
-    public long getId() {
-        return id;
-    }
-
-    public String getSitterurl() {
-        return sitterurl;
+public class SitterProfile extends JsonDeserializer{
+    @Override
+    public Object deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        JsonNode node = jsonParser.getCodec().readTree(jsonParser);
+        long id = node.get("id").asLong();
+        String login = node.get("login").textValue();
+        String nombre = node.get("nombre").textValue();
+        int tarifa = node.get("tarifa").asInt();
+        String provincia = node.get("provincia").textValue();
+        
+        Usuario sitter = new Usuario();
+        sitter.setLogin(login);
+        sitter.setNombre(nombre);
+        sitter.setId(id);
+        sitter.setTarifa(tarifa);
+        sitter.setProvincia(provincia);
+        return sitter;
     }
 }

@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
 <title>Resultado de búsqueda de sitters</title>
 </head>
 <body>
@@ -19,10 +20,20 @@
 {{#encontrado}}
 <h2>Resultados para la búsqueda de Sitters</h2>
 	<table>
+		<tr>
+		    <th>Índice</th>
+		    <th>id</th>
+		    <th>Enlace 1</th>
+		    <th>Enlace 2</th>
+		    <th>Botón 2</th>
+		  </tr>
 		{{#resultadofinal}}
 		<tr>
 		<td>{{-index}}</td>
 		<td>{{.}}</td>
+		<td><a href="window.location='../sitters/{{.}}';">Enlace con window location</a> </td>
+		<td><a href="https//localhost:8443/sitters/{{.}}';">Enlace con localhost</a> </td>
+		<td><input type="submit" value="Botón del sitter" onclick="window.location='../sitters/{{.}}';" /> </td>
 		</tr>
 		{{/resultadofinal}}
 	</table>

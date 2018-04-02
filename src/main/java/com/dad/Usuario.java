@@ -16,20 +16,35 @@ import javax.persistence.OneToOne;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(using = SitterProfile.class)
 @Entity
 public class Usuario {
+	
+	interface SitterResultado {}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	// Atributos del usuario
+	@JsonView(SitterResultado.class)
 	private String login;
+	@JsonView(SitterResultado.class)
 	private String nombre;
+	@JsonView(SitterResultado.class)
 	private String apellido;
+	
 	private String passwordHash;
 	private String email;
+	@JsonView(SitterResultado.class)
 	private String provincia;
+	@JsonView(SitterResultado.class)
 	private int tarifa;
+	@JsonView(SitterResultado.class)
 	private String descripcion;
 	
 	//@ElementCollection (fetch= FetchType.EAGER)
@@ -300,7 +315,8 @@ public class Usuario {
 	public String toString() {
 		//String out = new Scanner(new URL("http://www.google.com").openStream(), "UTF-8").useDelimiter("\\A").next();
 		if (this.getRol().equals("ROLE_sitter")) {
-			return "Login:"+this.login+" - Nombre:"+this.nombre+" - Tarifa: "+this.tarifa+" - Provincia: "+this.provincia;
+			//return "Login:"+this.login+" - Nombre:"+this.nombre+" - Tarifa: "+this.tarifa+" - Provincia: "+this.provincia;
+			return this.getId().toString();
 		}
 		return "Login:"+this.login+" - Nombre:"+this.nombre+" - Provincia: "+this.provincia;
 	}

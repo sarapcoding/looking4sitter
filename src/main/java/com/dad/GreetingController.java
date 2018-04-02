@@ -32,13 +32,5 @@ public class GreetingController {
         return new Greeting(counter.incrementAndGet(),String.format(estaOnline, nombre));
     }
     
-    @GetMapping(value="/sitter/{id}")
-    public ResponseEntity<Usuario> getPerfilSitter(@PathVariable Long id) {
-        Usuario sitterID = usuarioRepositorio.findById(id);
-        if (sitterID==null) { // si no se halla el sitter
-        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-        	return new ResponseEntity<>(sitterID, HttpStatus.OK);
-        }
-    }
+    
 }

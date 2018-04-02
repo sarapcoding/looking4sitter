@@ -19,7 +19,6 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 	Usuario findByLogin(String login);
 	Usuario findByEmail (String email);
 	List<Usuario> findByRol(String rol);
-	
 	List<Usuario> findByProvinciaIsLike(String provincia);
 	Usuario findById(Long id);
 	
@@ -38,14 +37,6 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 			nativeQuery = true)
 	List<Usuario> findByProvinciaAndTarifaAndRol(String provincia,int tarifa,String rol);
 	
-	/* búsqueda específica de sitters */
-	
-	// todos los sitters
-	
-//	@Query(
-//			value="select * from usuario where roles = ROLE_sitter",
-//			nativeQuery = true)
-//	List<Usuario> findByRoles(List<String> roles);
 }
 
 

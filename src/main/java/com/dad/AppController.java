@@ -85,8 +85,8 @@ public class AppController {
 			@RequestParam String tarifa_max) {
 		
 		int tarifa_h;
-		List<Usuario> resultado = new ArrayList();
-		List<Usuario> sitters = new ArrayList();
+		List<Usuario> resultado = new ArrayList<>();
+		List<Usuario> sitters = new ArrayList<>();
 		
 		if ((provincia == null) || (provincia == "")) {// si la provincia es null
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
@@ -108,15 +108,16 @@ public class AppController {
 			model.addAttribute("encontrado",true);
 			// Enviamos los sitters resultantes
 			
-			resultado = new ArrayList<>();
+//			resultado = new ArrayList<>();
+//			resultado = sitters;
 			// filtramos los sitters
-			for (Usuario u : sitters) {
-				if(u.getRol().equals("ROLE_sitter")) {
-					resultado.add(u);
-				}
-			}
+//			for (Usuario u : sitters) {
+//				if(u.getRol().equals("ROLE_sitter")) {
+//					resultado.add(u);
+//				}
+//			}
 			
-			model.addAttribute("resultadofinal",resultado);
+			model.addAttribute("resultadofinal",sitters);
 			
 		} else {// no hay resultados
 			model.addAttribute("vacio",true);

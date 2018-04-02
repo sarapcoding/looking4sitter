@@ -74,6 +74,17 @@ li a:hover:not(.active) {
     background-color: #111;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
 h1 {
     color: #54CD30;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
