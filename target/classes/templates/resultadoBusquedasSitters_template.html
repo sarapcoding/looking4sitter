@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- <script src="/webjars/jquery/jquery.min.js"></script> -->
 <!-- <script src="/funciones.js"></script> -->
 <title>Resultado de búsqueda de sitters</title>
@@ -55,21 +56,23 @@
 	<div>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 	</div>
-	
-
-
 {{/encontrado}}
-<div id="divDetalleSitter"></div>
+<br/>
+<br/>
+<div class="resultadoRest" id="divDetalleSitter"></div>
 
 </body>
 <script>
 function cargarSitter(id) {
+	// Se lanza una petición ajax a la irl del restcontroller usando jquery
     $.ajax({url: "/sitters/"+id, success: function(result){
+    	console.log(result);
 		var html="";
 		if (result!=""){
-			    	var obj = jQuery.parseJSON(result);
+// 			    	var obj = jQuery.parseJSON(result);
+					var obj = result;
 					html+="<h3>Mi nombre</h3>";
-					html+="<p>"+obj.nombre+" "+obj.apellidos +"</p>";
+					html+="<p>"+obj.nombre+" "+obj.apellido +"</p>";
 					html+="<h3>¿Quién soy?</h3>";
 					html+="<p>"+obj.descripcion+"</p>";
 					html+="<h3>Provincia</h3>";

@@ -26,6 +26,21 @@ div {
     margin: 4px 2px;
     cursor: pointer;
 	border-radius: 12px;
+}
+
+div.resultadoRest {
+	background-color: #54CD30;
+    border: none;
+    color: #ffffff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+	border-radius: 12px;
+}
+
 /*
 div.input {
 	color: red;
