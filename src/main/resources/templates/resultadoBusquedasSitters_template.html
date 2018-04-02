@@ -20,23 +20,34 @@
 {{#encontrado}}
 <h2>Resultados para la búsqueda de Sitters</h2>
 	<table>
+		{{#resultadologins}}
 		<tr>
-		    <th>Índice</th>
-		    <th>id</th>
-		    <th>Enlace 1</th>
-		    <th>Enlace 2</th>
-		    <th>Botón 2</th>
-		  </tr>
-		{{#resultadofinal}}
+		<td>Sitter {{.}}</td>
+		</tr>
+		{{/resultadologins}}
+	</table>
+	<table>
+		{{#resultadotarifas}}
 		<tr>
-		<td>{{-index}}</td>
+		<td>{{.}},00 €/hora</td>
+		</tr>
+		{{/resultadotarifas}}
+	</table>
+	<table>
+		{{#resultadoprovincias}}
+		<tr>
 		<td>{{.}}</td>
-		<td><a href="window.location='../sitters/{{.}}';">Enlace con window location</a> </td>
-		<td><a href="https//localhost:8443/sitters/{{.}}';">Enlace con localhost</a> </td>
+		</tr>
+		{{/resultadoprovincias}}
+	</table>
+	<table>
+		{{#resultadoids}}
+		<tr>
 		<td><input type="submit" value="Botón del sitter" onclick="window.location='../sitters/{{.}}';" /> </td>
 		</tr>
-		{{/resultadofinal}}
+		{{/resultadoids}}
 	</table>
+<!-- 	<td><input type="submit" value="Botón del sitter" onclick="window.location='../sitters/{{.}}';" /> </td> -->
 	<div>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 	</div>

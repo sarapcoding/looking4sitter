@@ -70,10 +70,6 @@ public class UserController {
 		return "registroExitoso_template";
 	}
 	
-	@RequestMapping("/perfil-sitter")
-	public String checkSitterProfile() {
-		return "perfilSitter_template";
-	}
 	
 	
 }

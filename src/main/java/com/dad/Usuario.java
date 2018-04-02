@@ -37,8 +37,7 @@ public class Usuario {
 	private String nombre;
 	@JsonView(SitterResultado.class)
 	private String apellido;
-	
-	private String passwordHash;
+	@JsonView(SitterResultado.class)
 	private String email;
 	@JsonView(SitterResultado.class)
 	private String provincia;
@@ -46,6 +45,8 @@ public class Usuario {
 	private int tarifa;
 	@JsonView(SitterResultado.class)
 	private String descripcion;
+	
+	private String passwordHash;
 	
 	//@ElementCollection (fetch= FetchType.EAGER)
 	private String rol;
