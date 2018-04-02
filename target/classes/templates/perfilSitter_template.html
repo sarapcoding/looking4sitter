@@ -11,17 +11,17 @@
 <h1>Sitter {{loginSitter}}</h1>
 <div>
 	<h3>Mi nombre</h3>
-		<p>{{nombreSitter}} {{apellidoSitter}}</p>
+		<p>{{nombre}} {{apellido}}</p>
 	<h3>¿Quién soy?</h3>
-		<p>{{descSitter}}</p>
+		<p>{{descripcion}}</p>
 	<h3>Provincia</h3>
-		<p>{{provinciaSitter}}</p>
+		<p>{{provincia}}</p>
 	<h3>Mi tarifa es</h3>
-		<p>{{tarifaSitter}},00€/hora</p>
-	<h3>Mis horas libres son:</h3>
-		{{#noHorasLibres}}
-		<p>¡Oh no, no tengo horas libres!</p>
-		{{/noHorasLibres}}
+		<p>{{tarifa}},00€/hora</p>
+<!-- 	<h3>Mis horas libres son:</h3> -->
+<!-- 		{{#noHorasLibres}} -->
+<!-- 		<p>¡Oh no, no tengo horas libres!</p> -->
+<!-- 		{{/noHorasLibres}} -->
 <!-- 		{{#horasLibres}} -->
 <!-- 			<tr> -->
 <!-- 			<td>{{-index}}</td> -->
@@ -39,8 +39,6 @@
 
 <div>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
-	</div>
-	
-
+</div>
 </body>
 </html>

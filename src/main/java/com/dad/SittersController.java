@@ -25,11 +25,13 @@ public class SittersController {
 	
 	@JsonView(Usuario.SitterResultado.class)
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Usuario> getPerfilSitter(@PathVariable Long id) {
+	public ResponseEntity<Usuario> getPerfilSitter(Model model, @PathVariable Long id) {
 		Usuario sitterID = usuarioRepositorio.findById(id);
 		if (sitterID==null) { // si no se halla el sitter
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
+			
+			
 			return new ResponseEntity<>(sitterID, HttpStatus.OK);
 		}
 	}

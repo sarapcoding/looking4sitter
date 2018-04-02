@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<!-- <script src="/webjars/jquery/jquery.min.js"></script> -->
+<!-- <script src="/funciones.js"></script> -->
 <title>Resultado de búsqueda de sitters</title>
 </head>
 <body>
@@ -43,7 +45,9 @@
 	<table>
 		{{#resultadoids}}
 		<tr>
-		<td><input type="submit" value="Botón del sitter" onclick="window.location='../sitters/{{.}}';" /> </td>
+<!-- 		<td><input type="submit" value="Ir al Perfil del Sitter" onclick="window.location='../sitters/{{.}}';" /> </td> -->
+			<td><input type="submit" value="Ir al Perfil del Sitter" onclick="cargarSitter('{{.}}');" /> </td>
+
 		</tr>
 		{{/resultadoids}}
 	</table>
@@ -55,7 +59,32 @@
 
 
 {{/encontrado}}
-
+<div id="divDetalleSitter"></div>
 
 </body>
+<script>
+function cargarSitter(id) {
+    $.ajax({url: "/sitters/"+id, success: function(result){
+		var html="";
+		if (result!=""){
+			    	var obj = jQuery.parseJSON(result);
+					html+="<h3>Mi nombre</h3>";
+					html+="<p>"+obj.nombre+" "+obj.apellidos +"</p>";
+					html+="<h3>¿Quién soy?</h3>";
+					html+="<p>"+obj.descripcion+"</p>";
+					html+="<h3>Provincia</h3>";
+					html+="<p>"+obj.provincia+"</p>";
+					html+="<h3>Mi tarifa es:</h3>";
+					html+="<p>"+obj.tarifa+",00€/hora</p>";   
+		}else{
+						html+="<h3>No se han encontrado resultados</h3>";
+		}		
+		$("#divDetalleSitter").html(html);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+        alert(thrownError);
+    }});
+ 
+}
+</script>
 </html>
