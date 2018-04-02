@@ -97,7 +97,7 @@ public class AppController {
 			}
 		} else { // si tengo provincia
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-				sitters = usuarioRepositorio.findByProvinciaIsLike(provincia);
+				sitters = usuarioRepositorio.findByProvinciaIsLike(provincia,new PageRequest(num_pag, 2));
 				
 			} else { // si no
 				tarifa_h = Integer.parseInt(tarifa_max);

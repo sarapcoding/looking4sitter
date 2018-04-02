@@ -21,11 +21,14 @@
 	<table>
 		{{#resultadofinal}}
 		<tr>
+		<td>{{login}}</td>
 		<td>{{-index}}</td>
 		<td>{{.}}</td>
 		</tr>
 		{{/resultadofinal}}
 	</table>
+	<input type="hidden" name="num_pag" value= {{numPag}} />
+	<input type="submit" value="Siguiente"/>
 	<div>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 	</div>

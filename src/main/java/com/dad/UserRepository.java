@@ -18,9 +18,9 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 
 	Usuario findByLogin(String login);
 	Usuario findByEmail (String email);
-	Page<Usuario> findByRol(String rol);
-	Page<Usuario> findByProvincia(String provincia);
-	Page<Usuario> findByProvinciaIsLike(String provincia);
+	Page<Usuario> findByRol(String rol,Pageable page);
+	Page<Usuario> findByProvincia(String provincia,Pageable page);
+	Page<Usuario> findByProvinciaIsLike(String provincia,Pageable page);
 	Usuario findById(Long id);
 	
 	/*@Query(
