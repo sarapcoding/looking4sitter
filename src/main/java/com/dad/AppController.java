@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.dad.UserRepository;
 import com.dad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,31 +82,32 @@ public class AppController {
 	
 
 	@RequestMapping("/busqueda-avanzada-sitters")
-	public String busquedaAvanzada(Model model,
-			@RequestParam String provincia,
-			@RequestParam String tarifa_max) {
-		
+	public String busquedaAvanzada(Model model, @RequestParam String provincia,@RequestParam String tarifa_max,
+		@RequestParam int num_pag){
+		int sig_pag=num_pag+1;
 		int tarifa_h;
-		List<Usuario> resultado = new ArrayList();
-		List<Usuario> sitters = new ArrayList();
+		Page<Usuario> sitters;
 		
 		if ((provincia == null) || (provincia == "")) {// si la provincia es null
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-				sitters = (List<Usuario>) usuarioRepositorio.findAll();
+				sitters = usuarioRepositorio.findAll(new PageRequest(num_pag,2));
 			} else {
 				tarifa_h = Integer.parseInt(tarifa_max);
-				sitters = usuarioRepositorio.findByTarifaAndRol(tarifa_h,"ROLE_sitter");
+				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h,new PageRequest(num_pag, 2));
 			}
 		} else { // si tengo provincia
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
 				sitters = usuarioRepositorio.findByProvinciaIsLike(provincia);
+				
 			} else { // si no
 				tarifa_h = Integer.parseInt(tarifa_max);
-				sitters = usuarioRepositorio.findByProvinciaAndTarifaAndRol(provincia, tarifa_h,"ROLE_sitter");
+				sitters = usuarioRepositorio.findByProvinciaAndRolAndTarifaLessThan(provincia, "ROLE_sitter",tarifa_h,
+						new PageRequest(num_pag, 2));
+				
 			}
 		}
 		
-		if (!sitters.isEmpty()) {//se han hallado resultados
+		if (sitters.getTotalElements()!=0) {//se han hallado resultados
 			model.addAttribute("encontrado",true);
 			// Enviamos los sitters resultantes
 			
@@ -113,6 +116,7 @@ public class AppController {
 		} else {// no hay resultados
 			model.addAttribute("vacio",true);
 		}
+		model.addAttribute("numPag",sig_pag);
 		return "resultadoBusquedasSitters_template";
 	}
 	

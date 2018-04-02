@@ -23,6 +23,7 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
     public void postHandle(final HttpServletRequest request, final HttpServletResponse response,final Object handler, final ModelAndView modelAndView) throws Exception {
+	
 		//if request.getRequestURI() gs-blablabla no hacer esto
 		// opción 2: no hacer esto automáticamente, añadir esto a cada método del controlador
 		//str1.toLowerCase().contains(str2.toLowerCase())
@@ -43,10 +44,10 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("myMethod ["+myMethod+"]");
 		*/
 		
-		if (!request.getRequestURI().contains("greeting")) {
+		//if (!request.getRequestURI().contains("greeting")) {
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
 	    	modelAndView.addObject("token", token.getToken());   
-		}
+		//}
   
 		 	
     }

@@ -13,11 +13,12 @@
 {{#padre}}
 	<div>
 	<h3>Búsqueda avanzada de sitters</h3>
-	<form action="busqueda-avanzada-sitters" method="post">
+	<form action="busqueda-avanzada-sitters" method="get">
 		<p>Provincia: </p><input type='text' name='provincia' />
 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
 		<br>
 		<br>
+		<input type="hidden" name="num_pag" value=0 />
 		<input type='submit' value='Buscar' />
 	</form>
 	</div>
@@ -79,7 +80,7 @@
 
 {{#centro}}
 	<h2>Búsqueda avanzada de sitters</h2>
-	<form action="busqueda-avanzada-sitters" method="post">
+	<form action="busqueda-avanzada-sitters" method="get">
 		<p>Provincia: </p><input type='text' name='provincia' />
 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
 		<input type='submit' value='Buscar' />
