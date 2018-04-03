@@ -1,4 +1,4 @@
-body {margin:0;}
+body {margin:0px 50px;}
 
 button {
     background-color: #54CD30;
@@ -33,7 +33,7 @@ div.resultadoRest {
     border: none;
     color: #ffffff;
     padding: 15px 32px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     display: inline-block;
     margin: 4px 2px;
@@ -119,6 +119,13 @@ h3 {
 
 }
 
+h3.sitter {
+    color: #FFFFFF;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 100%;
+
+}
+
 p  {
     color: #000000;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -129,6 +136,18 @@ p.aviso {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     color: #05AEEF;
     font-size: 120%;
+}
+
+p.consejo {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: #FFFFFF;
+    font-size: 100%;
+}
+
+p.sitter {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: #FFFFFF;
+    font-size: 100%;
 }
 
 .active {

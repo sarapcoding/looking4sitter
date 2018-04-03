@@ -21,6 +21,7 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 	Page<Usuario> findByRol(String rol,Pageable page);
 	Page<Usuario> findByProvincia(String provincia,Pageable page);
 	Page<Usuario> findByProvinciaIsLike(String provincia,Pageable page);
+	Page<Usuario> findByRolAndProvinciaIsLike(String rol, String provincia,Pageable page);
 	Usuario findById(Long id);
 	
 	Page<Usuario> findByRolAndTarifaLessThan (String rol,int tarifa, Pageable page);

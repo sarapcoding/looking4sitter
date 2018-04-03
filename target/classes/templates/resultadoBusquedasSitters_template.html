@@ -62,14 +62,14 @@ function cargarSitter(id) {
 		if (result!=""){
 // 			    	var obj = jQuery.parseJSON(result);
 					var obj = result;
-					html+="<h3>Mi nombre</h3>";
-					html+="<p>"+obj.nombre+" "+obj.apellido +"</p>";
-					html+="<h3>¿Quién soy?</h3>";
-					html+="<p>"+obj.descripcion+"</p>";
-					html+="<h3>Provincia</h3>";
-					html+="<p>"+obj.provincia+"</p>";
-					html+="<h3>Mi tarifa es:</h3>";
-					html+="<p>"+obj.tarifa+",00€/hora</p>";   
+					html+="<h3 class='sitter' >Mi nombre</h3>";
+					html+="<p class='sitter' >"+obj.nombre+" "+obj.apellido +"</p>";
+					html+="<h3 class='sitter' >¿Quién soy?</h3>";
+					html+="<p class='sitter' >"+obj.descripcion+"</p>";
+					html+="<h3 class='sitter' >Provincia</h3>";
+					html+="<p class='sitter' >"+obj.provincia+"</p>";
+					html+="<h3 class='sitter' >Mi tarifa es:</h3>";
+					html+="<pclass='sitter' >"+obj.tarifa+",00€/hora</p>";   
 		}else{
 						html+="<h3>No se han encontrado resultados</h3>";
 		}		

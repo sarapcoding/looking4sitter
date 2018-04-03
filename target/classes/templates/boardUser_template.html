@@ -8,17 +8,18 @@
 <body>
 <img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
 <h1>Página principal</h1>
-<h2>{{mynameis}}</h2>
+<h2>Página de {{mynameis}}</h2>
 
 {{#padre}}
-	<div>
+	
 	<h3>Búsqueda avanzada de sitters</h3>
+	<div>
 	<form action="busqueda-avanzada-sitters" method="get">
 		<p>Provincia: </p><input type='text' name='provincia' />
 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
 		<br>
 		<br>
-		<p>Recuerda: si no seleccionas nada, se mostrarán todos los Sitters</p>
+		<p class="consejo">Recuerda: si no seleccionas nada, se mostrarán todos los Sitters</p>
 		<input type="hidden" name='num_pag' value=0 />
 		<input type='submit' value='Buscar' />
 	</form>
@@ -27,17 +28,15 @@
 <!-- 	</form> -->
 	</div>
 	<br>
-	<div>
+	
 	<h3>Publicar anuncio</h3>
+	<div>
 	<form action="publicar+anuncio">
 		<input type='submit' value='Publicar anuncio' />
 	</form>
 	</div>
 	<br>
 	
-	<h3>Sitters online</h3>
-<!-- 	aquí se pondrá la api rest donde se mostrará los sitters que hayan iniciado sesión, refrescándose cada x tiempo -->
-		
 {{/padre}}
 
 {{#sitter}}

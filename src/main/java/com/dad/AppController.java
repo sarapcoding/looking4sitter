@@ -100,12 +100,11 @@ public class AppController {
 			}
 		} else { // si tengo provincia
 			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-				sitters = usuarioRepositorio.findByProvinciaIsLike(provincia,new PageRequest(num_pag, 2));
+				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia,new PageRequest(num_pag, 2));
 				
 			} else { // si no
 				tarifa_h = Integer.parseInt(tarifa_max);
-				sitters = usuarioRepositorio.findByProvinciaAndRolAndTarifaLessThan(provincia, "ROLE_sitter",tarifa_h,
-						new PageRequest(num_pag, 2));
+				sitters = usuarioRepositorio.findByProvinciaAndRolAndTarifaLessThan(provincia, "ROLE_sitter",tarifa_h, new PageRequest(num_pag, 2));
 				
 			}
 		}
