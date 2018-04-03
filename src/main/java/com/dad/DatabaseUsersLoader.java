@@ -23,12 +23,19 @@ public class DatabaseUsersLoader {
 		Usuario us3 = new Usuario("flor","Flor","Blanca","flor123","flor@email.com","Barcelona",13,"po","ROLE_sitter");
 		Usuario us4 = new Usuario("caracoles","Caracoles Center","","caracoles123","caracoles@email.com","Madrid",0,"tinky","ROLE_centro");
 		Usuario us5 = new Usuario("kei","Kei","Wong","kei123","kei@email.com","Madrid",0,"Padre de un nene tranquilo","ROLE_padre");
+		Usuario us6 = new Usuario("aurora","Aurora","Perez","aurora123","aurora@email.com","Madrid",16,"Seria, responsable","ROLE_sitter");
+		Usuario us7 = new Usuario("xtina","Cristina","StClair","xtina123","xtina@email.com","Guipúzqua",13,"Au pair de Londres, responsable, enseño inglés","ROLE_sitter");
+		Usuario us8 = new Usuario("popurri","Carlos","Fu","popurri123","popurri@email.com","Albacete",13,"Chico serio, hermano de 5","ROLE_sitter");
+		
 		
 		usuarioRepositorio.save(us1);
 		usuarioRepositorio.save(us2);
 		usuarioRepositorio.save(us3);
 		usuarioRepositorio.save(us4);
 		usuarioRepositorio.save(us5);
+		usuarioRepositorio.save(us6);
+		usuarioRepositorio.save(us7);
+		usuarioRepositorio.save(us8);
 		
 		
 		Anuncio an1 = new Anuncio(us1,"Niñer@ para el sábado","Busco a alguien que pueda cuidar mi crío de 3 a 5 este viernes","2018-03-02");

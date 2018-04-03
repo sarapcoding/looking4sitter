@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +69,17 @@ public class UserController {
 		// Creación de la nueva relación entre un usuario y su perfil
 		//perfil.getUsuario().add(nuevoUsuario);
 		return "registroExitoso_template";
+	}
+	
+	@RequestMapping ("/anuncio/{login}")
+	public String usuarioPerfil(Model model,@PathVariable String login ){
+		Usuario usuario = usuarioRepositorio.findByLogin(login);
+		if (usuario.getRol().equals("ROLE_sitter")){
+			model.addAttribute("sitter", true);
+		}
+		
+		model.addAttribute("usuario", usuario);
+		return "perfilUser_template";
 	}
 	
 	

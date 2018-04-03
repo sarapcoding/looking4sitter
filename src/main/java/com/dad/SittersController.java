@@ -33,11 +33,11 @@ public class SittersController {
 		}
 	}
 	
-	@JsonView(Usuario.SitterResultado.class)
-	@GetMapping(value="/")
-	public List<Usuario> getListaSitters(){
-		List<Usuario> sitters = usuarioRepositorio.findByRol("ROLE_sitter");
-		return sitters;
-	}
+//	@JsonView(Usuario.SitterResultado.class)
+//	@GetMapping(value="/")
+//	public List<Usuario> getListaSitters(){
+//		List<Usuario> sitters = usuarioRepositorio.findByRol("ROLE_sitter");
+//		return sitters;
+//	}
 
 }

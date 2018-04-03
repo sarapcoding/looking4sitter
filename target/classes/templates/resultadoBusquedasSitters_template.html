@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- <script src="/webjars/jquery/jquery.min.js"></script> -->
-<!-- <script src="/funciones.js"></script> -->
 <title>Resultado de búsqueda de sitters</title>
 </head>
 <body>
@@ -23,36 +21,29 @@
 {{#encontrado}}
 <h2>Resultados para la búsqueda de Sitters</h2>
 	<table>
-		{{#resultadologins}}
 		<tr>
-		<td>Sitter {{.}}</td>
+		<td>Índice</td>
+		<td>Usuario</td>
+		<td>Tarifa</td>
+		<td>¿Quieres saber más?</td>
 		</tr>
-		{{/resultadologins}}
-	</table>
-	<table>
-		{{#resultadotarifas}}
+		{{#resultadofinal}}
 		<tr>
-		<td>{{.}},00 €/hora</td>
+		<td>{{-index}}</td>
+		<td>{{login}}</td>
+		<td>{{tarifa}},00€/hora</td>
+		<td><input type="submit" value="¡Ver más!" onclick="cargarSitter('{{id}}');" /> </td>
 		</tr>
-		{{/resultadotarifas}}
+		{{/resultadofinal}}
 	</table>
-	<table>
-		{{#resultadoprovincias}}
-		<tr>
-		<td>{{.}}</td>
-		</tr>
-		{{/resultadoprovincias}}
-	</table>
-	<table>
-		{{#resultadoids}}
-		<tr>
-<!-- 		<td><input type="submit" value="Ir al Perfil del Sitter" onclick="window.location='../sitters/{{.}}';" /> </td> -->
-			<td><input type="submit" value="Ir al Perfil del Sitter" onclick="cargarSitter('{{.}}');" /> </td>
-
-		</tr>
-		{{/resultadoids}}
-	</table>
-<!-- 	<td><input type="submit" value="Botón del sitter" onclick="window.location='../sitters/{{.}}';" /> </td> -->
+	<form action="busqueda-avanzada-sitters">
+		<input type="hidden" name='provincia' value= {{provincia}}   />
+		<input type="hidden" name='tarifa_max' value= {{tarifa_max}}   />
+		<input type="hidden" name="num_pag" value= {{numPag}}    />
+		<input type="submit" value="Siguiente"    />
+	</form>
+	<br/>
+<br/>
 	<div>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 	</div>
