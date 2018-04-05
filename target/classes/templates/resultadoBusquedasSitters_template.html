@@ -57,7 +57,7 @@
 function cargarSitter(id) {
 	// Se lanza una petición ajax a la irl del restcontroller usando jquery
 //     $.ajax({url: "/sitters/"+id, success: function(result){
-	$.ajax({url: "https://192.168.33.10:8444/sitters/"+id, success: function(result){
+	$.ajax({url: "192.168.33.10:8444/sitters/"+id, success: function(result){
     	console.log(result);
 		var html="";
 		if (result!=""){
