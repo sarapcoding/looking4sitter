@@ -42,10 +42,10 @@ public class UserController {
 				model.addAttribute("password",true);
 				return "registro_template";
 			}
-			model.addAttribute("correo",true);
+			model.addAttribute("usado",true);
 			return "registro_template";
 		}
-		model.addAttribute("nombre",true);
+		model.addAttribute("usado",true);
 		return "registro_template";
 	}	
 		
@@ -71,7 +71,7 @@ public class UserController {
 		return "registroExitoso_template";
 	}
 	
-	@RequestMapping ("/anuncio/{login}")
+	@RequestMapping ("/usuario/{login}")
 	public String usuarioPerfil(Model model,@PathVariable String login ){
 		Usuario usuario = usuarioRepositorio.findByLogin(login);
 		if (usuario.getRol().equals("ROLE_sitter")){

@@ -6,12 +6,9 @@
 </head>
 <body>
 <img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
- {{#nombre}}
- El nombre de usuario se encuentra en uso. Por favor, escoja otro
- {{/nombre}}
- {{#correo}}
- El email introducido se encuentra en uso. Por favor, escoja otro.
- {{/correo}}
+ {{#usado}}
+ Los datos introducidos ya se encuentran en uso.Porfavor escoja otro
+ {{/usado}}
  {{#password}}
  Las contraseñas no coinciden.Por favor, intentelo de nuevo
  {{/password}}

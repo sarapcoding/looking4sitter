@@ -18,7 +18,7 @@ public class Anuncio {
 	private String asunto;
 	private String cuerpo;
 	private String fecha; // DD-MM-YY
-	private String loginUsuario;
+	private String login;
 	
 	
 	 
@@ -43,11 +43,11 @@ public class Anuncio {
 	
 
 	public String getLoginUsuario() {
-		return loginUsuario;
+		return login;
 	}
 
 	public void setLoginUsuario(String login_usuario) {
-		this.loginUsuario = login_usuario;
+		this.login = login_usuario;
 	}
 
 	public String getAsunto() {
