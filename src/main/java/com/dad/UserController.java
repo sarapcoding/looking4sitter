@@ -63,11 +63,14 @@ public class UserController {
 		nuevoUsuario.setProvincia (provincia);
 		nuevoUsuario.setTarifa(tarifa);
 		nuevoUsuario.setDescripcion(descripcion);
-		nuevoUsuario.setRol(tipo);
+		if (tipo.equals("2")) { // padre
+			nuevoUsuario.setRol("ROLE_padre");
+		} else if (tipo.equals("3")) {
+			nuevoUsuario.setRol("ROLE_sitter");
+		}
+		
 		Usuario usuario_guardado = new Usuario();
 		usuario_guardado = usuarioRepositorio.save(nuevoUsuario);
-		// Creación de la nueva relación entre un usuario y su perfil
-		//perfil.getUsuario().add(nuevoUsuario);
 		return "registroExitoso_template";
 	}
 	

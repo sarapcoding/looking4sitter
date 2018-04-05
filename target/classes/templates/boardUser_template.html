@@ -19,7 +19,9 @@
 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
 		<br>
 		<br>
-		<p class="consejo">Recuerda: si no seleccionas nada, se mostrarán todos los Sitters</p>
+		<p class="consejo">¡Recuerda!</p>
+		<p class="consejo">Si no seleccionas nada,</p>
+		<p class="consejo">se mostrarán todos los Sitters</p>
 		<input type="hidden" name='num_pag' value=0 />
 		<input type='submit' value='Buscar' />
 	</form>
@@ -40,13 +42,13 @@
 {{/padre}}
 
 {{#sitter}}
-<h2>Mi agenda</h2>
-	<h3>Ver mi agenda</h3>
-	<input type="submit" value="Mis horas" onclick="window.location='../ver-mi-agenda';" />
-	<!-- <h3>Buscar en mi agenda</h3> -->
-	<h3>Dar horas de alta</h3>
-	<input type="submit" value="Alta" onclick="window.location='../ver-mi-agenda';" />
-	<!-- <h3>Buscar en mi agenda</h3> -->
+<!-- <h2>Mi agenda</h2> -->
+<!-- 	<h3>Ver mi agenda</h3> -->
+<!-- 	<input type="submit" value="Mis horas" onclick="window.location='../ver-mi-agenda';" /> -->
+<!-- 	<!-- <h3>Buscar en mi agenda</h3> --> -->
+<!-- 	<h3>Dar horas de alta</h3> -->
+<!-- 	<input type="submit" value="Alta" onclick="window.location='../ver-mi-agenda';" /> -->
+<!-- 	<!-- <h3>Buscar en mi agenda</h3> --> -->
 <h2>Tablón de anuncios</h2>
 	<h3>Todos los anuncios</h3>
 	<!-- se muestran todos los anuncios -->
@@ -65,15 +67,7 @@
 		<input type="hidden" name="num_pag" value=0 />
 		<input type='submit' value='Buscar' />
 	</form>
-	
-	<h3>Padres online</h3>
-<!-- 	aquí se pondrá la api rest donde se mostrará los padres que hayan iniciado sesión, refrescándose cada x tiempo -->
-	<div>
-<!-- 		<form action="online-pops"> -->
-<!-- 			<input type="submit" value='Recibo un hola mundo' />	 -->
-<!-- 		</form> -->
 		
-	</div>
 	
 {{/sitter}}
 

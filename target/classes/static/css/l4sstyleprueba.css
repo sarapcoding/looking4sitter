@@ -112,6 +112,12 @@ h2 {
     font-size: 180%;
 
 }
+h2.sitter {
+    color: #FFFFFF;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 100%;
+
+}
 h3 {
     color: #939393;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;

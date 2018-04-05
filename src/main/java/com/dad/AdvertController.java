@@ -6,11 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Controller
 public class AdvertController {
@@ -105,9 +111,23 @@ public class AdvertController {
 		//model.addAttribute("anuncios", anuncioRepositorio.findAll());
 		return "boardUser_template";
 	}
-	@RequestMapping ("/anuncio/{id}")
-	public String anuncioCompleto(Model model,@PathVariable long id){
-		model.addAttribute("anuncio", anuncioRepositorio.findOne(id));
-		return "advertComplete_template";
-	}
+	
+	
+//	@Autowired
+//	private AdvertRepository anuncioRepositorio;
+//	
+//	@JsonView(Anuncio.AnuncioResultado.class)
+//	@GetMapping (value="/anuncio/{id}", produces =MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Anuncio> anuncioCompleto(@PathVariable Long id){
+//		Anuncio anuncioID = anuncioRepositorio.findById(id);
+//		if (anuncioID==null) {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		} else {
+//			
+//			return ResponseEntity.accepted().body(anuncioID);
+//		}
+//		
+//	}
+	
+	
 }

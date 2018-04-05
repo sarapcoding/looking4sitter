@@ -16,6 +16,7 @@ public interface AdvertRepository extends JpaRepository<Anuncio,Long>{
 	//Page<Anuncios> findByCiudad (String ciudad, Pageable page);
 	//Page<Anuncios> findByTarifa (String tarifa, Pageable page);
 	Page<Anuncio> findByFecha (String fecha, Pageable page);
+	Anuncio findById(Long id);
 	//Page<Anuncios> findByCiudadAndTarifa (String ciudad, String tarifa, Pageable page);
 	//Page<Anuncios> findByCiudadAndFecha (String ciudad, String fecha, Pageable page);
 	//Page<Anuncios> findByFechaAndTarifa (String fecha, String tarifa, Pageable page);
