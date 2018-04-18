@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +61,7 @@ public class BusquedasController {
 		if(!provincia.matches("[A-Za-z]+")) {
 			provincia = "";
 		}
-		System.out.println("Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
+		System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
 		//System.out.println("Creación del restTemplate correcta");
 		String url = "https://localhost:8443/sitters/resultados/"+provincia+"/"+tarifamax;
@@ -66,7 +70,7 @@ public class BusquedasController {
 //		Map<String,String> params = new HashMap<String,String>();
 //		params.put(arg0, arg1)
 //		
-		System.out.println("Mi url: ["+url+"]");
+		System.out.println("------------------> Mi url: ["+url+"]");
 		//String url = "https://localhost:8444/sitters/resultados?provincia="+provincia+"&tarifamax="+tarifamax;
 //		javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
 //			    new javax.net.ssl.HostnameVerifier(){
@@ -78,24 +82,32 @@ public class BusquedasController {
 //			            return false;
 //			        }
 //			    });
-		ObjectNode data = restTemplate.getForObject(url, ObjectNode.class);
+		//ObjectNode data = restTemplate.getForObject(url, ObjectNode.class);
+		
+		ResponseEntity<JSONObject[]> responseEntity = restTemplate.getForEntity(url, JSONObject[].class);
+		JSONObject[] resultados = responseEntity.getBody();
+		System.out.println(resultados.toString());
 		System.out.println("Se ha hecho la llamada getForObject de la url para recuperar un ObjectNode");
 		//List<Usuario> resultadositters = new ArrayList<>();
 		List<String> sits = new ArrayList<>();
-		ArrayNode items = (ArrayNode) data.get("items");
-		for (int i = 0; i < items.size(); i++) {
-			JsonNode item = items.get(i); // se obtiene el item
-			//Usuario s = new Usuario();
-			String mylogin = item.get("login").asText();
-//			String mynombre;
-//			String myapellido;
-//			String myprovincia;
-//			int mytarifa;
-//			String mydescripcion;
-			
-			sits.add(mylogin);
-			
+		
+		for (JSONObject jo : resultados) {
+			sits.add(jo.toString());
 		}
+		//ArrayNode items = (ArrayNode) data.get("items");
+//		for (int i = 0; i < items.size(); i++) {
+//			JsonNode item = items.get(i); // se obtiene el item
+//			//Usuario s = new Usuario();
+//			String mylogin = item.get("login").asText();
+////			String mynombre;
+////			String myapellido;
+////			String myprovincia;
+////			int mytarifa;
+////			String mydescripcion;
+//			
+//			sits.add(mylogin);
+//			
+//		}
 		
 		model.addAttribute("resultadofinal",sits);
 		
