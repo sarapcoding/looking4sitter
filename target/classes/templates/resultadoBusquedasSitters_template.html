@@ -25,14 +25,16 @@
 		<td>Índice</td>
 		<td>Usuario</td>
 		<td>Tarifa</td>
-		<td>¿Quieres saber más?</td>
+<!-- 		<td>¿Quieres saber más?</td> -->
+		<td>¡Aquí puedes ver quién soy!</td>
 		</tr>
 		{{#resultadofinal}}
 		<tr>
 		<td>{{-index}}</td>
 		<td>{{login}}</td>
 		<td>{{tarifa}},00€/hora</td>
-		<td><input type="submit" value="¡Ver más!" onclick="cargarSitter('{{id}}');" /> </td>
+<!-- 		<td><input type="submit" value="¡Ver más!" onclick="cargarSitter('{{id}}');" /> </td> -->
+		<td><div class="resultadoRest" id="divDetalleSitter"></div></td>
 		</tr>
 		{{/resultadofinal}}
 	</table>
@@ -50,7 +52,7 @@
 {{/encontrado}}
 <br/>
 <br/>
-<div class="resultadoRest" id="divDetalleSitter"></div>
+
 
 </body>
 <script>
@@ -58,6 +60,8 @@ function cargarSitter(id) {
 	// Se lanza una petición ajax a la irl del restcontroller usando jquery
 //     $.ajax({url: "/sitters/"+id, success: function(result){
 
+	// ahora el javascript debe llamar al json con los resultados
+	// ughhhhhhhh
 	$.ajax({type: "GET",
 		url: "https://192.168.33.10:8444/sitters/"+id,
 		dataType: "json",

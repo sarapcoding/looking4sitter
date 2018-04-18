@@ -21,3 +21,16 @@ function cargarSitter(id) {
     }});
  
 }
+
+//<script src="https://code.jquery.com/jquery-2.2.0.min.js">
+//</script>
+//<script src="script.js"></script>
+
+$(document).ready(function(){
+	$.ajax({
+		url:""
+	}).done(function(data) {
+		console.log(data);
+	});
+	
+});
