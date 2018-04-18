@@ -86,9 +86,10 @@ public class SittersController {
 //	}
 	
 	@JsonView(Usuario.SitterResultado.class)
-	@RequestMapping(path="/resultados/{provincia}/{tarifamax}",
-					method = RequestMethod.GET,
-					produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/resultados/{provincia}/{tarifamax}",
+					//method = RequestMethod.GET,
+					produces=MediaType.APPLICATION_JSON_VALUE
+					)
 	public ResponseEntity<List<Usuario>> getPerfilesBusqueda(
 			@PathVariable String provincia,
 			@PathVariable String tarifamax) {
@@ -126,6 +127,7 @@ public class SittersController {
 		} else {// no hay resultados
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		
 		
 		
 		
