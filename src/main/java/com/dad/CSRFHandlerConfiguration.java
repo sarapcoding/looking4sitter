@@ -43,10 +43,9 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("myMethod ["+myMethod+"]");
 		*/
 		
-		if ((!request.getRequestURI().contains("resultados"))
+		if ((!request.getRequestURI().contains("search")) && (!request.getRequestURI().contains("resultados"))
 				&& (!request.getRequestURI().contains("busqueda"))
 				&& (!request.getRequestURI().contains("sitters"))
-				&& (!request.getRequestURI().contains("search"))
 				){
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
 	    	modelAndView.addObject("token", token.getToken());

@@ -3,6 +3,9 @@ package com.dad;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
+import com.google.gson.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,56 +50,10 @@ public class SittersController {
 //		}
 //	}
 	
-//	@JsonView(Usuario.SitterResultado.class)
-//	@GetMapping(value="/resultados", produces=MediaType.APPLICATION_JSON_VALUE )
-//	public ResponseEntity<List<Usuario>> getPerfilesSitter(Model model, @PathVariable String provincia, @PathVariable String tarifa_max) {
-//		int tarifa_h;
-//		List<Usuario> sitters;
-//		if (!tarifa_max.matches("[0-9]+")) {
-//			tarifa_max = "";
-//		}
-//		
-//		if(!provincia.matches("[A-Za-z]+")) {
-//			provincia = "";
-//		}
-//		
-//		if ((provincia == null) || (provincia == "")) {// si la provincia es null
-//			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-//				sitters = usuarioRepositorio.findByRol("ROLE_sitter");
-//			} else {
-//				tarifa_h = Integer.parseInt(tarifa_max);
-//				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h);
-//			}
-//		} else { // si tengo provincia
-//			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-//				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia);
-//				
-//			} else { // si no
-//				tarifa_h = Integer.parseInt(tarifa_max);
-//				sitters = usuarioRepositorio.findByRolAndProvinciaAndTarifaLessThan("ROLE_sitter",provincia,tarifa_h);
-//				
-//			}
-//		}
-//		
-//		if (!sitters.isEmpty()) {//se han hallado resultados
-//			return ResponseEntity.accepted().body(sitters);
-//		} else {// no hay resultados
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//		
-//		
-//		
-//	}
-	
 	@JsonView(Usuario.SitterResultado.class)
-	@GetMapping(value="/resultados/{provincia}/{tarifamax}",
-					//method = RequestMethod.GET,
-					produces=MediaType.APPLICATION_JSON_VALUE
-					)
-	public @ResponseBody List<Usuario> getPerfilesBusqueda(
-			@PathVariable String provincia,
-			@PathVariable String tarifamax) {
-		System.out.println("Me han llegado los parámetros: "+provincia+" - "+tarifamax);
+	@GetMapping(value="/provincia/{provincia}/tarifamax/{tarifamax}",
+				produces=MediaType.APPLICATION_JSON_VALUE )
+	public ResponseEntity<List<Usuario>> getPerfilesSitter(Model model, @PathVariable String provincia, @PathVariable String tarifamax) {
 		int tarifa_h;
 		List<Usuario> sitters;
 		if (!tarifamax.matches("[0-9]+")) {
@@ -125,9 +82,57 @@ public class SittersController {
 			}
 		}
 		
-		return sitters;
+		if (!sitters.isEmpty()) {//se han hallado resultados
+			return ResponseEntity.accepted().body(sitters);
+		} else {// no hay resultados
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		
 		
 	}
+	
+//	@JsonView(Usuario.SitterResultado.class)
+//	@GetMapping(value="/provincia/{provincia}/tarifamax/{tarifamax}",
+//					//method = RequestMethod.GET,
+//					produces=MediaType.APPLICATION_JSON_VALUE
+//					)
+//	public String getPerfilesBusqueda(
+//			@PathParam("provincia") String provincia,
+//			@PathParam("tarifamax") String tarifamax) {
+//		//System.out.println("Me han llegado los parámetros: "+provincia+" - "+tarifamax);
+//		System.console().writer().println("######################## "+provincia+tarifamax+" ########################");
+//		int tarifa_h;
+//		List<Usuario> sitters;
+//		if (!tarifamax.matches("[0-9]+")) {
+//			tarifamax = "";
+//		}
+//		
+//		if(!provincia.matches("[A-Za-z]+")) {
+//			provincia = "";
+//		}
+//		
+//		if ((provincia == null) || (provincia == "")) {// si la provincia es null
+//			if ((tarifamax == null) || (tarifamax == "")) {// si la tarifa es null también
+//				sitters = usuarioRepositorio.findByRol("ROLE_sitter");
+//			} else {
+//				tarifa_h = Integer.parseInt(tarifamax);
+//				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h);
+//			}
+//		} else { // si tengo provincia
+//			if ((tarifamax == null) || (tarifamax == "")) {// si la tarifa es null también
+//				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia);
+//				
+//			} else { // si no
+//				tarifa_h = Integer.parseInt(tarifamax);
+//				sitters = usuarioRepositorio.findByRolAndProvinciaAndTarifaLessThan("ROLE_sitter",provincia,tarifa_h);
+//				
+//			}
+//		}
+//		String json = new Gson().toJson(sitters);
+//		return json;
+//		
+//	}
 	
 
 }
