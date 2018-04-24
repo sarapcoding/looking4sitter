@@ -86,53 +86,53 @@ public class AppController {
 		return "principal_template";
 	}
 	
-	@RequestMapping("/busqueda-avanzada-sitters")
-	public String busquedaAvanzada(Model model, @RequestParam String provincia,@RequestParam String tarifa_max,
-		@RequestParam int num_pag){
-		int sig_pag=num_pag+1;
-		int tarifa_h;
-		Page<Usuario> sitters;
-		
-		// conversion: si tarifa no es un número y provincia no tiene a-z
-		if (!tarifa_max.matches("[0-9]+")) {
-			tarifa_max = "";
-		}
-		
-		if(!provincia.matches("[A-Za-z]+")) {
-			provincia = "";
-		}
-		
-		if ((provincia == null) || (provincia == "")) {// si la provincia es null
-			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-				sitters = usuarioRepositorio.findByRol("ROLE_sitter",new PageRequest(num_pag,2));
-			} else {
-				tarifa_h = Integer.parseInt(tarifa_max);
-				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h,new PageRequest(num_pag, 2));
-			}
-		} else { // si tengo provincia
-			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
-				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia,new PageRequest(num_pag, 2));
-				
-			} else { // si no
-				tarifa_h = Integer.parseInt(tarifa_max);
-				sitters = usuarioRepositorio.findByProvinciaAndRolAndTarifaLessThan(provincia, "ROLE_sitter",tarifa_h, new PageRequest(num_pag, 2));
-				
-			}
-		}
-		
-		if (sitters.getTotalElements()!=0) {//se han hallado resultados
-			model.addAttribute("encontrado",true);
-			// Enviamos los sitters resultantes
-			model.addAttribute("resultadofinal",sitters);
-			
-		} else {// no hay resultados
-			model.addAttribute("vacio",true);
-		}
-		model.addAttribute("numPag",sig_pag);
-		model.addAttribute("provincia", provincia);
-		model.addAttribute("tarifa_max", tarifa_max);
-		return "resultadoBusquedasSitters_template";
-	}
+//	@RequestMapping("/busqueda-avanzada-sitters")
+//	public String busquedaAvanzada(Model model, @RequestParam String provincia,@RequestParam String tarifa_max,
+//		@RequestParam int num_pag){
+//		int sig_pag=num_pag+1;
+//		int tarifa_h;
+//		Page<Usuario> sitters;
+//		
+//		// conversion: si tarifa no es un número y provincia no tiene a-z
+//		if (!tarifa_max.matches("[0-9]+")) {
+//			tarifa_max = "";
+//		}
+//		
+//		if(!provincia.matches("[A-Za-z]+")) {
+//			provincia = "";
+//		}
+//		
+//		if ((provincia == null) || (provincia == "")) {// si la provincia es null
+//			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
+//				sitters = usuarioRepositorio.findByRol("ROLE_sitter",new PageRequest(num_pag,2));
+//			} else {
+//				tarifa_h = Integer.parseInt(tarifa_max);
+//				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h,new PageRequest(num_pag, 2));
+//			}
+//		} else { // si tengo provincia
+//			if ((tarifa_max == null) || (tarifa_max == "")) {// si la tarifa es null también
+//				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia,new PageRequest(num_pag, 2));
+//				
+//			} else { // si no
+//				tarifa_h = Integer.parseInt(tarifa_max);
+//				sitters = usuarioRepositorio.findByProvinciaAndRolAndTarifaLessThan(provincia, "ROLE_sitter",tarifa_h, new PageRequest(num_pag, 2));
+//				
+//			}
+//		}
+//		
+//		if (sitters.getTotalElements()!=0) {//se han hallado resultados
+//			model.addAttribute("encontrado",true);
+//			// Enviamos los sitters resultantes
+//			model.addAttribute("resultadofinal",sitters);
+//			
+//		} else {// no hay resultados
+//			model.addAttribute("vacio",true);
+//		}
+//		model.addAttribute("numPag",sig_pag);
+//		model.addAttribute("provincia", provincia);
+//		model.addAttribute("tarifa_max", tarifa_max);
+//		return "resultadoBusquedasSitters_template";
+//	}
 	
 	@GetMapping ("/perfil-usuario")
 	public String perfilUsuario (Model model){

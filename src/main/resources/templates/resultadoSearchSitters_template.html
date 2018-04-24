@@ -19,24 +19,87 @@
 {{/vacio}}
 
 {{#encontrado}}
+
 <h2>Resultados para la búsqueda de Sitters</h2>
+<table>
+	<td>
 	<table>
 		<tr>
-			<td>Índice</td>
 			<td>Login</td>
 		</tr>
-		{{#resultadofinal}}
+		{{#rlogins}}
 		<tr>
-			<td>{{-index}}</td>
 			<td>{{.}}</td>
 		</tr>
-		{{/resultadofinal}}
+		{{/rlogins}}
 	</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Nombre</td>
+		</tr>
+		{{#rnombres}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/rnombres}}
+	</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Apellidos</td>
+		</tr>
+		{{#rapellidos}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/rapellidos}}
+	</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Provincia</td>
+		</tr>
+		{{#rprovincias}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/rprovincias}}
+	</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Descripción</td>
+		</tr>
+		{{#rdescripciones}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/rdescripciones}}
+	</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Tarifa</td>
+		</tr>
+		{{#rtarifas}}
+		<tr>
+			<td>{{.}},00€/hora</td>
+		</tr>
+		{{/rtarifas}}
+	</table>
+	</td>
+</table>
 	<br/>
 {{/encontrado}}
 <br/>
 
-
+<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 
 </body>
 </html>

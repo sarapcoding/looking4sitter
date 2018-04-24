@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -44,21 +45,36 @@ public class BusquedasController {
 			@RequestParam String tarifamax) throws JSONException{
 		
 		if (!tarifamax.matches("[0-9]+")) {
-			tarifamax = "";
+			tarifamax = "1000";
 		}
 		
 		if(!provincia.matches("[A-Za-z]+")) {
-			provincia = "";
+			provincia = "null";
 		}
-		System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
+		
+		if ((provincia == null) || (provincia.equals(""))) {
+			provincia = "null";
+		}
+		
+		if ((tarifamax == null) ||(tarifamax.equals(""))) {
+			tarifamax = "1000";
+		}
+		
+		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
 		String url = "https://localhost:8443/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;
-		System.out.println("------------------> Mi url: ["+url+"]");
+		//System.out.println("------------------> Mi url: ["+url+"]");
 		String resultados = restTemplate.getForObject(url, String.class);
 		if ((resultados.equals("")) || (resultados == null)) {
 			model.addAttribute("vacio",true);
 		} else {
 			List<Usuario> sittR = new ArrayList<>();
+			List<String> logins = new ArrayList<>();
+			List<String> nombres = new ArrayList<>();
+			List<String> apellidos = new ArrayList<>();
+			List<String> provincias = new ArrayList<>();
+			List<String> descripciones = new ArrayList<>();
+			List<Integer> tarifas = new ArrayList<>();
 			//System.out.println(resultados);
 			JSONArray jsonarr = new JSONArray(resultados);
 			//System.out.println("MI JSONARRAY"+jsonarr);
@@ -68,18 +84,41 @@ public class BusquedasController {
 				JSONObject obj = jsonarr.getJSONObject(i);
 				Usuario u = new Usuario();
 				//System.out.println("MI OBJETO JSONOBJECT"+obj);
-				u.setId(obj.getLong("id"));
-				u.setNombre(obj.getString("nombre"));
-				u.setLogin(obj.getString("login"));
-				u.setApellido(obj.getString("apellido"));
-				u.setProvincia(obj.getString("provincia"));
-				u.setDescripcion(obj.getString("descripcion"));
-				u.setEmail(obj.getString("email"));
-				u.setTarifa(obj.getInt("tarifa"));
+				
+				Long myid = obj.getLong("id");
+				String mynombre = obj.getString("nombre");
+				String mylogin = obj.getString("login");
+				String myapellido = obj.getString("apellido");
+				String myprovincia = obj.getString("provincia");
+				String mydesc = obj.getString("descripcion");
+				String myemail = obj.getString("email");
+				int mytarifa = obj.getInt("tarifa");
+				
+				u.setId(myid);
+				u.setNombre(mynombre);
+				u.setLogin(mylogin);
+				u.setApellido(myapellido);
+				u.setProvincia(myprovincia);
+				u.setDescripcion(mydesc);
+				u.setEmail(myemail);
+				u.setTarifa(mytarifa);
+				
 				sittR.add(u);
+				logins.add(mylogin);
+				nombres.add(mynombre);
+				apellidos.add(myapellido);
+				provincias.add(myprovincia);
+				descripciones.add(mydesc);
+				tarifas.add(mytarifa);
 				//System.out.println("MI NOMBRE ES"+nombre);
 			}
 			model.addAttribute("encontrado",true);
+			model.addAttribute("rlogins",logins);
+			model.addAttribute("rnombres",nombres);
+			model.addAttribute("rapellidos",apellidos);
+			model.addAttribute("rprovincias",provincias);
+			model.addAttribute("rdescripciones",descripciones);
+			model.addAttribute("rtarifas",tarifas);
 			model.addAttribute("resultadofinal",sittR);
 		}
 		

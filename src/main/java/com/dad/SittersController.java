@@ -56,23 +56,23 @@ public class SittersController {
 	public ResponseEntity<List<Usuario>> getPerfilesSitter(Model model, @PathVariable String provincia, @PathVariable String tarifamax) {
 		int tarifa_h;
 		List<Usuario> sitters;
-		if (!tarifamax.matches("[0-9]+")) {
-			tarifamax = "";
-		}
+//		if (!tarifamax.matches("[0-9]+")) {
+//			tarifamax = "";
+//		}
+//		
+//		if(!provincia.matches("[A-Za-z]+")) {
+//			provincia = "";
+//		}
 		
-		if(!provincia.matches("[A-Za-z]+")) {
-			provincia = "";
-		}
-		
-		if ((provincia == null) || (provincia == "")) {// si la provincia es null
-			if ((tarifamax == null) || (tarifamax == "")) {// si la tarifa es null también
+		if (provincia.equals("null")) {// si la provincia es null
+			if (tarifamax == "1000") {// si la tarifa es null también
 				sitters = usuarioRepositorio.findByRol("ROLE_sitter");
 			} else {
 				tarifa_h = Integer.parseInt(tarifamax);
 				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h);
 			}
 		} else { // si tengo provincia
-			if ((tarifamax == null) || (tarifamax == "")) {// si la tarifa es null también
+			if (tarifamax == "1000") {// si la tarifa es null también
 				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia);
 				
 			} else { // si no
@@ -88,22 +88,19 @@ public class SittersController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		
-		
 	}
 	
 //	@JsonView(Usuario.SitterResultado.class)
-//	@GetMapping(value="/provincia/{provincia}/tarifamax/{tarifamax}",
-//					//method = RequestMethod.GET,
-//					produces=MediaType.APPLICATION_JSON_VALUE
-//					)
-//	public String getPerfilesBusqueda(
-//			@PathParam("provincia") String provincia,
-//			@PathParam("tarifamax") String tarifamax) {
-//		//System.out.println("Me han llegado los parámetros: "+provincia+" - "+tarifamax);
-//		System.console().writer().println("######################## "+provincia+tarifamax+" ########################");
+//	@GetMapping(value="/{provincia}/{tarifamax}/{numpag}",
+//				produces=MediaType.APPLICATION_JSON_VALUE )
+//	public ResponseEntity<Page<Usuario>> getPagesSitter(Model model, @PathVariable String provincia, @PathVariable String tarifamax, @PathVariable String numpag) {
 //		int tarifa_h;
-//		List<Usuario> sitters;
+//		int numpagnow = Integer.parseInt(numpag);
+//		int sigpag = numpagnow+1;
+//		Page<Usuario> sitters;
+//		//List<Usuario> sitters;
+//		
+//		
 //		if (!tarifamax.matches("[0-9]+")) {
 //			tarifamax = "";
 //		}
@@ -114,25 +111,30 @@ public class SittersController {
 //		
 //		if ((provincia == null) || (provincia == "")) {// si la provincia es null
 //			if ((tarifamax == null) || (tarifamax == "")) {// si la tarifa es null también
-//				sitters = usuarioRepositorio.findByRol("ROLE_sitter");
+//				sitters = usuarioRepositorio.findByRol("ROLE_sitter",new PageRequest(numpagnow,2));
 //			} else {
 //				tarifa_h = Integer.parseInt(tarifamax);
-//				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h);
+//				sitters = usuarioRepositorio.findByRolAndTarifaLessThan("ROLE_sitter",tarifa_h,new PageRequest(numpagnow,2));
 //			}
 //		} else { // si tengo provincia
 //			if ((tarifamax == null) || (tarifamax == "")) {// si la tarifa es null también
-//				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia);
+//				sitters = usuarioRepositorio.findByRolAndProvinciaIsLike("ROLE_sitter",provincia,new PageRequest(numpagnow,2));
 //				
 //			} else { // si no
 //				tarifa_h = Integer.parseInt(tarifamax);
-//				sitters = usuarioRepositorio.findByRolAndProvinciaAndTarifaLessThan("ROLE_sitter",provincia,tarifa_h);
+//				sitters = usuarioRepositorio.findByRolAndProvinciaAndTarifaLessThan("ROLE_sitter",provincia,tarifa_h,new PageRequest(numpagnow,2));
 //				
 //			}
 //		}
-//		String json = new Gson().toJson(sitters);
-//		return json;
+//		
+//		if (sitters.getTotalElements()!=0) {//se han hallado resultados
+//			return ResponseEntity.accepted().body(sitters);
+//		} else {// no hay resultados
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
 //		
 //	}
+	
 	
 
 }
