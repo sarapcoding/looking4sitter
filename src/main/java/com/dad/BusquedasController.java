@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -62,7 +63,7 @@ public class BusquedasController {
 		
 		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "https://localhost:8443/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;
+		String url = "https://localhost:8443/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;
 		//System.out.println("------------------> Mi url: ["+url+"]");
 		String resultados = restTemplate.getForObject(url, String.class);
 		if ((resultados.equals("")) || (resultados == null)) {
@@ -123,6 +124,62 @@ public class BusquedasController {
 		}
 		
 		return "resultadoSearchSitters_template";
+	}
+	
+	@RequestMapping ("/search-adverts")
+	public String encontrarAnuncio (Model model,@RequestParam String fecha) throws JSONException{ 
+		
+		if ((fecha == null) || (fecha.equals(""))) {
+			fecha = "null";
+			model.addAttribute("nohayfecha",true);
+		} else {
+			model.addAttribute("hayfecha",true);
+			model.addAttribute("mifecha",fecha);
+		}
+		
+		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "https://localhost:8443/busqueda/anuncios/"+fecha;
+		//System.out.println("------------------> Mi url: ["+url+"]");
+		String resultados = restTemplate.getForObject(url, String.class);
+		if ((resultados.equals("")) || (resultados == null)) {
+			model.addAttribute("vacio",true);
+		} else {
+			List<Anuncio> anuncios = new ArrayList<>();
+			List<String> asuntos = new ArrayList<>();
+			List<String> cuerpos = new ArrayList<>();
+			List<String> logins = new ArrayList<>();
+			//System.out.println(resultados);
+			JSONArray jsonarr = new JSONArray(resultados);
+			//System.out.println("MI JSONARRAY"+jsonarr);
+			int numS = jsonarr.length();
+		
+			for(int i=0;i<numS;i++) {
+				JSONObject obj = jsonarr.getJSONObject(i);
+				Anuncio a = new Anuncio();
+				//System.out.println("MI OBJETO JSONOBJECT"+obj);
+
+				String asunto = obj.getString("asunto");
+				String cuerpo = obj.getString("cuerpo");
+				String login = obj.getString("loginUsuario");
+				
+				anuncios.add(a);
+				asuntos.add(asunto);
+				cuerpos.add(cuerpo);
+				logins.add(login);
+				//System.out.println("MI NOMBRE ES"+nombre);
+			}
+			
+			
+			model.addAttribute("encontrado",true);
+			model.addAttribute("asuntos",asuntos);
+			model.addAttribute("cuerpos",cuerpos);
+			model.addAttribute("logins",logins);
+			
+			model.addAttribute("resultadofinal",anuncios);
+		}
+			
+		return "resultadoSearchAnuncios_template";
 	}
 	
 }

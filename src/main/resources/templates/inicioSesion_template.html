@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
 <meta charset="UTF-8">
 <title>Iniciar Sesión</title>
 </head>
@@ -9,12 +10,16 @@
 	{{#correcto}}
 	 <p>¡Verificacion incorrecta! Por favor, intentelo de nuevo</p>
 	{{/correcto}}
-
+	<h1>Página de acceso</h1>
+<div>
  	<form action="inicio" method="post">
 		<p>Usuario </p><input type='text' name='user' />
 		<p>Password </p><input type='password' name='pass' />
+		<br/>
+		<br/>
 		<input type='submit' value='Iniciar' />
 		<input type="hidden"  name="_csrf" value="{{token}}"/>
 	</form>
+	</div>
 </body>
 </html>

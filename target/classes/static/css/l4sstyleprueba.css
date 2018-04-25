@@ -1,4 +1,7 @@
-body {margin:0px 50px;}
+body {margin:0px 50px;
+	display: center;
+    text-align: center;
+    }
 
 button {
     background-color: #54CD30;
