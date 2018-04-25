@@ -15,8 +15,6 @@ public class DatabaseUsersLoader {
 	
 	@PostConstruct
 	private void initDatabase(){
-	//Copiar el initi de AppController. Necesario cambiar la estructura de los controladores para adaptar los rolesde usuario
-		
 		
 		Usuario us1 = new Usuario("padrede2","Antonio","García","padrede2123","padrede2@email.com","Madrid",0,"feliz","ROLE_padre");
 		Usuario us2 = new Usuario("mia","Amelia","G","mia123","mia@email.com","Madrid",15,"lala","ROLE_sitter");
@@ -42,28 +40,35 @@ public class DatabaseUsersLoader {
 		Anuncio an2 = new Anuncio(us5,"Busco persona","Tengo gemelos que necesitan ser vigilados","2018-03-02");
 		Anuncio an3 = new Anuncio(us1,"AAAH","Aaaah","2018-03-03");
 		Anuncio an4 = new Anuncio(us5,"Sábado por la noche","Busco persona responsable para cuidar de mi hijo de 6 años este viernes de 9 a 12 de la noche","2018-03-03");
-		
-		
+		Anuncio an5 = new Anuncio(us1,"Niñero para la tarde","Busco a alguien que vigile a mi hijo mientras hace los deberes","2018-04-30");
+		Anuncio an6 = new Anuncio(us1,"Busco persona que sepa chino","Clases particulares","2018-04-30");
+		Anuncio an7 = new Anuncio(us1,"Persona que me lleve los niños a la ruta","Necesito a alguien que acompañe a mis niños desde la casa a la ruta","2018-04-29");
+		Anuncio an8 = new Anuncio(us1,"Noche","Necesito a chico/chica que vigile a mi peque una noche","2018-05-07");
+		Anuncio an9 = new Anuncio(us1,"Tarde + cumple","Necesito a alguien que vigile al niño en un cumple","2018-04-29");
+		Anuncio an10 = new Anuncio(us1,"Niñero para la tarde","Necesito a alguien que le de el colacao al niño","2018-05-07");
+		Anuncio an11 = new Anuncio(us5,"Alguien que me cuide los niños en una boda","Sábado de 11 a 6","2018-05-12");
+		Anuncio an12 = new Anuncio(us5,"Profe de mates?","Busco a niñero que sea también profe particular","2018-04-30");
+		Anuncio an13 = new Anuncio(us5,"URGENTE","Necesito a alguien de 9 a 9 para cuidar de mis hijos","2018-05-05");
+		Anuncio an14 = new Anuncio(us5,"Niñero para la tarde","Para después del cole hasta las nueve","2018-04-30");
+		Anuncio an15 = new Anuncio(us5,"Busco persona que sepa ruso","Para impartir clases particulares a mis dos chiquillas","2018-05-04");
+		Anuncio an16 = new Anuncio(us5,"Persona paciente para niño TDA","Mi hijo tiene déficit de atención y necesito a alguien que tenga paciencia y experiencia","2018-05-06");
+				
 		anuncioRepositorio.save(an1);
 		anuncioRepositorio.save(an2);
 		anuncioRepositorio.save(an3);
 		anuncioRepositorio.save(an4);
-		
-		//usuarioRepositorio.
-		/*
-		us1.setAnuncio(an1_guardado);
-		us1.setAnuncio(an3_guardado);
-		us5.setAnuncio(an2_guardado);
-		us5.setAnuncio(an4_guardado);
-		
-		sitter.setUsuario(us2);
-		sitter.setUsuario(us3);
-		padre.setUsuario(us1);
-		padre.setUsuario(us5);
-		centro.setUsuario(us4);
-		*/
-		
-		
+		anuncioRepositorio.save(an5);
+		anuncioRepositorio.save(an6);
+		anuncioRepositorio.save(an7);
+		anuncioRepositorio.save(an8);
+		anuncioRepositorio.save(an9);
+		anuncioRepositorio.save(an10);
+		anuncioRepositorio.save(an11);
+		anuncioRepositorio.save(an12);
+		anuncioRepositorio.save(an13);
+		anuncioRepositorio.save(an14);
+		anuncioRepositorio.save(an15);
+		anuncioRepositorio.save(an16);
 
 	}
 }
