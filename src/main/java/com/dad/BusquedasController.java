@@ -175,7 +175,7 @@ public class BusquedasController {
 			model.addAttribute("asuntos",asuntos);
 			model.addAttribute("cuerpos",cuerpos);
 			model.addAttribute("logins",logins);
-			
+			model.addAttribute("anuncios",anuncios);
 			model.addAttribute("resultadofinal",anuncios);
 		}
 			
