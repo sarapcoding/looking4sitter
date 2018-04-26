@@ -37,7 +37,7 @@ public class Anuncio {
 	public Anuncio(Usuario user,String asunto, String cuerpo, String fecha) {
 		this.setUsuario(user);
 		this.setAsunto(asunto);
-		this.setCuerpo(asunto);
+		this.setCuerpo(cuerpo);
 		this.setFecha(fecha);
 		this.setLoginUsuario(user.getLogin());
 		

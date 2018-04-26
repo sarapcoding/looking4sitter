@@ -149,6 +149,7 @@ public class BusquedasController {
 			List<String> asuntos = new ArrayList<>();
 			List<String> cuerpos = new ArrayList<>();
 			List<String> logins = new ArrayList<>();
+			List<String> fechas = new ArrayList<>();
 			//System.out.println(resultados);
 			JSONArray jsonarr = new JSONArray(resultados);
 			//System.out.println("MI JSONARRAY"+jsonarr);
@@ -162,11 +163,12 @@ public class BusquedasController {
 				String asunto = obj.getString("asunto");
 				String cuerpo = obj.getString("cuerpo");
 				String login = obj.getString("loginUsuario");
-				
+				String fechan = obj.getString("fecha");
 				anuncios.add(a);
 				asuntos.add(asunto);
 				cuerpos.add(cuerpo);
 				logins.add(login);
+				fechas.add(fechan);
 				//System.out.println("MI NOMBRE ES"+nombre);
 			}
 			
@@ -175,6 +177,7 @@ public class BusquedasController {
 			model.addAttribute("asuntos",asuntos);
 			model.addAttribute("cuerpos",cuerpos);
 			model.addAttribute("logins",logins);
+			model.addAttribute("fechas", fechas);
 			model.addAttribute("anuncios",anuncios);
 			model.addAttribute("resultadofinal",anuncios);
 		}

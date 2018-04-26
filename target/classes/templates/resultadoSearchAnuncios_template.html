@@ -55,6 +55,20 @@
 		{{/cuerpos}}
 		</table>
 	</td>
+	{{#nohayfecha}}
+	<td>
+	<table>
+		<tr>
+			<td>Fecha</td>
+		</tr>
+		{{#fechas}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/fechas}}
+		</table>
+	</td>
+	{{/nohayfecha}}
 	</table>
 	
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
