@@ -63,7 +63,8 @@ public class BusquedasController {
 		
 		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "https://localhost:8444/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;//8443
+		//String url = "https://localhost:8444/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;//8443
+		String url = "https://localhost:8443/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;//8443
 		//System.out.println("------------------> Mi url: ["+url+"]");
 		String resultados = restTemplate.getForObject(url, String.class);
 		if ((resultados.equals("")) || (resultados == null)) {
@@ -139,7 +140,8 @@ public class BusquedasController {
 		
 		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "https://localhost:8444/busqueda/anuncios/"+fecha;
+		//String url = "https://localhost:8444/busqueda/anuncios/"+fecha;
+		String url = "https://localhost:8443/busqueda/anuncios/"+fecha;
 		//System.out.println("------------------> Mi url: ["+url+"]");
 		String resultados = restTemplate.getForObject(url, String.class);
 		if ((resultados.equals("")) || (resultados == null)) {

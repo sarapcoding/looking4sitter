@@ -57,6 +57,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //            .frameOptions().sameOrigin()
 //            .and()
 //        .authorizeRequests();
+		
+		// Previene la respuesta HTTP de no-cache
+		//http.headers().cacheControl().disable();
 	}
 	
 	@Autowired

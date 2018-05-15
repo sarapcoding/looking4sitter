@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.dad.Usuario.SitterResultado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -19,6 +20,7 @@ public class Anuncio {
 	// Atributos del anuncio
 	
 	@ManyToOne
+	@JsonIgnore
 	private Usuario usuario;
 	//private String nombre;
 	@JsonView(AnuncioResultado.class)
