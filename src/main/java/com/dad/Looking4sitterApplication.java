@@ -24,16 +24,6 @@ import com.hazelcast.config.JoinConfig;
 public class Looking4sitterApplication {
 
 	private static final Log LOG = LogFactory.getLog(Looking4sitterApplication.class);
-
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurerAdapter() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/busqueda").allowedOrigins("https://localhost:8449");
-//			}
-//		};
-//	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Looking4sitterApplication.class, args);
