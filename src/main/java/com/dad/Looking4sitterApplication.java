@@ -11,6 +11,9 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
@@ -22,6 +25,16 @@ public class Looking4sitterApplication {
 
 	private static final Log LOG = LogFactory.getLog(Looking4sitterApplication.class);
 
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurerAdapter() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/busqueda").allowedOrigins("https://localhost:8449");
+//			}
+//		};
+//	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Looking4sitterApplication.class, args);
 	}
@@ -41,5 +54,7 @@ public class Looking4sitterApplication {
 		joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
 		return config;
 	}
+	
+
 	
 }

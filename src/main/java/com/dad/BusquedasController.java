@@ -1,13 +1,25 @@
 package com.dad;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Arrays.*;
 import java.util.Base64;
 import java.util.List;
+import java.util.Set;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import javax.security.cert.X509Certificate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,12 +29,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -37,9 +51,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Controller
 public class BusquedasController {
-	@Autowired 
-	private UserRepository usuarioRepositorio;
+
 	
+//	@CrossOrigin(origins = "http://localhost:8449")
 	@RequestMapping("/search-sitters")
 	public String searchSitter(Model model,
 			@RequestParam String provincia,
@@ -63,9 +77,7 @@ public class BusquedasController {
 		
 		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "https://localhost:8449/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;//8443
-		//String url = "https://localhost:8443/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;//8443
-		//System.out.println("------------------> Mi url: ["+url+"]");
+		String url = "http://localhost:8449/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;//8443
 		String resultados = restTemplate.getForObject(url, String.class);
 		if ((resultados.equals("")) || (resultados == null)) {
 			model.addAttribute("vacio",true);
@@ -77,16 +89,12 @@ public class BusquedasController {
 			List<String> provincias = new ArrayList<>();
 			List<String> descripciones = new ArrayList<>();
 			List<Integer> tarifas = new ArrayList<>();
-			//System.out.println(resultados);
 			JSONArray jsonarr = new JSONArray(resultados);
-			//System.out.println("MI JSONARRAY"+jsonarr);
 			int numS = jsonarr.length();
 		
 			for(int i=0;i<numS;i++) {
 				JSONObject obj = jsonarr.getJSONObject(i);
 				Usuario u = new Usuario();
-				//System.out.println("MI OBJETO JSONOBJECT"+obj);
-				
 				Long myid = obj.getLong("id");
 				String mynombre = obj.getString("nombre");
 				String mylogin = obj.getString("login");
@@ -112,7 +120,6 @@ public class BusquedasController {
 				provincias.add(myprovincia);
 				descripciones.add(mydesc);
 				tarifas.add(mytarifa);
-				//System.out.println("MI NOMBRE ES"+nombre);
 			}
 			model.addAttribute("encontrado",true);
 			model.addAttribute("rlogins",logins);
@@ -127,8 +134,13 @@ public class BusquedasController {
 		return "resultadoSearchSitters_template";
 	}
 	
+	
+//	@CrossOrigin(origins = "http://localhost:8449")
 	@RequestMapping ("/search-adverts")
-	public String encontrarAnuncio (Model model,@RequestParam String fecha) throws JSONException{ 
+	public String encontrarAnuncio (Model model,@RequestParam String fecha) throws JSONException, NoSuchAlgorithmException, KeyManagementException{ 
+		
+		
+		
 		
 		if ((fecha == null) || (fecha.equals(""))) {
 			fecha = "null";
@@ -137,14 +149,14 @@ public class BusquedasController {
 			model.addAttribute("hayfecha",true);
 			model.addAttribute("mifecha",fecha);
 		}
-		
-		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "https://localhost:8449/busqueda/anuncios/"+fecha;
+		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
 		//https://localhost:8449/busqueda/anuncios/2018-04-30
-		//String url = "https://localhost:8443/busqueda/anuncios/"+fecha;
-		//System.out.println("------------------> Mi url: ["+url+"]");
+//		Set<HttpMethod> optionsForAllow = restTemplate.optionsForAllow(url);
+//		HttpMethod[] supportedMethods = {HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE};
+//		assertTrue(optionsForAllow.containsAll(Arrays.asList(supportedMethods)));
 		String resultados = restTemplate.getForObject(url, String.class);
+		
 		if ((resultados.equals("")) || (resultados == null)) {
 			model.addAttribute("vacio",true);
 		} else {
@@ -153,16 +165,12 @@ public class BusquedasController {
 			List<String> cuerpos = new ArrayList<>();
 			List<String> logins = new ArrayList<>();
 			List<String> fechas = new ArrayList<>();
-			//System.out.println(resultados);
 			JSONArray jsonarr = new JSONArray(resultados);
-			//System.out.println("MI JSONARRAY"+jsonarr);
 			int numS = jsonarr.length();
 		
 			for(int i=0;i<numS;i++) {
 				JSONObject obj = jsonarr.getJSONObject(i);
 				Anuncio a = new Anuncio();
-				//System.out.println("MI OBJETO JSONOBJECT"+obj);
-
 				String asunto = obj.getString("asunto");
 				String cuerpo = obj.getString("cuerpo");
 				String login = obj.getString("loginUsuario");
@@ -172,7 +180,6 @@ public class BusquedasController {
 				cuerpos.add(cuerpo);
 				logins.add(login);
 				fechas.add(fechan);
-				//System.out.println("MI NOMBRE ES"+nombre);
 			}
 			
 			
