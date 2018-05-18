@@ -1,6 +1,6 @@
 package com.dad;
 
-import static org.junit.Assert.assertTrue;
+
 
 import java.io.IOException;
 import java.security.KeyManagementException;
