@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
@@ -136,6 +137,7 @@ public class BusquedasController {
 	
 	
 //	@CrossOrigin(origins = "http://localhost:8449")
+	//@Cacheable(value="anuncios")
 	@RequestMapping ("/search-adverts")
 	public String encontrarAnuncio (Model model,@RequestParam String fecha) throws JSONException, NoSuchAlgorithmException, KeyManagementException{ 
 		
