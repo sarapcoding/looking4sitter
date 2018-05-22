@@ -67,17 +67,17 @@ public class AppController {
 	
 	
 
-//	@RequestMapping ("/registro")
-//	public String registrarUsuario (Model model){
-//		return "registro_template";
-//	}
-//	
-//		
-//	@RequestMapping ("/exito+registro")
-//	public String redireccionRegistro(Model model){
-//		//nombre_provisional
-//		return "continuacionRegistro_template";
-//	}	
+	@RequestMapping ("/registro")
+	public String registrarUsuario (Model model){
+		return "registro_template";
+	}
+	
+		
+	@RequestMapping ("/exito+registro")
+	public String redireccionRegistro(Model model){
+		//nombre_provisional
+		return "continuacionRegistro_template";
+	}	
 		
 	
 	

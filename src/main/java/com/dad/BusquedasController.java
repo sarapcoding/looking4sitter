@@ -1,5 +1,5 @@
 package com.dad;
-
+import com.dad.RestRepository;
 
 
 import java.io.IOException;
@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -50,11 +52,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+//@CacheConfig(cacheNames="datos")
 @Controller
 public class BusquedasController {
-
-	
-//	@CrossOrigin(origins = "http://localhost:8449")
+	//@CacheEvict(allEntries=true)
 	@RequestMapping("/search-sitters")
 	public String searchSitter(Model model,
 			@RequestParam String provincia,
@@ -136,14 +137,43 @@ public class BusquedasController {
 	}
 	
 	
-//	@CrossOrigin(origins = "http://localhost:8449")
+//	@Cacheable
+//	public List<Anuncio> getAnuncios(String fecha) throws JSONException {
+//		RestTemplate restTemplate = new RestTemplate();
+//		List<Anuncio> anuncios = new ArrayList<>();
+//		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
+//		//http://localhost:8449/busqueda/anuncios/2018-04-30
+//		String resultados = restTemplate.getForObject(url, String.class);
+//		
+//		JSONArray jsonarr = new JSONArray(resultados);
+//		int numS = jsonarr.length();
+//	
+//		for(int i=0;i<numS;i++) {
+//			JSONObject obj = jsonarr.getJSONObject(i);
+//			Anuncio a = new Anuncio();
+//			a.setAsunto(obj.getString("asunto"));
+//			a.setCuerpo(obj.getString("cuerpo"));
+//			a.setFecha(obj.getString("fecha"));
+//			a.setLoginUsuario(obj.getString("loginUsuario"));
+//			anuncios.add(a);
+//		}
+//		return anuncios;
+//	}
+	
+	
+	@Cacheable("datos")
+	public String getAnuncios(String fecha) throws JSONException {
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
+		//http://localhost:8449/busqueda/anuncios/2018-04-30
+		String resultados = restTemplate.getForObject(url, String.class);
+		return resultados;
+	}
+	
 	//@Cacheable(value="anuncios")
+	//@CacheEvict(allEntries=true)
 	@RequestMapping ("/search-adverts")
-	public String encontrarAnuncio (Model model,@RequestParam String fecha) throws JSONException, NoSuchAlgorithmException, KeyManagementException{ 
-		
-		
-		
-		
+	public String encontrarAnuncio (Model model,@RequestParam String fecha) throws JSONException{ 
 		if ((fecha == null) || (fecha.equals(""))) {
 			fecha = "null";
 			model.addAttribute("nohayfecha",true);
@@ -151,13 +181,13 @@ public class BusquedasController {
 			model.addAttribute("hayfecha",true);
 			model.addAttribute("mifecha",fecha);
 		}
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
-		//https://localhost:8449/busqueda/anuncios/2018-04-30
-//		Set<HttpMethod> optionsForAllow = restTemplate.optionsForAllow(url);
-//		HttpMethod[] supportedMethods = {HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE};
-//		assertTrue(optionsForAllow.containsAll(Arrays.asList(supportedMethods)));
-		String resultados = restTemplate.getForObject(url, String.class);
+//		RestTemplate restTemplate = new RestTemplate();
+//		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
+//		//http://localhost:8449/busqueda/anuncios/2018-04-30
+//
+//		String resultados = restTemplate.getForObject(url, String.class);
+		
+		String resultados = getAnuncios(fecha);
 		
 		if ((resultados.equals("")) || (resultados == null)) {
 			model.addAttribute("vacio",true);
@@ -172,18 +202,18 @@ public class BusquedasController {
 		
 			for(int i=0;i<numS;i++) {
 				JSONObject obj = jsonarr.getJSONObject(i);
-				Anuncio a = new Anuncio();
 				String asunto = obj.getString("asunto");
 				String cuerpo = obj.getString("cuerpo");
 				String login = obj.getString("loginUsuario");
 				String fechan = obj.getString("fecha");
+				Anuncio a = new Anuncio(asunto,cuerpo,fechan);
+				a.setLoginUsuario(login);
 				anuncios.add(a);
 				asuntos.add(asunto);
 				cuerpos.add(cuerpo);
 				logins.add(login);
 				fechas.add(fechan);
 			}
-			
 			
 			model.addAttribute("encontrado",true);
 			model.addAttribute("asuntos",asuntos);

@@ -33,7 +33,7 @@ public class Looking4sitterApplication {
 	@Bean
 	public CacheManager cacheManager() {
 		LOG.info("Activating cache...");
-		return new ConcurrentMapCacheManager("anuncios");
+		return new ConcurrentMapCacheManager("datos");
 	}
 	
 	@Bean

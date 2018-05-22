@@ -16,23 +16,23 @@ public interface AdvertRepository extends CrudRepository<Anuncios,Long>{
 
 }*/
 
-@CacheConfig(cacheNames="anuncios")
+//@CacheConfig(cacheNames="anuncios")
 public interface AdvertRepository extends JpaRepository<Anuncio,Long>{
 	//Page<Anuncios> findByCiudad (String ciudad, Pageable page);
 	//Page<Anuncios> findByTarifa (String tarifa, Pageable page);
 	Page<Anuncio> findByFecha (String fecha, Pageable page);
 	
-	@CacheEvict(allEntries=true)
+	//@CacheEvict(allEntries=true)
 	Anuncio save(Anuncio anuncio);
 	
 	
-	@Cacheable
+	//@Cacheable
 	List<Anuncio> findByFecha(String fecha);
 	
-	@Cacheable
+	//@Cacheable
 	Anuncio findById(Long id);
 	
-	@Cacheable
+	//@Cacheable
 	List<Anuncio> findAll();
 	
 	//Page<Anuncios> findByCiudadAndTarifa (String ciudad, String tarifa, Pageable page);
