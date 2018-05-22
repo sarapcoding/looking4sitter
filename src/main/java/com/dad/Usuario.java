@@ -69,11 +69,11 @@ public class Usuario {
 	@OneToMany(mappedBy="destino")
 	private List<Comentario> comentario_destinado;
 	
-	@OneToOne
-	private Agenda agenda;
-	
-	@OneToMany(mappedBy="padre")
-	private List<Hora> hora;
+//	@OneToOne
+//	private Agenda agenda;
+//	
+//	@OneToMany(mappedBy="padre")
+//	private List<Hora> hora;
 	
 	//private List<Mensaje> mensaje;
 		 
@@ -273,29 +273,29 @@ public class Usuario {
 
 
 
-	public Agenda getAgenda() {
-		return agenda;
-	}
-
-
-	public void setAgenda(Agenda agenda) {
-		this.agenda = agenda;
-	}
-
-
-	public List<Hora> getHora() {
-		return hora;
-	}
-
-
-	public void setHora(Hora hora) {
-		this.hora.add(hora);
-	}
-
-
-	public void setAnuncio(List<Anuncio> anuncio) {
-		this.anuncio = anuncio;
-	}
+//	public Agenda getAgenda() {
+//		return agenda;
+//	}
+//
+//
+//	public void setAgenda(Agenda agenda) {
+//		this.agenda = agenda;
+//	}
+//
+//
+//	public List<Hora> getHora() {
+//		return hora;
+//	}
+//
+//
+//	public void setHora(Hora hora) {
+//		this.hora.add(hora);
+//	}
+//
+//
+//	public void setAnuncio(List<Anuncio> anuncio) {
+//		this.anuncio = anuncio;
+//	}
 
 
 	public void setComentario_escrito(Comentario comentario_escrito) {

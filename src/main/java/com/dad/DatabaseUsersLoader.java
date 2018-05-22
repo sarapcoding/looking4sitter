@@ -24,6 +24,7 @@ public class DatabaseUsersLoader {
 		Usuario us6 = new Usuario("aurora","Aurora","Perez","aurora123","aurora@email.com","Madrid",16,"Seria, responsable","ROLE_sitter");
 		Usuario us7 = new Usuario("xtina","Cristina","StClair","xtina123","xtina@email.com","Guipúzqua",13,"Au pair de Londres, responsable, enseño inglés","ROLE_sitter");
 		Usuario us8 = new Usuario("popurri","Carlos","Fu","popurri123","popurri@email.com","Albacete",13,"Chico serio, hermano de 5","ROLE_sitter");
+		Usuario us9 = new Usuario("nina","Nina","Wong","nina123","nina@email.com","Madrid",0,"Madre de un nene tranquilo","ROLE_padre");
 		
 		
 		usuarioRepositorio.save(us1);
@@ -34,6 +35,7 @@ public class DatabaseUsersLoader {
 		usuarioRepositorio.save(us6);
 		usuarioRepositorio.save(us7);
 		usuarioRepositorio.save(us8);
+		usuarioRepositorio.save(us9);
 		
 		
 		Anuncio an1 = new Anuncio(us1,"Niñer@ para el sábado","Busco a alguien que pueda cuidar mi crío de 3 a 5 este viernes","2018-03-02");

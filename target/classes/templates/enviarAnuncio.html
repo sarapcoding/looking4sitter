@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Publica un anuncio</title>
 </head>
 <body>
 <img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
-<form action="add+anuncio" method= "post">
-		<!-- <p>Nombre:</p><input type='text' name='nombre' /> -->
+<h2>Publicación de anuncios</h2>
+
+	<div>
+	<form action="add+anuncio" method= "post">
+		{{#campovacio}}
+		<p>Por favor, rellene <b>todos</b> los campos</p>
+		{{/campovacio}}
 		<p>Asunto :</p><input type='text' name='asunto' />
 		<p>Fecha de inicio :</p><input type="date" name="fecha"/>
-		<!--  <p>Tarifa:</p><input/ type="number" name="tarifa">-->
-		<p>Comentario :</p>
+		<p>Mensaje :</p>
 		<textarea rows='4' cols='50' name='cuerpo'></textarea>
+		<br>
+		<br>
 	    <input type='submit' value='Enviar' />
 	</form>
+	</div>
 </body>
 </html>

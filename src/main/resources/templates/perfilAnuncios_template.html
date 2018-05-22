@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<title>Mis anuncios publicados</title>
+</head>
+<body>
+	<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
+<h2>Mis anuncios</h2>
+
+{{#encontrado}}
+<h3>Estos son los anuncios que he publicado</h3>	
+	<table>
+	<td>
+	<table>
+		<tr>
+			<td>Fecha</td>
+		</tr>
+		{{#fechas}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/fechas}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Asunto</td>
+		</tr>
+		{{#asuntos}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/asuntos}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Mensaje</td>
+		</tr>
+		{{#cuerpos}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/cuerpos}}
+		</table>
+	</td>
+	</table>
+	
+{{/encontrado}}
+		
+{{#vacio}}
+	<h3>¡Parece que no has publicado nada!</h3>
+	
+{{/vacio}}
+
+<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
+
+</body>
+
+</html>

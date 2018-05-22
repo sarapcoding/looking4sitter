@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
-<title>Perfil de {{myprofileis}}</title>
+<title>Perfil de {{mynameis}}</title>
 </head>
 <body>
 <img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
@@ -25,23 +25,8 @@
 		<p class="consejo">¡Recuerda!</p>
 		<p class="consejo">Si no rellenas nada,</p>
 		<p class="consejo">se mostrarán todos los Sitters</p>
-<!-- 		<input type="hidden" name='num_pag' value=0 /> -->
 		<input type='submit' value='Buscar' />
 	</form>
-<!-- 	<form action="busqueda-avanzada-sitters" method="get"> -->
-<!-- 		<p>Provincia: </p><input type='text' name='provincia' /> -->
-<!-- 		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' /> -->
-<!-- 		<br> -->
-<!-- 		<br> -->
-<!-- 		<p class="consejo">¡Recuerda!</p> -->
-<!-- 		<p class="consejo">Si no seleccionas nada,</p> -->
-<!-- 		<p class="consejo">se mostrarán todos los Sitters</p> -->
-<!-- 		<input type="hidden" name='num_pag' value=0 /> -->
-<!-- 		<input type='submit' value='Buscar' /> -->
-<!-- 	</form> -->
-<!-- 	<form action="sitters/"> -->
-<!-- 		<input type="submit" value="Ver todos los sitters"> -->
-<!-- 	</form> -->
 	</div>
 	<br>
 	
@@ -53,35 +38,31 @@
 	</div>
 	<br>
 	
+	<h3>Ver mis anuncios publicados</h3>
+	<div>
+	<form action="mis-anuncios-publicados">
+		<input type='submit' value='Ver anuncios' />
+	</form>
+	</div>
+	<br>
+	
 {{/padre}}
 
 {{#sitter}}
-<!-- <h2>Mi agenda</h2> -->
-<!-- 	<h3>Ver mi agenda</h3> -->
-<!-- 	<input type="submit" value="Mis horas" onclick="window.location='../ver-mi-agenda';" /> -->
-<!-- 	<!-- <h3>Buscar en mi agenda</h3> --> 
-<!-- 	<h3>Dar horas de alta</h3> -->
-<!-- 	<input type="submit" value="Alta" onclick="window.location='../ver-mi-agenda';" /> -->
-<!-- 	<!-- <h3>Buscar en mi agenda</h3> --> 
+
 <h2>Tablón de anuncios</h2>
 
 	<h3>Todos los anuncios</h3>
 	<div>
-	<!-- se muestran todos los anuncios -->
 	<form action= "search-adverts">
-<!-- 		<input type="hidden" name="num_pag" value=0 /> -->
 		<input type="hidden" name="fecha" value="" />
 		<input type="submit" value="Ver tablón de anuncios"  />
 	</form>
 	</div>
 	<h3>Búsqueda de anuncio por fecha</h3>
-	<!--  <form action="publicar+anuncio"><input type='submit' value='Publicar anuncio' /></form> -->
 <div>
 	<form action="search-adverts">
-		<!-- <p>Ciudad :</p><input type="search" name='ciudad' /> -->
 		<p>Fecha de inicio:</p><input type="date" name="fecha" />
-		<!-- <p>Salario minimo:</p><input type="number" name="salario"/> -->
-<!-- 		<input type="hidden" name="num_pag" value=0 /> -->
 		<input type='submit' value='Buscar' />
 	</form>
 	</div>	

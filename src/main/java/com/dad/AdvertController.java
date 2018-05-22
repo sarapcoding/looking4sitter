@@ -9,10 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,6 +25,9 @@ public class AdvertController {
 
 	@Autowired
 	private AdvertRepository anuncioRepositorio;
+	
+	@Autowired
+	private UserRepository usuarioRepositorio;
 	
 	int num_elem = 1;
 	
@@ -41,67 +46,46 @@ public class AdvertController {
 			model.addAttribute("numPag",sig_pag);
 			model.addAttribute("fechaBusqueda", fecha);
 		}
-		//Page<Anuncios> coincidencias_salario = anuncioRepositorio.findByTarifa(salario,new PageRequest(num_pag, num_elem));
-		/*
-		if (coincidencias_ciudad.getTotalElements()==0){
-			if (coincidencias_fecha.getTotalElements()==0){
-				if (coincidencias_salario.getTotalElements()==0){
-					model.addAttribute("fail", true);
-				}
-				model.addAttribute("anuncios", coincidencias_salario);
-			}if (coincidencias_salario.getTotalElements()==0){
-				model.addAttribute("anuncios",coincidencias_fecha);
-			}
-			Page<Anuncios> coincidencia_combinada = anuncioRepositorio.findByFechaAndTarifa(fecha, salario, new PageRequest(num_pag, num_elem));
-			model.addAttribute("anuncios", coincidencia_combinada);
-		}if (coincidencias_fecha.getTotalElements()==0){
-			if (coincidencias_salario.getTotalElements()==0){
-				model.addAttribute("anuncios", coincidencias_ciudad);
-			}Page<Anuncios> coincidencia_combinada = anuncioRepositorio.findByCiudadAndTarifa(ciudad, salario, new PageRequest(num_pag, num_elem));
-			model.addAttribute("anuncios",coincidencia_combinada);
-		}if (coincidencias_salario.getTotalElements()==0){
-			Page<Anuncios> coincidencia_combinada = anuncioRepositorio.findByCiudadAndFecha(ciudad, fecha, new PageRequest(num_pag, num_elem));
-			model.addAttribute("anuncios",coincidencia_combinada);
-		}
 		
-		Page<Anuncios> coincidencia_combinada = anuncioRepositorio.findByCiudadAndTarifaAndFecha(ciudad, salario, fecha, new PageRequest(num_pag, num_elem));
-		model.addAttribute("anuncios", coincidencia_combinada);
-		
-		*/
 			
 		return "resultadoBusquedasAnuncios_template";
 	}
 	
 	@RequestMapping ("/publicar+anuncio")
 	public String publicarAnuncio (Model model){
-		
 		return "enviarAnuncio";
 		
 	}
 	
-	@RequestMapping ("/tablon-anuncios")
-	public String allAdverts (Model model, @RequestParam int num_pag) {
-		int sig_pag=num_pag+1;
-		Page<Anuncio> todos = anuncioRepositorio.findAll(new PageRequest(num_pag, 2));
-		int elementos = todos.getNumberOfElements();
-		model.addAttribute("encontrado", true);
-		model.addAttribute("anuncios",todos);
-		model.addAttribute("numPag",0);
-		model.addAttribute("numPag", sig_pag);
-		if (sig_pag >= elementos) {
-			model.addAttribute("final", true);
+//	@RequestMapping ("/tablon-anuncios")
+//	public String allAdverts (Model model, @RequestParam int num_pag) {
+//		int sig_pag=num_pag+1;
+//		Page<Anuncio> todos = anuncioRepositorio.findAll(new PageRequest(num_pag, 2));
+//		int elementos = todos.getNumberOfElements();
+//		model.addAttribute("encontrado", true);
+//		model.addAttribute("anuncios",todos);
+//		model.addAttribute("numPag",0);
+//		model.addAttribute("numPag", sig_pag);
+//		if (sig_pag >= elementos) {
+//			model.addAttribute("final", true);
+//		}
+//		return "resultadoBusquedasAnuncios_template";
+//	}
+	
+	
+	@PostMapping ("/add+anuncio")
+	public String addAdvert (Model model,
+			@RequestParam String asunto,
+			@RequestParam String fecha,
+			@RequestParam String cuerpo){
+		
+		if ((asunto.equals("")) || (cuerpo.equals("")) || (fecha.equals(""))) {
+			model.addAttribute("campovacio", true);
+			return "enviarAnuncio";
 		}
-		return "resultadoBusquedasAnuncios_template";
-	}
-	
-	
-	@RequestMapping ("/add+anuncio")
-	public String addAdvert (HttpServletRequest request, Model model, @RequestParam String asunto,
-			@RequestParam String fecha,	@RequestParam String cuerpo){
-		UsuarioSesion usuario_actual = (UsuarioSesion) request.getSession().getAttribute("usuario_actual");
-		Usuario usuario = usuario_actual.getUsuario();
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario usuario = usuarioRepositorio.findByLogin(username);
 		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,fecha);
-		//usuario.setAnuncio(anuncio);
 		anuncioRepositorio.save(anuncio);
 		return "successAdvert_template";
 	}

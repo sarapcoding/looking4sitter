@@ -1,10 +1,13 @@
 package com.dad;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
-
-	@Autowired
-	private AgendaRepository agendaRepositry;
 	
 	@Autowired
-	private HoraRepository horaRepository;
+	private AdvertRepository anuncioRepositorio;
 	
 	@PostMapping ("/verificacion+registro")
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
@@ -83,6 +83,33 @@ public class UserController {
 		
 		model.addAttribute("usuario", usuario);
 		return "perfilUser_template";
+	}
+	
+	@GetMapping("/mis-anuncios-publicados")
+	public String perfilAnuncios(Model model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		List<Anuncio> misanuncios = anuncioRepositorio.findByLoginUsuario(username);
+		
+		if (misanuncios.isEmpty()) {
+			model.addAttribute("vacio", true);
+		} else {
+			List<String> fechas = new ArrayList();
+			List<String> asuntos = new ArrayList();
+			List<String> cuerpos = new ArrayList();
+			for (Anuncio a : misanuncios) {
+				fechas.add(a.getFecha());
+				asuntos.add(a.getAsunto());
+				cuerpos.add(a.getCuerpo());
+			}
+			model.addAttribute("fechas",fechas);
+			model.addAttribute("asuntos",asuntos);
+			model.addAttribute("cuerpos",cuerpos);
+			//model.addAttribute("misanuncios",misanuncios);
+			model.addAttribute("encontrado", true);
+		}
+		
+		return "perfilAnuncios_template";
 	}
 	
 	
