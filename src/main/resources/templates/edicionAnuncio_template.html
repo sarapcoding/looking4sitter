@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
+	<form action="edited+addvert" method = "post">
+		{{#campovacio}}
+		<p>Por favor, rellene <b>todos</b> los campos</p>
+		{{/campovacio}}
+		<p>Asunto :</p><input type='text' name='asunto' value={{asunto}} />
+		<p>Fecha de inicio :</p><input type="date" name="fecha" value= {{fecha}}/>
+		<p>Mensaje :</p>
+		<textarea rows='4' cols='50' name='cuerpo' >{{cuerpo}}</textarea>
+		<br>
+		<br>
+		<input type="hidden" name="id" value={{id}}/>
+	    <input type='submit' value='Enviar' />
+	</form>
+ 	
+</body>
+</html>

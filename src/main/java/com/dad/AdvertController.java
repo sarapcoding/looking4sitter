@@ -99,11 +99,13 @@ public class AdvertController {
 	@RequestMapping ("/edit+addvert")
 	public String editAdvert (Model model,
 			@RequestParam String id){
-			Anuncio anuncio=anuncioRepositorio.findById(Long.parseLong(id));
+			long longID=Long.parseLong(id);
+			Anuncio anuncio=anuncioRepositorio.findById(longID);
 			model.addAttribute("asunto", anuncio.getAsunto());
 			model.addAttribute("cuerpo", anuncio.getCuerpo());
+			System.out.println(anuncio.getFecha());
 			model.addAttribute("fecha", anuncio.getFecha());
-			model.addAttribute("id", id);
+			model.addAttribute("id", longID);
 			return "edicionAnuncio_template";
 		}
 	@PostMapping ("/edited+advert")

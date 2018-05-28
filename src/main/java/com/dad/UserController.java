@@ -102,7 +102,6 @@ public class UserController {
 				fechas.add(a.getFecha());
 				asuntos.add(a.getAsunto());
 				cuerpos.add(a.getCuerpo());
-				System.out.println(a.getId());
 				ids.add(a.getId());
 			}
 			model.addAttribute("fechas",fechas);
