@@ -42,7 +42,7 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 		String myMethod = request.getMethod();
 		System.out.println("myMethod ["+myMethod+"]");
 		*/
-		
+		System.out.println(request.getRequestURI());
 		if ((!request.getRequestURI().contains("search")) && (!request.getRequestURI().contains("resultados"))
 				&& (!request.getRequestURI().contains("busqueda"))
 				&& (!request.getRequestURI().contains("sitters"))

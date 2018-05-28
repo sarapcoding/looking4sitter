@@ -97,14 +97,18 @@ public class UserController {
 			List<String> fechas = new ArrayList();
 			List<String> asuntos = new ArrayList();
 			List<String> cuerpos = new ArrayList();
+			List<Long> ids = new ArrayList<Long>();
 			for (Anuncio a : misanuncios) {
 				fechas.add(a.getFecha());
 				asuntos.add(a.getAsunto());
 				cuerpos.add(a.getCuerpo());
+				System.out.println(a.getId());
+				ids.add(a.getId());
 			}
 			model.addAttribute("fechas",fechas);
 			model.addAttribute("asuntos",asuntos);
 			model.addAttribute("cuerpos",cuerpos);
+			model.addAttribute("ids", ids);
 			//model.addAttribute("misanuncios",misanuncios);
 			model.addAttribute("encontrado", true);
 		}

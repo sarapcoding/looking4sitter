@@ -96,6 +96,34 @@ public class AdvertController {
 		return "boardUser_template";
 	}
 	
+	@RequestMapping ("/edit+addvert")
+	public String editAdvert (Model model,
+			@RequestParam String id){
+			Anuncio anuncio=anuncioRepositorio.findById(Long.parseLong(id));
+			model.addAttribute("asunto", anuncio.getAsunto());
+			model.addAttribute("cuerpo", anuncio.getCuerpo());
+			model.addAttribute("fecha", anuncio.getFecha());
+			model.addAttribute("id", id);
+			return "edicionAnuncio_template";
+		}
+	@PostMapping ("/edited+advert")
+	public String editedAdvert (Model model,
+			@RequestParam String asunto,
+			@RequestParam String fecha,
+			@RequestParam String cuerpo,
+			@RequestParam Long id){
+		
+		if ((asunto.equals("")) || (cuerpo.equals("")) || (fecha.equals(""))) {
+			model.addAttribute("campovacio", true);
+			return "enviarAnuncio";
+		}
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario usuario = usuarioRepositorio.findByLogin(username);
+		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,fecha);
+		anuncioRepositorio.save(anuncio);
+		anuncioRepositorio.delete(id);
+		return "successAdvert_template";
+	}
 	
 //	@Autowired
 //	private AdvertRepository anuncioRepositorio;
