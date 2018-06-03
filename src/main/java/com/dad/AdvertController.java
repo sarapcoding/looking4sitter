@@ -108,7 +108,7 @@ public class AdvertController {
 			model.addAttribute("id", longID);
 			return "edicionAnuncio_template";
 		}
-	@PostMapping ("/edited+advert")
+	@RequestMapping ("/edited+advert")
 	public String editedAdvert (Model model,
 			@RequestParam String asunto,
 			@RequestParam String fecha,
