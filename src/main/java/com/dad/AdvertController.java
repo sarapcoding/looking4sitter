@@ -96,7 +96,7 @@ public class AdvertController {
 		return "boardUser_template";
 	}
 	
-	@RequestMapping ("/edit+addvert")
+	@RequestMapping ("/edit+advert")
 	public String editAdvert (Model model,
 			@RequestParam String id){
 			long longID=Long.parseLong(id);
