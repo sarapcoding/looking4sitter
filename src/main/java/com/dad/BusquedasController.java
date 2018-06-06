@@ -53,9 +53,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 //@CacheConfig(cacheNames="datos")
+//@___mapping("/busquedas")
 @Controller
 public class BusquedasController {
 	//@CacheEvict(allEntries=true)
+	// @___mapping("sitters")
 	@RequestMapping("/search-sitters")
 	public String searchSitter(Model model,
 			@RequestParam String provincia,
