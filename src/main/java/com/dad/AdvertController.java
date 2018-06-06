@@ -31,7 +31,7 @@ public class AdvertController {
 	
 	int num_elem = 1;
 	
-	@RequestMapping ("/encontrar+anuncio")
+	@RequestMapping ("/encontrar-anuncio")
 	//public String encontrarAnuncio (Model model, @RequestParam String  ciudad, @RequestParam String fecha, @RequestParam String salario){
 	public String encontrarAnuncio (Model model,@RequestParam String fecha, @RequestParam int num_pag){ 
 		
@@ -51,7 +51,7 @@ public class AdvertController {
 		return "resultadoBusquedasAnuncios_template";
 	}
 	
-	@RequestMapping ("/publicar+anuncio")
+	@RequestMapping ("/publicar-anuncio")
 	public String publicarAnuncio (Model model){
 		return "enviarAnuncio";
 		
@@ -73,7 +73,7 @@ public class AdvertController {
 //	}
 	
 	
-	@PostMapping ("/add+anuncio")
+	@PostMapping ("/add-anuncio")
 	public String addAdvert (Model model,
 			@RequestParam String asunto,
 			@RequestParam String fecha,
@@ -90,13 +90,13 @@ public class AdvertController {
 		return "successAdvert_template";
 	}
 
-	@RequestMapping ("/advert+added")
+	@RequestMapping ("/advert-added")
 	public String volverTablon (Model model){
 		//model.addAttribute("anuncios", anuncioRepositorio.findAll());
 		return "boardUser_template";
 	}
 	
-	@RequestMapping ("/edit+advert")
+	@RequestMapping ("/edit-advert")
 	public String editAdvert (Model model,
 			@RequestParam String id){
 			long longID=Long.parseLong(id);
@@ -108,7 +108,7 @@ public class AdvertController {
 			model.addAttribute("id", longID);
 			return "edicionAnuncio_template";
 		}
-	@RequestMapping ("/edited+advert")
+	@RequestMapping ("/edited-advert")
 	public String editedAdvert (Model model,
 			@RequestParam String asunto,
 			@RequestParam String fecha,

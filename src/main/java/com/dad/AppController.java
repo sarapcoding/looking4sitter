@@ -41,7 +41,7 @@ public class AppController {
 		return "inicioSesion_template";
 	}
 	
-	@GetMapping ("/inicio+sesion")
+	@GetMapping ("/inicio-sesion")
 	public String verificacionInicioSesion (Model model, HttpServletRequest request){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Usuario user = usuarioRepositorio.findByLogin(username);
@@ -73,7 +73,7 @@ public class AppController {
 	}
 	
 		
-	@RequestMapping ("/exito+registro")
+	@RequestMapping ("/exito-registro")
 	public String redireccionRegistro(Model model){
 		//nombre_provisional
 		return "continuacionRegistro_template";

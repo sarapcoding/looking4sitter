@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	private AdvertRepository anuncioRepositorio;
 	
-	@PostMapping ("/verificacion+registro")
+	@PostMapping ("/verificacion-registro")
 	public String verificarRegistro (Model model, @RequestParam String usuario, @RequestParam String contrasena,
 			@RequestParam String contrasena2,@RequestParam String email, @RequestParam String tipo ){
 		//"select Id from Usuarios where Login=usuario"
@@ -49,7 +49,7 @@ public class UserController {
 		return "registro_template";
 	}	
 		
-	@RequestMapping ("/continuacion+registro")
+	@RequestMapping ("/continuacion-registro")
 	public String redireccionRegistro(Model model,@RequestParam String login, @RequestParam String password,
 			@RequestParam String email, @RequestParam String tipo, @RequestParam String nombre, @RequestParam String provincia
 			, @RequestParam int tarifa, @RequestParam String descripcion){
