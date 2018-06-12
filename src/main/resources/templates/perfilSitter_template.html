@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF8">
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<title>Perfil del Sitter</title>
+</head>
+<body>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
+{{#encontrado}}
+<h1>Sitter {{loginSitter}}</h1>
+<div>
+	<h3>Mi nombre</h3>
+		<p>{{nombre}} {{apellido}}</p>
+	<h3>¿Quién soy?</h3>
+		<p>{{descripcion}}</p>
+	<h3>Provincia</h3>
+		<p>{{provincia}}</p>
+	<h3>Mi tarifa es</h3>
+		<p>{{tarifa}},00€/hora</p>
+<!-- 	<h3>Mis horas libres son:</h3> -->
+<!-- 		{{#noHorasLibres}} -->
+<!-- 		<p>¡Oh no, no tengo horas libres!</p> -->
+<!-- 		{{/noHorasLibres}} -->
+<!-- 		{{#horasLibres}} -->
+<!-- 			<tr> -->
+<!-- 			<td>{{-index}}</td> -->
+<!-- 			<td>{{.}}</td> -->
+<!-- 			</tr> -->
+<!-- 		{{/horasLibres}} -->
+	
+		
+</div>
+{{/encontrado}}
+
+{{#noEncontrado}}
+<h1>Lo sentimos, no se ha podido encontrar el usuario</h1>
+{{/noEncontrado}}
+
+<div>
+	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
+</div>
+</body>
+</html>

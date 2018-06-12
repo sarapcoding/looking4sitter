@@ -2,54 +2,75 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Perfil de {{myprofileis}}</title>
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<title>Perfil de {{mynameis}}</title>
 </head>
 <body>
-<h1>Página principal de {{mynameis}}</h1>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
+<h1>Página principal</h1>
+<h2>Página de {{mynameis}}</h2>
 
 {{#padre}}
-
-	<h2>Búsqueda avanzada de sitters</h2>
-	<form action="busqueda-avanzada-sitters" method="post">
-		<p>Provincia: </p><input type='text' name='provincia' />
-		<p>Tarifa máxima: </p><input type='text' name='tarifa_max' />
+	
+	<h3>Búsqueda avanzada de sitters</h3>
+	<div>
+	<h2>Prueba de la búsqueda de sitters con REST</h2>
+	<form action="search-sitters" method="get">
+		<p>Provincia </p>
+		<p><input type='text' name='provincia' /></p>
+		<p>Tarifa máxima </p>
+		<p><input type='text' name='tarifamax' /></p>
+		<br>
+		<br>
+		<p class="consejo">¡Recuerda!</p>
+		<p class="consejo">Si no rellenas nada,</p>
+		<p class="consejo">se mostrarán todos los Sitters</p>
 		<input type='submit' value='Buscar' />
 	</form>
+	</div>
+	<br>
 	
-	<h2>Publicar anuncio</h2>
-	<form action="publicar+anuncio">
+	<h3>Publicar anuncio</h3>
+	<div>
+	<form action="publicar-anuncio">
 		<input type='submit' value='Publicar anuncio' />
 	</form>
+	</div>
+	<br>
 	
-		
-		
+	<h3>Ver mis anuncios publicados</h3>
+	<div>
+	<form action="mis-anuncios-publicados">
+		<input type='submit' value='Ver anuncios' />
+	</form>
+	</div>
+	<br>
+	
 {{/padre}}
 
 {{#sitter}}
+
 <h2>Tablón de anuncios</h2>
+
 	<h3>Todos los anuncios</h3>
-	<!-- se muestran todos los anuncios -->
-	<form action= "tablon-anuncios">
-		<input type="hidden" name="num_pag" value=0 />
+	<div>
+	<form action= "search-adverts">
+		<input type="hidden" name="fecha" value="" />
 		<input type="submit" value="Ver tablón de anuncios"  />
 	</form>
-	<h3>Búsqueda de anuncio</h3>
-	<!--  <form action="publicar+anuncio"><input type='submit' value='Publicar anuncio' /></form> -->
-
-	<p>Filtrar Anuncios</p>
-	<form action="encontrar+anuncio">
-		<!-- <p>Ciudad :</p><input type="search" name='ciudad' /> -->
+	</div>
+	<h3>Búsqueda de anuncio por fecha</h3>
+<div>
+	<form action="search-adverts">
 		<p>Fecha de inicio:</p><input type="date" name="fecha" />
-		<!-- <p>Salario minimo:</p><input type="number" name="salario"/> -->
-		<input type="hidden" name="num_pag" value=0 />
 		<input type='submit' value='Buscar' />
-	
-	
 	</form>
+	</div>	
 	
 {{/sitter}}
 
 {{#star_sitter}}
+<p>no implementado</p>
 {{/star_sitter}}
 
 {{#centro}}
@@ -61,7 +82,15 @@
 	</form>
 {{/centro}}
 
-<input type="submit" value="Cerrar sesión" onclick="window.location='../cerrar-sesion';" />
+	<br/>
+	<br/>
+	
+	<form action="/cerrar-sesion">
+		<input type="submit" value="Cerrar sesión" />
+	</form>
+	
+	<br/>
+	<br/>
 
 </body>
 </html>

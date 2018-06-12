@@ -1,14 +1,12 @@
 package com.dad;
 
 public class UsuarioSesion {
-	private Usuario usuario;
-	private Perfil perfil;
+	private Usuario usuario;// usuario que actualmente está iniciado sesión
 	
 	public UsuarioSesion() {}
 	
-	public UsuarioSesion(Usuario usuario, Perfil perfil) {
+	public UsuarioSesion(Usuario usuario) {
 		setUsuario(usuario);
-		setPerfil(perfil);
 	}
 	
 	public Usuario getUsuario() {
@@ -16,12 +14,6 @@ public class UsuarioSesion {
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-	public Perfil getPerfil() {
-		return perfil;
-	}
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
 	}
 	
 	

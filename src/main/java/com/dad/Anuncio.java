@@ -5,19 +5,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.dad.Usuario.SitterResultado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 public class Anuncio {
+	
+	interface AnuncioResultado {}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	// Atributos del anuncio
 	
 	@ManyToOne
+	@JsonIgnore
 	private Usuario usuario;
 	//private String nombre;
+	@JsonView(AnuncioResultado.class)
 	private String asunto;
+	@JsonView(AnuncioResultado.class)
 	private String cuerpo;
+	@JsonView(AnuncioResultado.class)
 	private String fecha; // DD-MM-YY
+	@JsonView(AnuncioResultado.class)
 	private String loginUsuario;
 	
 	
@@ -27,7 +39,7 @@ public class Anuncio {
 	public Anuncio(Usuario user,String asunto, String cuerpo, String fecha) {
 		this.setUsuario(user);
 		this.setAsunto(asunto);
-		this.setCuerpo(asunto);
+		this.setCuerpo(cuerpo);
 		this.setFecha(fecha);
 		this.setLoginUsuario(user.getLogin());
 		

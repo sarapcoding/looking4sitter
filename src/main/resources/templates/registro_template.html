@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<meta charset="UTF8">
 <title>Insert title here</title>
 </head>
 <body>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
  {{#nombre}}
  El nombre de usuario se encuentra en uso. Por favor, escoja otro
  {{/nombre}}
@@ -12,9 +14,9 @@
  El email introducido se encuentra en uso. Por favor, escoja otro.
  {{/correo}}
  {{#password}}
- Las contrase�as no coinciden.Por favor, intentelo de nuevo
+ Las contraseñas no coinciden.Por favor, intentelo de nuevo
  {{/password}}
-<form action="verificacion+registro" method="post">
+<form action="verificacion-registro" method="post">
 		<p>Usuario :</p><input type='text' name='usuario' />
 		<p>Password :</p><input type="password" name='contrasena' />
 		<p>Confirmar password :</p><input type="password" name='contrasena2' />
@@ -29,7 +31,9 @@
 		<label for=center>Centro</label>
 		<br>
 		<br>
+
 		<input type='submit' value='Registrar' />
+		<input type="hidden"  name="_csrf" value="{{token}}"/>
 		</form>
 </body>
 </html>

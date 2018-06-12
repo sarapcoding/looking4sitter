@@ -1,9 +1,12 @@
 package com.dad;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,25 +14,49 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(using = SitterProfile.class)
 @Entity
 public class Usuario {
+	
+	interface SitterResultado {}
+	
+	@JsonView(SitterResultado.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	// Atributos del usuario
+	@JsonView(SitterResultado.class)
 	private String login;
+	@JsonView(SitterResultado.class)
 	private String nombre;
+	@JsonView(SitterResultado.class)
 	private String apellido;
-	private String password;
+	@JsonView(SitterResultado.class)
 	private String email;
+	@JsonView(SitterResultado.class)
 	private String provincia;
+	@JsonView(SitterResultado.class)
 	private int tarifa;
+	@JsonView(SitterResultado.class)
 	private String descripcion;
 	
-	@ManyToOne
-	private Perfil perfil;
+	private String passwordHash;
 	
+	//@ElementCollection (fetch= FetchType.EAGER)
+	private String rol;
+	
+	
+
+	/*@ManyToOne
+	private Perfil perfil;
+	*/
 	@OneToMany(mappedBy="usuario")
 	private List<Anuncio> anuncio;
 	
@@ -42,10 +69,16 @@ public class Usuario {
 	@OneToMany(mappedBy="destino")
 	private List<Comentario> comentario_destinado;
 	
+//	@OneToOne
+//	private Agenda agenda;
+//	
+//	@OneToMany(mappedBy="padre")
+//	private List<Hora> hora;
+	
 	//private List<Mensaje> mensaje;
 		 
 	
-	protected Usuario(String login,
+	public Usuario(String login,
 					String nombre,
 					String apellido,
 					String password,
@@ -53,17 +86,19 @@ public class Usuario {
 					String provincia,
 					int tarifa,
 					String descrip,
-					Perfil perfil
+					String rol
 					) {
 		this.setLogin(login);
 		this.setNombre(nombre);
 		this.setApellido(apellido);
-		this.setPassword(password);
+		// ya se hace la codificación hash en el propio setter de password
+		//this.setPasswordHash(new BCryptPasswordEncoder().encode(password));
+		this.setPasswordHash(password);
 		this.setEmail(email);
 		this.setProvincia(provincia);
 		this.setTarifa(tarifa);
 		this.setDescripcion(descrip);
-		this.setPerfil(perfil);
+		this.setRol(rol);
 		this.anuncio = new ArrayList<>();
 		this.comentario_destinado = new ArrayList<>();
 		this.comentario_escrito= new ArrayList<>();
@@ -113,14 +148,14 @@ public class Usuario {
 
 
 
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
 
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordHash(String password) {
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 	}
 
 
@@ -173,7 +208,7 @@ public class Usuario {
 
 	
 
-	public Perfil getPerfil() {
+	/*public Perfil getPerfil() {
 		return perfil;
 	}
 
@@ -181,7 +216,7 @@ public class Usuario {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
-	}
+	}*/
 
 
 
@@ -226,13 +261,6 @@ public class Usuario {
 	}
 
 
-
-	public void setComentario_escrito(Comentario comentario_escrito) {
-		this.comentario_escrito.add(comentario_escrito);
-	}
-
-
-
 	public List<Comentario> getComentario_destinado() {
 		return comentario_destinado;
 	}
@@ -245,15 +273,55 @@ public class Usuario {
 
 
 
-	/*
+//	public Agenda getAgenda() {
+//		return agenda;
+//	}
+//
+//
+//	public void setAgenda(Agenda agenda) {
+//		this.agenda = agenda;
+//	}
+//
+//
+//	public List<Hora> getHora() {
+//		return hora;
+//	}
+//
+//
+//	public void setHora(Hora hora) {
+//		this.hora.add(hora);
+//	}
+//
+//
+//	public void setAnuncio(List<Anuncio> anuncio) {
+//		this.anuncio = anuncio;
+//	}
+
+
+	public void setComentario_escrito(Comentario comentario_escrito) {
+		this.comentario_escrito.add(comentario_escrito);
+	}
+
+
+	public String getRol() {
+		return rol;
+	}
+
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Usuario [Login=" + this.login +", Nombre=" + this.nombre +", Provincia="+this.provincia +"]";
+		//String out = new Scanner(new URL("http://www.google.com").openStream(), "UTF-8").useDelimiter("\\A").next();
+//		if (this.getRol().equals("ROLE_sitter")) {
+//			//return "Login:"+this.login+" - Nombre:"+this.nombre+" - Tarifa: "+this.tarifa+" - Provincia: "+this.provincia;
+//			return this.getId().toString();
+//		}
+		return "Login:"+this.login+" - Nombre:"+this.nombre+" - Provincia: "+this.provincia;
 	}
-*/
-	@Override
-	public String toString() {
-		return "Login=" + this.login +" - Nombre=" + this.nombre +" - Provincia="+this.provincia +" - Tarifa="+this.tarifa;
-	}
+
 	
 }

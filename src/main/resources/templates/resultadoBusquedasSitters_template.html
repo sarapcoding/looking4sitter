@@ -2,9 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Resultado de búsqueda de sitters</title>
 </head>
 <body>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
 {{#provincias_vacias}}
 <h2>Provincia vacía</h2>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
@@ -18,21 +21,73 @@
 {{#encontrado}}
 <h2>Resultados para la búsqueda de Sitters</h2>
 	<table>
+		<tr>
+		<td>Índice</td>
+		<td>Usuario</td>
+		<td>Tarifa</td>
+<!-- 		<td>¿Quieres saber más?</td> -->
+		<td>¡Aquí puedes ver quién soy!</td>
+		</tr>
 		{{#resultadofinal}}
 		<tr>
 		<td>{{-index}}</td>
-		<td>{{.}}</td>
+		<td>{{login}}</td>
+		<td>{{tarifa}},00€/hora</td>
+<!-- 		<td><input type="submit" value="¡Ver más!" onclick="cargarSitter('{{id}}');" /> </td> -->
+		<td><div class="resultadoRest" id="divDetalleSitter"></div></td>
 		</tr>
 		{{/resultadofinal}}
 	</table>
+	<form action="busqueda-avanzada-sitters">
+		<input type="hidden" name='provincia' value= {{provincia}}   />
+		<input type="hidden" name='tarifa_max' value= {{tarifa_max}}   />
+		<input type="hidden" name="num_pag" value= {{numPag}}    />
+		<input type="submit" value="Siguiente"    />
+	</form>
+	<br/>
+<br/>
 	<div>
 	<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
 	</div>
-	
-
-
 {{/encontrado}}
+<br/>
+<br/>
 
 
 </body>
+<script>
+function cargarSitter(id) {
+	// Se lanza una petición ajax a la irl del restcontroller usando jquery
+//     $.ajax({url: "/sitters/"+id, success: function(result){
+
+	// ahora el javascript debe llamar al json con los resultados
+	// ughhhhhhhh
+	$.ajax({type: "GET",
+		url: "https://192.168.33.10:8444/sitters/"+id,
+		dataType: "json",
+		success: function(result){
+    	console.log(result);
+		var html="";
+		if (result!=""){
+// 			    	var obj = jQuery.parseJSON(result);
+					var obj = result;
+					html+="<h3 class='sitter' >Mi nombre</h3>";
+					html+="<p class='sitter' >"+obj.nombre+" "+obj.apellido +"</p>";
+					html+="<h3 class='sitter' >¿Quién soy?</h3>";
+					html+="<p class='sitter' >"+obj.descripcion+"</p>";
+					html+="<h3 class='sitter' >Provincia</h3>";
+					html+="<p class='sitter' >"+obj.provincia+"</p>";
+					html+="<h3 class='sitter' >Mi tarifa es:</h3>";
+					html+="<pclass='sitter' >"+obj.tarifa+",00€/hora</p>";   
+		}else{
+						html+="<h3>No se han encontrado resultados</h3>";
+		}		
+		$("#divDetalleSitter").html(html);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+        alert(thrownError);
+    }});
+ 
+}
+</script>
 </html>

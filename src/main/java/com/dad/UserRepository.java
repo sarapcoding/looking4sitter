@@ -16,50 +16,44 @@ import com.dad.Usuario;
 @Repository
 public interface UserRepository extends JpaRepository<Usuario,Long>{
 
-	List<Usuario> findByLogin(String login);
-	List<Usuario> findByEmail (String email);
-	List<Usuario> findByProvincia(String provincia);
-	List<Usuario> findByProvinciaIsLike(String provincia);
-	List<Usuario> findById(Long id);
+	Usuario findByLogin(String login);
+	Usuario findByEmail (String email);
+	Page<Usuario> findByRol(String rol,Pageable page);
+	Page<Usuario> findByProvincia(String provincia,Pageable page);
+	Page<Usuario> findByProvinciaIsLike(String provincia,Pageable page);
+	Page<Usuario> findByRolAndProvinciaIsLike(String rol, String provincia,Pageable page);
+	Usuario findById(Long id);
 	
-	@Query(
-			value="select * from usuario where Tarifa <= ?1",
-			nativeQuery = true)
-	List<Usuario> findByTarifa(int tarifa);
+	Page<Usuario> findByRolAndTarifaLessThan (String rol,int tarifa, Pageable page);
 	
-	@Query(
-			value="select * from usuario where Provincia like ?1 and Tarifa <= ?2",
-			nativeQuery = true)
-	List<Usuario> findByProvinciaAndTarifa(String provincia,int tarifa);
-
+	Page<Usuario> findByRolAndProvinciaAndTarifaLessThan (String rol,String provincia,int tarifa, Pageable page);
+	
+	List<Usuario> findByRolAndProvinciaAndTarifaLessThan (String rol,String provincia,int tarifa);
+	List<Usuario> findByRolAndProvinciaIsLike(String rol,String provincia);
+	List<Usuario> findByRolAndTarifaLessThan(String rol, int tarifa);
+	List<Usuario> findByRol(String rol);
+	
+//	Usuario findByLogin(String login);
+//	Usuario findByEmail (String email);
+//	List<Usuario> findByRol(String rol);
+//	List<Usuario> findByProvinciaIsLike(String provincia);
+//	Usuario findById(Long id);
+//	
+//	@Query(
+//			value="select * from usuario where tarifa <= ?1  and rol = ?2 ",
+//			nativeQuery = true)
+//	List<Usuario> findByTarifaAndRol(int tarifa,String rol);
+//	
+//	@Query(
+//			value="select * from usuario where provincia like ?1  and rol = ?2 ",
+//			nativeQuery = true)
+//	List<Usuario> findByProvinciaAndRol(String provincia,String rol);
+//	
+//	@Query(
+//			value="select * from usuario where provincia like ?1 and tarifa <= ?2 and rol = ?3 ",
+//			nativeQuery = true)
+//	List<Usuario> findByProvinciaAndTarifaAndRol(String provincia,int tarifa,String rol);
+//	
 }
 
-
-/*
-@Repository
-public interface UserRepository extends CrudRepository<Usuario,Long>{
-List<Usuario> findByLogin(String login);
-	List<Usuario> findByEmail (String email);
-	List<Usuario> findByProvincia(String provincia);
-	List<Usuario> findByProvinciaIsLike(String provincia);
-	List<Usuario> findById(Long id);
-	
-	@Query(
-			value="select * from usuarios where Tarifa <= ?1",
-			nativeQuery = true)
-	List<Usuario> findByTarifa(int tarifa);
-	
-	
-	//@Query(
-	//		value="select * from usuarios where 1=1 ?1 ?2",
-	//		nativeQuery = true)
-	//List<Usuarios> findByProvinciaAndTarifa(String provincia,String tarifa);
-	
-	@Query(
-			value="select * from usuarios where Provincia like ?1 and Tarifa <= ?2",
-			nativeQuery = true)
-	List<Usuario> findByProvinciaAndTarifa(String provincia,int tarifa);
-	
-}
-*/
 
