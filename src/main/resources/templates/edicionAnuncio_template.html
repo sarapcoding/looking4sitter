@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
 <meta charset="UTF-8">
 <title>Edición de anuncio</title>
 </head>
 <body>
 <img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
+<div>
 	<form action="edited-advert" method = "get">
 		{{#campovacio}}
 		<p>Por favor, rellene <b>todos</b> los campos</p>
@@ -18,8 +20,9 @@
 		<br>
 		<input type ="hidden" name="fecha" value={{fecha}}/>
 		<input type="hidden" name="id" value={{id}}/>
-	    <input type='submit' value='Enviar' />
+	    <input type='submit' value='Añadir anuncio editado' />
 	</form>
+</div>
  	
 </body>
 </html>

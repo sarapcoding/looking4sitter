@@ -63,6 +63,8 @@ public class AdvertController {
 			@RequestParam String fecha,
 			@RequestParam String cuerpo){
 		
+		System.out.println("Anuncio a añadir: "+asunto+" - "+fecha+" - "+cuerpo);
+		
 		if ((asunto.equals("")) || (cuerpo.equals("")) || (fecha.equals(""))) {
 			model.addAttribute("campovacio", true);
 			return "enviarAnuncio";
@@ -73,26 +75,6 @@ public class AdvertController {
 		anuncioRepositorio.save(anuncio);
 		return "successAdvert_template";
 		
-/*
- * 
- * if ((asunto.equals("")) || (cuerpo.equals(""))) {
-			model.addAttribute("campovacio", true);
-			return "enviarAnuncio";
-		}
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Usuario usuario = usuarioRepositorio.findByLogin(username);
-		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,"");
-		if (fechaNueva.equals("")) { // si no se ha dado una fecha nueva, se mantiene la fecha
-			anuncio.setFecha(fecha.replaceAll("/", ""));
-		} else { // si se ha dado una fecha nueva, se establece la fecha nueva
-			anuncio.setFecha(fechaNueva.replaceAll("/", ""));
-		}
-		anuncioRepositorio.delete(Long.parseLong(id.replaceAll("/", "")));
-		anuncioRepositorio.save(anuncio);
-		
-		return "successAdvert_template";
- * 
- * */
 	}
 
 	@RequestMapping ("/advert-added")
