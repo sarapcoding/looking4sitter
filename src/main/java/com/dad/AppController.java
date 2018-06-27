@@ -13,7 +13,7 @@ import com.dad.Usuario;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import com.dad.Comentario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +29,9 @@ import org.springframework.web.client.RestTemplate;
 public class AppController {
 	@Autowired 
 	private UserRepository usuarioRepositorio;
+	
+	@Autowired
+	private RemarkRepository comentarioRepositorio;
 	
 	
 	@GetMapping ("/")
@@ -101,8 +104,32 @@ public class AppController {
 			model.addAttribute("myprofileis", "PADRE");
 			
 		} else if (myrolis.contains("ROLE_sitter")) {
+			
+			List<Comentario> myC = comentarioRepositorio.findByDestino(user);
+			
+			if ((myC.isEmpty())||(myC==null)) {
+				model.addAttribute("nocomment", true);
+
+			} else {
+				model.addAttribute("yescomment", true);
+				List<String> padres = new ArrayList<>();
+				List<String> comment = new ArrayList<>();
+				List<String> puntuaciones = new ArrayList<>();
+				List<String> fechasc = new ArrayList<>();
+				for (Comentario c : myC) {
+					padres.add(c.getOrigen().getLogin()); // padre del que se recibe el comentario
+					comment.add(c.getComentario());
+					puntuaciones.add(Integer.toString(c.getPuntuacion()));
+					fechasc.add(c.getFecha());
+				}
+				model.addAttribute("padresuser",padres);
+				model.addAttribute("fechascom",fechasc);
+				model.addAttribute("comentarios",comment);
+				model.addAttribute("puntuaciones",puntuaciones);
+			}
 			model.addAttribute("sitter", true);
 			model.addAttribute("myprofileis","SITTER" );
+
 			
 		} else if (myrolis.contains("ROLE_starsitter")) {
 			model.addAttribute("star_sitter", true);

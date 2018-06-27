@@ -46,12 +46,20 @@
 	</div>
 	<br>
 	
+	<h3>Ver mis comentarios escritos</h3>
+	<div>
+	<form action="comentarios-escritos">
+		<input type='submit' value='Ver comentarios' />
+	</form>
+	</div>
+	<br>
+	
 {{/padre}}
 
 {{#sitter}}
 
 <h2>Tablón de anuncios</h2>
-
+	
 	<h3>Todos los anuncios</h3>
 	<div>
 	<form action= "search-adverts">
@@ -67,6 +75,66 @@
 	</form>
 	</div>	
 	
+	<h3>Comentarios</h3>
+	
+	<p>Mi tabla de comentarios recibidos</p>
+	{{#nocomment}}
+	<p>¡No tienes comentarios aún!</p>
+	{{/nocomment}}
+	{{#yescomment}}
+	<table>
+	<td>
+	<table>
+		<tr>
+			<td>Padre</td>
+		</tr>
+		{{#padresuser}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/padresuser}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Comentario</td>
+		</tr>
+		{{#comentarios}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/comentarios}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Mi puntuación</td>
+		</tr>
+		{{#puntuaciones}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/puntuaciones}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Fecha</td>
+		</tr>
+		{{#fechascom}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/fechascom}}
+		</table>
+	</td>
+</table>
+{{/yescomment}}
+	
+	<br>
 {{/sitter}}
 
 {{#star_sitter}}

@@ -1,6 +1,11 @@
 package com.dad;
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import com.dad.Comentario;
-public interface RemarkRepository extends CrudRepository<Comentario,Long>{
+
+@Repository
+public interface RemarkRepository extends JpaRepository<Comentario,Long>{
+	List<Comentario> findByDestino(Usuario destino);
 }

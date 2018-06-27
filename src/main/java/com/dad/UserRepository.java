@@ -32,6 +32,7 @@ public interface UserRepository extends JpaRepository<Usuario,Long>{
 	List<Usuario> findByRolAndProvinciaIsLike(String rol,String provincia);
 	List<Usuario> findByRolAndTarifaLessThan(String rol, int tarifa);
 	List<Usuario> findByRol(String rol);
+	//List<Comentario> findByComentarioDestinado()
 	
 //	Usuario findByLogin(String login);
 //	Usuario findByEmail (String email);

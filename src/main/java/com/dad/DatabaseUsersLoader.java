@@ -13,6 +13,9 @@ public class DatabaseUsersLoader {
 	@Autowired
 	private AdvertRepository anuncioRepositorio;
 	
+	@Autowired
+	private RemarkRepository comentarioRepositorio;
+	
 	@PostConstruct
 	private void initDatabase(){
 		
@@ -71,6 +74,25 @@ public class DatabaseUsersLoader {
 		anuncioRepositorio.save(an14);
 		anuncioRepositorio.save(an15);
 		anuncioRepositorio.save(an16);
+		
+		// comentarios para sitters: mia us2 flor us3
+		// padres: kei us5 nina us9 padrede2 us1
+		
+		Comentario c1 = new Comentario(us5,us2,"Gran sitter! Sabe inglés y es muy simpática",9,"2018-06-27");// kei a mia
+		Comentario c2 = new Comentario(us9,us2,"Chica responsable",7,"2018-06-23");// nina a mia
+		Comentario c3 = new Comentario(us9,us3,"Muy responsable, ¡la recomiendo!",9,"2018-05-30");
+		Comentario c4 = new Comentario(us5,us3,"Muy maja",6,"2018-06-01");
+		Comentario c5 = new Comentario(us9,us2,"Majísima!",7,"2018-06-01");
+		Comentario c6 = new Comentario(us9,us2,"Hizo que le diera un ataque de alergia a mi perro :(",3,"2018-06-01");
+		Comentario c7 = new Comentario(us9,us2,"Gran sitter!",8,"2018-06-01");
+		
+		comentarioRepositorio.save(c1);
+		comentarioRepositorio.save(c2);
+		comentarioRepositorio.save(c3);
+		comentarioRepositorio.save(c4);
+		comentarioRepositorio.save(c5);
+		comentarioRepositorio.save(c6);
+		comentarioRepositorio.save(c7);
 
 	}
 }

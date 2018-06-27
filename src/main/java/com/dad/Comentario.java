@@ -24,6 +24,14 @@ public class Comentario {
 	
 	public Comentario() {}
 	
+	public Comentario(Usuario padre, Usuario sitter, String comentario, int puntuacion, String fecha) {
+		this.origen=padre;
+		this.destino=sitter;
+		this.comentario=comentario;
+		this.puntuacion=puntuacion;
+		this.fecha=fecha;
+		
+	}
 
 	public Long getId() {
 		return id;
