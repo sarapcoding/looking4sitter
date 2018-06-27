@@ -24,8 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/greeting").permitAll();
 		http.authorizeRequests().antMatchers("/registro").permitAll();
-		http.authorizeRequests().antMatchers("/verificacion+registro").permitAll();
-		http.authorizeRequests().antMatchers("/continuacion+registro").permitAll();
+		http.authorizeRequests().antMatchers("/verificacion-registro").permitAll();
+		http.authorizeRequests().antMatchers("/continuacion-registro").permitAll();
 		http.authorizeRequests().antMatchers("/inicio").permitAll();
 		http.authorizeRequests().antMatchers("/inicio-failed").permitAll();
 		http.authorizeRequests().antMatchers("/busqueda/**").permitAll();
@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.formLogin().loginPage("/inicio");
 		http.formLogin().usernameParameter("user");
 		http.formLogin().passwordParameter("pass");
-		http.formLogin().defaultSuccessUrl("/inicio+sesion");
+		http.formLogin().defaultSuccessUrl("/inicio-sesion");
 		http.formLogin().failureUrl("/inicio-failed");
 		
 		

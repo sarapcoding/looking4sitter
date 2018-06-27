@@ -57,23 +57,7 @@ public class AdvertController {
 		
 	}
 	
-//	@RequestMapping ("/tablon-anuncios")
-//	public String allAdverts (Model model, @RequestParam int num_pag) {
-//		int sig_pag=num_pag+1;
-//		Page<Anuncio> todos = anuncioRepositorio.findAll(new PageRequest(num_pag, 2));
-//		int elementos = todos.getNumberOfElements();
-//		model.addAttribute("encontrado", true);
-//		model.addAttribute("anuncios",todos);
-//		model.addAttribute("numPag",0);
-//		model.addAttribute("numPag", sig_pag);
-//		if (sig_pag >= elementos) {
-//			model.addAttribute("final", true);
-//		}
-//		return "resultadoBusquedasAnuncios_template";
-//	}
-	
-	
-	@PostMapping ("/add-anuncio")
+	@RequestMapping ("/add-anuncio")
 	public String addAdvert (Model model,
 			@RequestParam String asunto,
 			@RequestParam String fecha,
@@ -85,9 +69,30 @@ public class AdvertController {
 		}
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Usuario usuario = usuarioRepositorio.findByLogin(username);
-		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,fecha);
+		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,fecha.replaceAll("/", ""));
 		anuncioRepositorio.save(anuncio);
 		return "successAdvert_template";
+		
+/*
+ * 
+ * if ((asunto.equals("")) || (cuerpo.equals(""))) {
+			model.addAttribute("campovacio", true);
+			return "enviarAnuncio";
+		}
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario usuario = usuarioRepositorio.findByLogin(username);
+		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,"");
+		if (fechaNueva.equals("")) { // si no se ha dado una fecha nueva, se mantiene la fecha
+			anuncio.setFecha(fecha.replaceAll("/", ""));
+		} else { // si se ha dado una fecha nueva, se establece la fecha nueva
+			anuncio.setFecha(fechaNueva.replaceAll("/", ""));
+		}
+		anuncioRepositorio.delete(Long.parseLong(id.replaceAll("/", "")));
+		anuncioRepositorio.save(anuncio);
+		
+		return "successAdvert_template";
+ * 
+ * */
 	}
 
 	@RequestMapping ("/advert-added")
@@ -105,43 +110,39 @@ public class AdvertController {
 			model.addAttribute("cuerpo", anuncio.getCuerpo());
 			System.out.println(anuncio.getFecha());
 			model.addAttribute("fecha", anuncio.getFecha());
-			model.addAttribute("id", longID);
+			model.addAttribute("fechaNueva", anuncio.getFecha());
+			model.addAttribute("id", id);
+			
 			return "edicionAnuncio_template";
 		}
+	
+	
 	@RequestMapping ("/edited-advert")
 	public String editedAdvert (Model model,
 			@RequestParam String asunto,
 			@RequestParam String fecha,
+			@RequestParam String fechaNueva,
 			@RequestParam String cuerpo,
-			@RequestParam Long id){
+			@RequestParam String id){
 		
-		if ((asunto.equals("")) || (cuerpo.equals("")) || (fecha.equals(""))) {
+		if ((asunto.equals("")) || (cuerpo.equals(""))) {
 			model.addAttribute("campovacio", true);
 			return "enviarAnuncio";
 		}
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Usuario usuario = usuarioRepositorio.findByLogin(username);
-		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,fecha);
+		Anuncio anuncio = new Anuncio(usuario,asunto,cuerpo,"");
+		if (fechaNueva.equals("")) { // si no se ha dado una fecha nueva, se mantiene la fecha
+			anuncio.setFecha(fecha.replaceAll("/", ""));
+		} else { // si se ha dado una fecha nueva, se establece la fecha nueva
+			anuncio.setFecha(fechaNueva.replaceAll("/", ""));
+		}
+		anuncioRepositorio.delete(Long.parseLong(id.replaceAll("/", "")));
 		anuncioRepositorio.save(anuncio);
-		anuncioRepositorio.delete(id);
+		
 		return "successAdvert_template";
 	}
 	
-//	@Autowired
-//	private AdvertRepository anuncioRepositorio;
-//	
-//	@JsonView(Anuncio.AnuncioResultado.class)
-//	@GetMapping (value="/anuncio/{id}", produces =MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Anuncio> anuncioCompleto(@PathVariable Long id){
-//		Anuncio anuncioID = anuncioRepositorio.findById(id);
-//		if (anuncioID==null) {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		} else {
-//			
-//			return ResponseEntity.accepted().body(anuncioID);
-//		}
-//		
-//	}
 	
 	
 }
