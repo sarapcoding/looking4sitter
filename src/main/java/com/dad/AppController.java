@@ -104,29 +104,6 @@ public class AppController {
 			model.addAttribute("myprofileis", "PADRE");
 			
 		} else if (myrolis.contains("ROLE_sitter")) {
-			
-			List<Comentario> myC = comentarioRepositorio.findByDestino(user);
-			
-			if ((myC.isEmpty())||(myC==null)) {
-				model.addAttribute("nocomment", true);
-
-			} else {
-				model.addAttribute("yescomment", true);
-				List<String> padres = new ArrayList<>();
-				List<String> comment = new ArrayList<>();
-				List<String> puntuaciones = new ArrayList<>();
-				List<String> fechasc = new ArrayList<>();
-				for (Comentario c : myC) {
-					padres.add(c.getOrigen().getLogin()); // padre del que se recibe el comentario
-					comment.add(c.getComentario());
-					puntuaciones.add(Integer.toString(c.getPuntuacion()));
-					fechasc.add(c.getFecha());
-				}
-				model.addAttribute("padresuser",padres);
-				model.addAttribute("fechascom",fechasc);
-				model.addAttribute("comentarios",comment);
-				model.addAttribute("puntuaciones",puntuaciones);
-			}
 			model.addAttribute("sitter", true);
 			model.addAttribute("myprofileis","SITTER" );
 

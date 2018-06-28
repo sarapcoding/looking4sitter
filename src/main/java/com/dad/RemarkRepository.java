@@ -8,4 +8,5 @@ import com.dad.Comentario;
 @Repository
 public interface RemarkRepository extends JpaRepository<Comentario,Long>{
 	List<Comentario> findByDestino(Usuario destino);
+	List<Comentario> findByOrigen(Usuario origen);
 }

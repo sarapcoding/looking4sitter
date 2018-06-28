@@ -1,5 +1,8 @@
 package com.dad;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ public class AdvertController {
 	
 	@Autowired
 	private UserRepository usuarioRepositorio;
+	
+	@Autowired
+	private RemarkRepository comentarioRepositorio;
 	
 	int num_elem = 1;
 	
@@ -62,8 +68,6 @@ public class AdvertController {
 			@RequestParam String asunto,
 			@RequestParam String fecha,
 			@RequestParam String cuerpo){
-		
-		System.out.println("Anuncio a añadir: "+asunto+" - "+fecha+" - "+cuerpo);
 		
 		if ((asunto.equals("")) || (cuerpo.equals("")) || (fecha.equals(""))) {
 			model.addAttribute("campovacio", true);
@@ -123,6 +127,64 @@ public class AdvertController {
 		anuncioRepositorio.save(anuncio);
 		
 		return "successAdvert_template";
+	}
+	
+	@RequestMapping("/recieved-comments")
+	public String comentariosRecibidos(Model model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario user = usuarioRepositorio.findByLogin(username);
+		List<Comentario> myC = comentarioRepositorio.findByDestino(user);
+		
+		if ((myC.isEmpty())||(myC==null)) {
+			model.addAttribute("nocomment", true);
+
+		} else {
+			model.addAttribute("yescommentSitter", true);
+			List<String> padres = new ArrayList<>();
+			List<String> comment = new ArrayList<>();
+			List<String> puntuaciones = new ArrayList<>();
+			List<String> fechasc = new ArrayList<>();
+			for (Comentario c : myC) {
+				padres.add(c.getOrigen().getLogin()); // padre del que se recibe el comentario
+				comment.add(c.getComentario());
+				puntuaciones.add(Integer.toString(c.getPuntuacion()));
+				fechasc.add(c.getFecha());
+			}
+			model.addAttribute("padresuser",padres);
+			model.addAttribute("fechascom",fechasc);
+			model.addAttribute("comentarios",comment);
+			model.addAttribute("puntuaciones",puntuaciones);
+		}
+		return "comentarioSitter_template";
+	}
+	
+	@RequestMapping("/written-comments")
+	public String comentariosEnviados(Model model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario user = usuarioRepositorio.findByLogin(username);
+		List<Comentario> myC = comentarioRepositorio.findByOrigen(user);
+		
+		if ((myC.isEmpty())||(myC==null)) {
+			model.addAttribute("nocomment", true);
+
+		} else {
+			model.addAttribute("yescommentParent", true);
+			List<String> sitters = new ArrayList<>();
+			List<String> comment = new ArrayList<>();
+			List<String> puntuaciones = new ArrayList<>();
+			List<String> fechasc = new ArrayList<>();
+			for (Comentario c : myC) {
+				sitters.add(c.getDestino().getLogin()); // sitters a los que se han escrito comentario
+				comment.add(c.getComentario());
+				puntuaciones.add(Integer.toString(c.getPuntuacion()));
+				fechasc.add(c.getFecha());
+			}
+			model.addAttribute("sittersuser",sitters);
+			model.addAttribute("fechascom",fechasc);
+			model.addAttribute("comentarios",comment);
+			model.addAttribute("puntuaciones",puntuaciones);
+		}
+		return "comentarioSitter_template";
 	}
 	
 	
