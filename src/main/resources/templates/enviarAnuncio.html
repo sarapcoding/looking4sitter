@@ -9,7 +9,7 @@
 <img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
 <h2>Publicación de anuncios</h2>
 	<div>
-	<form action="add-anuncio" method = "get">
+	<form action="add-anuncio" method = "post">
 		{{#campovacio}}
 		<p>Por favor, rellene <b>todos</b> los campos</p>
 		{{/campovacio}}
@@ -20,6 +20,7 @@
 		<br>
 		<br>
 	    <input type='submit' value='Añadir mi anuncio' />
+	    	<input type="hidden"  name="_csrf" value="{{token}}"/>
 	</form>
 	</div>
 </body>
