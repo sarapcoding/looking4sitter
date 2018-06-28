@@ -23,12 +23,13 @@ Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensaj
      style="float: left; margin-right: 10px;" />
 
 ## Configuración de la máquina virtual
-Usamos vagrant/trusty32 para la ejecución de la aplicación.
+Usamos ubuntu/trusty32 con vagrant para la ejecución de la aplicación.
 
 ### Instalación del JDK y de MYSQL Server
 ```bash
 sudo apt-get update
-# En el caso de que la instalación del JDK no funcionase por no encontrar el paquete, se debe ejecutar lo siguiente
+# En el caso de que la instalación del JDK no funcionase por
+# no encontrar el paquete, se debe ejecutar lo siguiente
 sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update
 # Instalación JDK
@@ -62,6 +63,42 @@ Arrancamos los jars de la siguiente manera en diferentes terminales:
 ```
 $ java -jar xxxxxxxxxxxxxxxx-x.x.x-SNAPSHOT.jar
 ```
+
+## Balanceo de carga
+### Configuración de Haproxy
+Creamos una máquina virtual separada en la que instalamos Haproxy. Nos aseguramos que tengamos la siguiente versión:
+```
+$ haproxy -version
+HA-Proxy version 1.6.14-1ppa1~trusty-66af4a1 2018/01/06
+Copyright 2000-2018 Willy Tarreau <willy@haproxy.org>
+```
+Se debe configurar el archivo haproxy.cfg que se halla en /etc/haproxy añadiendo después de las secciones global y default con lo siguiente para tener dos nodos:
+```
+frontend localhost
+        bind *:80                                                                                                       
+        bind *:443
+        option tcplog
+        mode tcp
+        default_backend nodes
+
+backend nodes
+        mode tcp
+        balance roundrobin
+        option ssl-hello-chk
+        server node1 192.168.33.10:8443 check
+        server node2 192.168.33.20:8443 check
+```
+En esta configuración se tiene dos nodos, node1 y node2 que corresponden a las IP 192.168.33.10 y 192.168.33.20 respectivamente. Para poder configurar un nodo nuevo, se debe completar el siguiente código y añadirlo al final de backend nodes:
+```
+server nodeX XXX.XXX.XXX.XXX:YYYY check
+```
+Siendo XXX.XXX.XXX.XXX la IP de la máquina en la que se está ejecutando la aplicación e YYYY el puerto.
+
+La configuración frontend cuenta con el modo TCP y la opción TCPLog, significando que las conexiones a los nodos quedarán reflejadas en el log que se encuentra en /var/log/haproxy.log al que se deberá acceder de la siguiente forma:
+```
+$ sudo vim /var/log/haproxy.log
+```
+En el podemos leer los logs, debido a problemas con la versión de Haproxy 1.6 y su incompatibilidad con 1.4, no se puede acceder a la página de stats para comprobar las conexiones a los nodos.
 
 ## Capturas
 # Inicio
