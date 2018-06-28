@@ -1,5 +1,7 @@
 package com.dad;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,6 +187,38 @@ public class AdvertController {
 			model.addAttribute("puntuaciones",puntuaciones);
 		}
 		return "comentarioSitter_template";
+	}
+	
+	@RequestMapping("/send-comment")
+	public String escribirComentario(Model model,
+			@RequestParam String id) {
+		Usuario sitter = usuarioRepositorio.findById(Long.parseLong(id.replace("/", "")));
+		String login = sitter.getLogin();
+		model.addAttribute("sitterlogin",login);
+		model.addAttribute("sitterid",id.replace("/", ""));
+		return "escribirComentario_template";
+	}
+	
+	@RequestMapping("/save-comment")
+	public String enviarComentario(Model model,
+			@RequestParam String sitterid,
+			@RequestParam String comentario,
+			@RequestParam int puntos) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario userPadre = usuarioRepositorio.findByLogin(username);
+		Usuario userSitter = usuarioRepositorio.findById(Long.parseLong(sitterid.replace("/", "")));
+		Comentario micomentario = new Comentario();
+		micomentario.setComentario(comentario);
+		micomentario.setOrigen(userPadre);
+		micomentario.setDestino(userSitter);
+		micomentario.setPuntuacion(puntos);
+		String hoy = "";
+		DateTimeFormatter dft = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+		LocalDate localDate = LocalDate.now();
+		hoy = dft.format(localDate);
+		micomentario.setFecha(hoy);
+		comentarioRepositorio.save(micomentario);
+		return "successComentario_template";
 	}
 	
 	

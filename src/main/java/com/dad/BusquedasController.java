@@ -92,6 +92,7 @@ public class BusquedasController {
 			List<String> apellidos = new ArrayList<>();
 			List<String> provincias = new ArrayList<>();
 			List<String> descripciones = new ArrayList<>();
+			List<String> ids = new ArrayList<>();
 			List<Integer> tarifas = new ArrayList<>();
 			JSONArray jsonarr = new JSONArray(resultados);
 			int numS = jsonarr.length();
@@ -124,6 +125,7 @@ public class BusquedasController {
 				provincias.add(myprovincia);
 				descripciones.add(mydesc);
 				tarifas.add(mytarifa);
+				ids.add(Long.toString(myid));
 			}
 			model.addAttribute("encontrado",true);
 			model.addAttribute("rlogins",logins);
@@ -132,6 +134,7 @@ public class BusquedasController {
 			model.addAttribute("rprovincias",provincias);
 			model.addAttribute("rdescripciones",descripciones);
 			model.addAttribute("rtarifas",tarifas);
+			model.addAttribute("rids",ids);
 			model.addAttribute("resultadofinal",sittR);
 		}
 		

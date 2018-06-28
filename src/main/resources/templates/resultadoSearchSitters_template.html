@@ -94,6 +94,21 @@
 		{{/rtarifas}}
 	</table>
 	</td>
+	<td>
+	<table>
+		<tr>
+			<td>Dejar comentario</td>
+		</tr>
+		{{#rids}}
+		<tr>
+			<td><form action= "send-comment" method="get">
+			<input type="hidden" name= "id" value= {{.}} readonly/>
+			<input type="submit" value="Escribir comentario" />
+		</form></td>
+		</tr>
+		{{/rids}}
+	</table>
+	</td>
 </table>
 	<br/>
 {{/encontrado}}
