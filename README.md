@@ -22,6 +22,47 @@ Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensaj
      alt="Diagrama entidades"
      style="float: left; margin-right: 10px;" />
 
+## Configuración de la máquina virtual
+Usamos vagrant/trusty32 para la ejecución de la aplicación.
+
+### Instalación del JDK y de MYSQL Server
+```bash
+sudo apt-get update
+# En el caso de que la instalación del JDK no funcionase por no encontrar el paquete, se debe ejecutar lo siguiente
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update
+# Instalación JDK
+sudo apt-get install -y openjdk-8-jre
+# Instalación de MySQL Server
+sudo apt-get install mysql-server
+mysql -u root -p
+```
+
+#### Configuración de la base de datos
+Creación del schema vacío
+```mysql
+create database mybbdd;
+```
+Creación del usuario de la aplicación que accederá a la base de datos
+```mysql
+create user 'sitteradmin'@'localhost' identified by 'sitterpass';
+grant all privileges on *.* to 'sitteradmin'@'localhost' with grant option;
+```
+#### Ejecución del jar en la máquina virtual
+Arrancamos la máquina virtual
+```
+vagrant up
+vagrant ssh
+```
+Accedemos a la carpeta en la que se contiene los jar (tanto el jar de la aplicación como el jar del servicio rest)
+```
+$ cd /vagrant
+```
+Arrancamos los jars de la siguiente manera en diferentes terminales:
+```
+$ java -jar xxxxxxxxxxxxxxxx-x.x.x-SNAPSHOT.jar
+```
+
 ## Capturas
 # Inicio
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas/welcome.PNG"
