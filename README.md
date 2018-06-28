@@ -23,7 +23,7 @@ Mensaje | Los usuarios podrán comunicarse entre si mediante el envío de mensaj
      style="float: left; margin-right: 10px;" />
 
 ## Configuración de la máquina virtual
-Usamos ubuntu/trusty32 con vagrant para la ejecución de la aplicación.
+Usamos ubuntu/trusty32 con vagrant para la ejecución de la aplicación. En nuestro caso empleamos dos máquinas virtuales con las direcciones IP 192.168.33.10 y 192.168.33.20, reservando la dirección IP 192.168.33.33 para HAProxy
 
 ### Instalación del JDK y de MYSQL Server
 ```bash
@@ -65,14 +65,23 @@ $ java -jar xxxxxxxxxxxxxxxx-x.x.x-SNAPSHOT.jar
 ```
 
 ## Balanceo de carga
-### Configuración de Haproxy
-Creamos una máquina virtual separada en la que instalamos Haproxy. Nos aseguramos que tengamos la siguiente versión:
+### Configuración de HAProxy
+Creamos una máquina virtual separada en la que instalamos HAProxy.
+```bash
+$ sudo apt-get install haproxy
+```
+Nos aseguramos que tengamos la versión **HAProxy 1.6**:
 ```
 $ haproxy -version
 HA-Proxy version 1.6.14-1ppa1~trusty-66af4a1 2018/01/06
 Copyright 2000-2018 Willy Tarreau <willy@haproxy.org>
 ```
-Se debe configurar el archivo haproxy.cfg que se halla en /etc/haproxy añadiendo después de las secciones global y default con lo siguiente para tener dos nodos:
+Se debe configurar el archivo haproxy.cfg:
+```bash
+$ cd /etc/haproxy
+$ sudo vim haproxy.cfg
+```
+Se añade después de las secciones global y default con lo siguiente para tener dos nodos:
 ```
 frontend localhost
         bind *:80
@@ -97,7 +106,7 @@ La configuración frontend cuenta con el modo TCP y la opción TCPLog, significa
 ```
 $ sudo vim /var/log/haproxy.log
 ```
-En el podemos leer los logs, debido a problemas con la versión de Haproxy 1.6 y su incompatibilidad con 1.4, no se puede acceder a la página de stats para comprobar las conexiones a los nodos.
+En el podemos leer los logs, debido a problemas con la versión de HAProxy 1.6 y su incompatibilidad con 1.4, no se puede acceder a la página de stats para comprobar las conexiones a los nodos.
 
 Para arrancar el servicio del balanceo de carga se usa el siguiente comando:
 ```
