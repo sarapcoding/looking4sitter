@@ -93,12 +93,24 @@ En esta configuración se tiene dos nodos, node1 y node2 que corresponden a las 
 server nodeX XXX.XXX.XXX.XXX:YYYY check
 ```
 Siendo XXX.XXX.XXX.XXX la IP de la máquina en la que se está ejecutando la aplicación e YYYY el puerto.
-
 La configuración frontend cuenta con el modo TCP y la opción TCPLog, significando que las conexiones a los nodos quedarán reflejadas en el log que se encuentra en /var/log/haproxy.log al que se deberá acceder de la siguiente forma:
 ```
 $ sudo vim /var/log/haproxy.log
 ```
 En el podemos leer los logs, debido a problemas con la versión de Haproxy 1.6 y su incompatibilidad con 1.4, no se puede acceder a la página de stats para comprobar las conexiones a los nodos.
+
+Para arrancar el servicio del balanceo de carga se usa el siguiente comando:
+```
+$ sudo service haproxy start
+```
+Y para volver a arrancarlo:
+```
+$ sudo service haproxy restart
+```
+Para pararlo:
+```
+$ sudo service haproxy stop
+```
 
 ## Capturas
 # Inicio
