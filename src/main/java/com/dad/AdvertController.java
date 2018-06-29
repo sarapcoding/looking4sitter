@@ -65,7 +65,7 @@ public class AdvertController {
 		
 	}
 	
-	@PostMapping ("/add-anuncio")
+	@RequestMapping ("/add-anuncio")
 	public String addAdvert (Model model,
 			@RequestParam String asunto,
 			@RequestParam String fecha,
