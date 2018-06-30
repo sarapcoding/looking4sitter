@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<title>Mis comentarios</title>
+</head>
+<body>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
+<h1>Mis comentarios</h1>
+
+	<h2>Tabla de comentarios</h2>
+	
+	{{#nocomment}}
+	<p>¡No tienes comentarios aún!</p>
+	{{/nocomment}}
+	
+	{{#yescommentSitter}}
+	<table>
+	<td>
+	<table>
+		<tr>
+			<td><b>Padre</b></td>
+		</tr>
+		{{#padresuser}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/padresuser}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td><b>Comentario</b></td>
+		</tr>
+		{{#comentarios}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/comentarios}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td><b>Mi puntuación</b></td>
+		</tr>
+		{{#puntuaciones}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/puntuaciones}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td><b>Fecha</b></td>
+		</tr>
+		{{#fechascom}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/fechascom}}
+		</table>
+	</td>
+	</table>
+	{{/yescommentSitter}}
+	
+	
+	{{#yescommentParent}}
+	<table>
+	<td>
+	<table>
+		<tr>
+			<td><b>Sitter</b></td>
+		</tr>
+		{{#sittersuser}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/sittersuser}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td><b>Comentario</b></td>
+		</tr>
+		{{#comentarios}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/comentarios}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td><b>Mi puntuación</b></td>
+		</tr>
+		{{#puntuaciones}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/puntuaciones}}
+		</table>
+	</td>
+	<td>
+	<table>
+		<tr>
+			<td><b>Fecha</b></td>
+		</tr>
+		{{#fechascom}}
+		<tr>
+			<td>{{.}}</td>
+		</tr>
+		{{/fechascom}}
+		</table>
+	</td>
+	</table>
+	{{/yescommentParent}}
+	
+<input type="submit" value="Volver al perfil" onclick="window.location='../perfil-usuario';" />
+
+</body>
+</html>

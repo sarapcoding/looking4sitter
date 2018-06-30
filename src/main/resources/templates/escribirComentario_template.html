@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="css/l4sstyleprueba.css">
+<meta charset="UTF-8">
+<title>Enviar comentario</title>
+</head>
+<body>
+<img src="images/logolooking.jpg" alt="Logo Aplicación" style="width:780px;height:150px;">
+<div>
+	<h1>Escribir comentario</h1>
+	<h2>Escribe tu comentario para {{sitterlogin}}</h2>
+	<form action="save-comment" method = "get">
+		{{#campovacio}}
+		<p>Por favor, rellene <b>todos</b> los campos</p>
+		{{/campovacio}}
+		<p>Comentario :</p><textarea rows='4' cols='50' name='comentario' ></textarea>
+		<p>Mi puntuación :</p><input type="number" name="puntos" min="1" max="10"/>
+		<br>
+		<br>
+		<input type="hidden" name="sitterid" value={{sitterid}}/>
+	    <input type='submit' value='Enviar comentario' />
+	</form>
+</div>
+ 	
+</body>
+</html>
