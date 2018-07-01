@@ -218,6 +218,9 @@ $ sudo service haproxy stop
 - Tablón de anuncios: muestra a los Sitters todos los anuncios que han escrito los padres.
 - Búsqueda avanzada de anuncios: los Sitters pueden buscar anuncios por fecha de publicación.
 - Busqueda avanzada de Sitters: puede buscarse Sitters según la provincia en la que viven y la tarifa máxima que desean pagar. También puede mostrarse todos los Sitters que hay en la página.
+
+## Vídeo demostrativo
+[Vídeo demostrativo](https://youtu.be/cBLkNsGnYK8)
 ## Integrantes
 
 Nombre | Apellidos | Correo | Cuenta de GitHub
