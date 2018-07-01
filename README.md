@@ -201,6 +201,10 @@ $ sudo service haproxy stop
 
 ### Comentarios
 #### Comentarios escritos por el padre
+<img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/comentariosescritospadre.PNG"
+     alt="Escribir comentario"
+     style="float: left; margin-right: 10px;" />
+#### Escritura de un comentario
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/escribircomentario.PNG"
      alt="Escribir comentario"
      style="float: left; margin-right: 10px;" />
