@@ -121,83 +121,91 @@ $ sudo service haproxy stop
 ```
 
 ## Capturas
-# Inicio
+### Inicio
 <img src="https://raw.githubusercontent.com/sarapcoding/looking4sitter/master/capturas_finales/welcome.PNG"
      alt="Página de inicio"
      style="float: left; margin-right: 10px;" />
      
-# Inicio sesión
+### Inicio sesión
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/iniciosesion.PNG"
      alt="Inicio sesión"
      style="float: left; margin-right: 10px;" />
      
-# Perfiles
+### Perfiles
+#### Perfil de un padre
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/inicioperfilpadre.PNG"
      alt="Perfil padre"
      style="float: left; margin-right: 10px;" />
-
+#### Perfil de un sitter
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/perfilsitter.PNG"
      alt="Perfil Sitter"
      style="float: left; margin-right: 10px;" />
 
 
-# Registro
+### Registro
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/registro.PNG"
      alt="Registro"
      style="float: left; margin-right: 10px;" />
      
-     
+#### Registro de un padre
  <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/registroPadre.PNG"
      alt="Registro Padre"
      style="float: left; margin-right: 10px;" />
      
+#### Registro de un sitter
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/registrositter.PNG"
      alt="Registro Sitter"
      style="float: left; margin-right: 10px;" />
-     
+#### Registro exitoso
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/registrosuccess.PNG"
      alt="Registro Exitoso"
      style="float: left; margin-right: 10px;" />
 
 
 
-# Búsqueda de sitters
+### Búsqueda de sitters
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/busquedasitterspadre.PNG"
      alt="Búsqueda sitters"
      style="float: left; margin-right: 10px;" />
 
-# Búsqueda de anuncios
+### Búsqueda de anuncios
+#### Tablero de anuncios completo
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/tableroanunciossitter.PNG"
      alt="Búsqueda anuncio"
      style="float: left; margin-right: 10px;" />
+#### Tablero de anuncios con búsqueda específica por fecha
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/busquedaanunciofechasitter.PNG"
      alt="Búsqueda anuncio por fecha"
      style="float: left; margin-right: 10px;" />
 
-# Creación de un anuncio
+### Creación de un anuncio
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/publicacionanuncio.PNG"
      alt="Creación anuncio"
      style="float: left; margin-right: 10px;" />
      
-# Edición de un anuncio
+### Edición de un anuncio
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/edicionanuncio.PNG"
      alt="Edición anuncio"
      style="float: left; margin-right: 10px;" />
 
-# Anuncios publicados 
+### Anuncios publicados 
+#### Tablero de anuncios del padre
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/tableroanunciospadre.PNG"
      alt="Listado de anuncios"
      style="float: left; margin-right: 10px;" />
      
+#### Tablero de anuncios vacío
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/anunciospublicadosvaciopadre.PNG"
      alt="Sin anuncios"
      style="float: left; margin-right: 10px;" />
 
-# Comentarios
+### Comentarios
+#### Comentarios escritos por el padre
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/escribircomentario.PNG"
      alt="Escribir comentario"
      style="float: left; margin-right: 10px;" />
      
+#### Comentarios recibidos del sitter
 <img src="https://github.com/sarapcoding/looking4sitter/blob/master/capturas_finales/comentariossitter.PNG"
      alt="Comentarios recibidos"
      style="float: left; margin-right: 10px;" />
