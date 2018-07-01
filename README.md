@@ -21,6 +21,14 @@ Comentario | Comentario de los padres al niñero en el que se indica tambien la 
      alt="Diagrama entidades"
      style="float: left; margin-right: 10px;" />
 
+## Generación del jar
+Tras clonar el proyecto en un directorio, se emplea maven para la generación del jar:
+```bash
+$ cd ~/looking4sitter
+$ mvn package
+```
+El jar se encontrará en la carpeta target del proyecto.
+
 ## Configuración de la máquina virtual
 Usamos ubuntu/trusty32 con vagrant para la ejecución de la aplicación. En nuestro caso empleamos dos máquinas virtuales con las direcciones IP 192.168.33.10 y 192.168.33.20, reservando la dirección IP 192.168.33.33 para HAProxy
 
