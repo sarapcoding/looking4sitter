@@ -1,7 +1,7 @@
 # looking4sitter
 
 ## Descripción
-Looking4Sitter es una aplicación web en la cual los padres o guarderias podrán buscar el niñero o niñera adecuado a sus necesidades. Cuenta con una lista de niñeros que muestran sus cualidades, páginas individuales para cada niñero con comentarios y puntuación de otros padres al niñero y un tablón de anuncios donde los padres podrán informar de qué tipo de niñero buscan.
+Looking4Sitter es una aplicación web en la cual los padres podrán buscar el niñero o niñera adecuado a sus necesidades. Cuenta con una lista de niñeros que muestran sus cualidades, páginas individuales para cada niñero con comentarios y puntuación de otros padres al niñero y un tablón de anuncios donde los padres podrán informar de qué tipo de niñero buscan.
 
 ## Entidades
 
@@ -215,8 +215,9 @@ $ sudo service haproxy stop
      style="float: left; margin-right: 10px;" />
 
 ## Funcionalidades del servicio interno
-- Tablón de anuncios.
-- Busqueda avanzada.
+- Tablón de anuncios: muestra a los Sitters todos los anuncios que han escrito los padres.
+- Búsqueda avanzada de anuncios: los Sitters pueden buscar anuncios por fecha de publicación.
+- Busqueda avanzada de Sitters: puede buscarse Sitters según la provincia en la que viven y la tarifa máxima que desean pagar. También puede mostrarse todos los Sitters que hay en la página.
 ## Integrantes
 
 Nombre | Apellidos | Correo | Cuenta de GitHub
