@@ -30,7 +30,7 @@ $ mvn package
 El jar se encontrará en la carpeta target del proyecto.
 
 ## Configuración de la máquina virtual
-Usamos ubuntu/trusty32 con vagrant para la ejecución de la aplicación. En nuestro caso empleamos dos máquinas virtuales con las direcciones IP 192.168.33.10 y 192.168.33.20, reservando la dirección IP 192.168.33.33 para HAProxy
+Usamos ubuntu/trusty32 con vagrant para la ejecución de la aplicación. En nuestro caso empleamos dos máquinas virtuales con las direcciones IP 192.168.33.XX y 192.168.33.YY, reservando la dirección IP 192.168.33.ZZ para HAProxy
 
 ### Instalación del JDK y de MYSQL Server
 ```bash
@@ -63,11 +63,11 @@ $ vagrant up
 $ vagrant ssh
 ```
 Accedemos a la carpeta en la que se contiene los jar (tanto el jar de la aplicación como el jar del servicio rest)
-```
+```bash
 $ cd /vagrant
 ```
 Arrancamos los jars de la siguiente manera en diferentes terminales:
-```
+```bash
 $ java -jar xxxxxxxxxxxxxxxx-x.x.x-SNAPSHOT.jar
 ```
 
@@ -110,21 +110,21 @@ server nodeX XXX.XXX.XXX.XXX:YYYY check
 ```
 Siendo XXX.XXX.XXX.XXX la IP de la máquina en la que se está ejecutando la aplicación e YYYY el puerto.
 La configuración frontend cuenta con el modo TCP y la opción TCPLog, significando que las conexiones a los nodos quedarán reflejadas en el log que se encuentra en /var/log/haproxy.log al que se deberá acceder de la siguiente forma:
-```
+```bash
 $ sudo vim /var/log/haproxy.log
 ```
 En el podemos leer los logs, debido a problemas con la versión de HAProxy 1.6 y su incompatibilidad con 1.4, no se puede acceder a la página de stats para comprobar las conexiones a los nodos.
 
 Para arrancar el servicio del balanceo de carga se usa el siguiente comando:
-```
+```bash
 $ sudo service haproxy start
 ```
 Y para volver a arrancarlo:
-```
+```bash
 $ sudo service haproxy restart
 ```
 Para pararlo:
-```
+```bash
 $ sudo service haproxy stop
 ```
 
@@ -228,6 +228,7 @@ $ sudo service haproxy stop
 - Busqueda avanzada de Sitters: puede buscarse Sitters según la provincia en la que viven y la tarifa máxima que desean pagar. También puede mostrarse todos los Sitters que hay en la página.
 
 ## Vídeo demostrativo
+Este es el enlace del vídeo demostrativo de la aplicación ejecutada en dos máquinas iguales, usando una tercera máquina para el balanceo de carga.
 [Vídeo demostrativo](https://youtu.be/cBLkNsGnYK8)
 ## Integrantes
 
