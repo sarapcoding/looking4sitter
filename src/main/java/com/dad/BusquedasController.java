@@ -33,6 +33,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -42,6 +43,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -52,12 +54,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-//@CacheConfig(cacheNames="datos")
-//@___mapping("/busquedas")
 @Controller
 public class BusquedasController {
-	//@CacheEvict(allEntries=true)
-	// @___mapping("sitters")
+
 	@RequestMapping("/search-sitters")
 	public String searchSitter(Model model,
 			@RequestParam String provincia,
@@ -78,12 +77,20 @@ public class BusquedasController {
 		if ((tarifamax == null) ||(tarifamax.equals(""))) {
 			tarifamax = "1000";
 		}
-		
-		//System.out.println("------------------> Se ha comprobado los parámetros de entrada (prov="+provincia+", tarif="+tarifamax+")");
 		RestTemplate restTemplate = new RestTemplate();
 		String url = "http://localhost:8449/busqueda/sitters/provincia/"+provincia+"/tarifamax/"+tarifamax;//8443
-		String resultados = restTemplate.getForObject(url, String.class);
-		if ((resultados.equals("")) || (resultados == null)) {
+		String resultados = new String();
+		try {
+			resultados = restTemplate.getForObject(url, String.class);
+		} catch (HttpClientErrorException ex) {
+			if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+				model.addAttribute("vacio",true);
+				return "resultadoSearchSitters_template";
+			}
+		}
+		
+		System.out.println(resultados);
+		if ((resultados == null) || (resultados.equals(""))) {
 			model.addAttribute("vacio",true);
 		} else {
 			List<Usuario> sittR = new ArrayList<>();
@@ -141,42 +148,17 @@ public class BusquedasController {
 		return "resultadoSearchSitters_template";
 	}
 	
-	
-//	@Cacheable
-//	public List<Anuncio> getAnuncios(String fecha) throws JSONException {
-//		RestTemplate restTemplate = new RestTemplate();
-//		List<Anuncio> anuncios = new ArrayList<>();
-//		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
-//		//http://localhost:8449/busqueda/anuncios/2018-04-30
-//		String resultados = restTemplate.getForObject(url, String.class);
-//		
-//		JSONArray jsonarr = new JSONArray(resultados);
-//		int numS = jsonarr.length();
-//	
-//		for(int i=0;i<numS;i++) {
-//			JSONObject obj = jsonarr.getJSONObject(i);
-//			Anuncio a = new Anuncio();
-//			a.setAsunto(obj.getString("asunto"));
-//			a.setCuerpo(obj.getString("cuerpo"));
-//			a.setFecha(obj.getString("fecha"));
-//			a.setLoginUsuario(obj.getString("loginUsuario"));
-//			anuncios.add(a);
-//		}
-//		return anuncios;
-//	}
-	
+
 	
 	@Cacheable("datos")
 	public String getAnuncios(String fecha) throws JSONException {
 		RestTemplate restTemplate = new RestTemplate();
 		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
-		//http://localhost:8449/busqueda/anuncios/2018-04-30
 		String resultados = restTemplate.getForObject(url, String.class);
 		return resultados;
 	}
 	
-	//@Cacheable(value="anuncios")
-	//@CacheEvict(allEntries=true)
+
 	@RequestMapping ("/search-adverts")
 	public String encontrarAnuncio (Model model,@RequestParam String fecha) throws JSONException{ 
 		if ((fecha == null) || (fecha.equals(""))) {
@@ -186,15 +168,9 @@ public class BusquedasController {
 			model.addAttribute("hayfecha",true);
 			model.addAttribute("mifecha",fecha);
 		}
-//		RestTemplate restTemplate = new RestTemplate();
-//		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
-//		//http://localhost:8449/busqueda/anuncios/2018-04-30
-//
-//		String resultados = restTemplate.getForObject(url, String.class);
-		
 		String resultados = getAnuncios(fecha);
 		
-		if ((resultados.equals("")) || (resultados == null)) {
+		if ((resultados == null) || (resultados.equals("")))  {
 			model.addAttribute("vacio",true);
 		} else {
 			List<Anuncio> anuncios = new ArrayList<>();
