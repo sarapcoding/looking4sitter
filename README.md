@@ -27,7 +27,7 @@ Tras clonar el proyecto en un directorio, se emplea maven para la generación de
 $ cd ~/looking4sitter
 $ mvn package
 ```
-El jar se encontrará en la carpeta target del proyecto.
+El jar se encontrará en la carpeta target del proyecto. Para contar con el servicio interno, debe hacerse lo mismo con el proyecto [serviciorest](https://github.com/sarapcoding/serviciorest/blob/master/README.md)
 
 ## Configuración de la máquina virtual
 Usamos ubuntu/trusty32 con vagrant para la ejecución de la aplicación. En nuestro caso empleamos dos máquinas virtuales con las direcciones IP 192.168.33.XX y 192.168.33.YY, reservando la dirección IP 192.168.33.ZZ para HAProxy
@@ -228,8 +228,8 @@ $ sudo service haproxy stop
 - Busqueda avanzada de Sitters: puede buscarse Sitters según la provincia en la que viven y la tarifa máxima que desean pagar. También puede mostrarse todos los Sitters que hay en la página.
 
 ## Vídeo demostrativo
-Este es el enlace del vídeo demostrativo de la aplicación ejecutada en dos máquinas iguales, usando una tercera máquina para el balanceo de carga.
-[Vídeo demostrativo](https://youtu.be/cBLkNsGnYK8)
+Este es el enlace del [vídeo demostrativo](https://youtu.be/cBLkNsGnYK8) de la aplicación ejecutada en dos máquinas iguales, usando una tercera máquina para el balanceo de carga.
+
 ## Integrantes
 
 Nombre | Apellidos | Correo | Cuenta de GitHub
