@@ -150,13 +150,21 @@ public class BusquedasController {
 	
 
 	
-	@Cacheable("datos")
-	public String getAnuncios(String fecha) throws JSONException {
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
-		String resultados = restTemplate.getForObject(url, String.class);
-		return resultados;
-	}
+//	@Cacheable("datos")
+//	public String getAnuncios(String fecha) throws JSONException {
+//		RestTemplate restTemplate = new RestTemplate();
+//		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
+//		String resultados = new String();
+//		try {
+//			resultados = restTemplate.getForObject(url, String.class);
+//		} catch (HttpClientErrorException ex) {
+//			if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+//				model.addAttribute("vacio",true);
+//				return "resultadoSearchAnuncios_template";
+//			}
+//		}
+//		return resultados;
+//	}
 	
 
 	@RequestMapping ("/search-adverts")
@@ -168,7 +176,21 @@ public class BusquedasController {
 			model.addAttribute("hayfecha",true);
 			model.addAttribute("mifecha",fecha);
 		}
-		String resultados = getAnuncios(fecha);
+		
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://localhost:8449/busqueda/anuncios/"+fecha;
+		String resultados = new String();
+		try {
+			resultados = restTemplate.getForObject(url, String.class);
+		} catch (HttpClientErrorException ex) {
+			if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+				model.addAttribute("fail",true);
+				return "resultadoSearchAnuncios_template";
+			}
+		}
+		
+		//String resultados = getAnuncios(fecha);
 		
 		if ((resultados == null) || (resultados.equals("")))  {
 			model.addAttribute("vacio",true);
